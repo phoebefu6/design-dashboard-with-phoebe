@@ -2,6 +2,12 @@
 
 An interactive operational dashboard for an ecommerce Double Day mega campaign.
 
+## Live dashboard
+
+**[Open the interactive dashboard](https://phoebefu6.github.io/design-dashboard-with-phoebe/Ecommerce/mega-campaign-live-dashboard/)**
+
+It runs directly in a browser through GitHub Pages. No installation or GitHub account is required.
+
 ## What it monitors
 
 - Daily active users and peak concurrency
