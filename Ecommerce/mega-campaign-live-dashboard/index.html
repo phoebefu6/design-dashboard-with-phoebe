@@ -1,0 +1,285 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta
+      name="description"
+      content="Responsive Ecomm 11.11 live sales command center with persistent day and night themes."
+    />
+    <title>Ecomm 11.11 Live Command Center</title>
+    <link rel="stylesheet" href="./styles.css" />
+    <script>
+      (() => {
+        const saved = localStorage.getItem("ecomm-dashboard-theme");
+        const preferred = matchMedia("(prefers-color-scheme: light)").matches ? "day" : "night";
+        document.documentElement.dataset.theme = saved || preferred;
+      })();
+    </script>
+  </head>
+  <body>
+    <div class="app-shell">
+      <header class="topbar">
+        <a class="brand" href="#" aria-label="Ecomm 11.11 command center home">
+          <span class="brand-mark" aria-hidden="true"><i></i></span>
+          <span>
+            <strong>Ecomm 11.11</strong>
+            <small>Live command center</small>
+          </span>
+        </a>
+
+        <div class="live-cluster" aria-label="Dashboard status">
+          <span class="live-pill"><span></span> Live</span>
+          <span class="updated">Updated <time datetime="2024-11-11T11:42:30+08:00">11:42:30</time></span>
+        </div>
+
+        <div class="toolbar">
+          <label class="select-control">
+            <span>Country</span>
+            <select id="country-filter" aria-label="Country">
+              <option value="all">All countries</option>
+              <option value="sg">Singapore</option>
+              <option value="my">Malaysia</option>
+              <option value="th">Thailand</option>
+            </select>
+          </label>
+          <label class="select-control">
+            <span>Channel</span>
+            <select id="channel-filter" aria-label="Channel">
+              <option value="all">All channels</option>
+              <option value="app">App</option>
+              <option value="web">Web</option>
+            </select>
+          </label>
+          <button class="icon-button" type="button" aria-label="Open notifications">
+            <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M18 8a6 6 0 0 0-12 0c0 7-3 7-3 9h18c0-2-3-2-3-9M10 21h4"/></svg>
+            <b>3</b>
+          </button>
+          <div class="theme-control" role="group" aria-label="Color scheme">
+            <button class="theme-option" type="button" data-set-theme="day" aria-label="Use day theme">
+              <svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="4"/><path d="M12 2v2m0 16v2M4.93 4.93l1.42 1.42m11.3 11.3 1.42 1.42M2 12h2m16 0h2M4.93 19.07l1.42-1.42m11.3-11.3 1.42-1.42"/></svg>
+              <span>Day</span>
+            </button>
+            <button class="theme-option" type="button" data-set-theme="night" aria-label="Use night theme">
+              <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M20.5 14.2A8.5 8.5 0 0 1 9.8 3.5 8.5 8.5 0 1 0 20.5 14.2Z"/></svg>
+              <span>Night</span>
+            </button>
+          </div>
+        </div>
+      </header>
+
+      <aside class="sidebar" aria-label="Dashboard navigation">
+        <div class="mobile-section-title">Explore</div>
+        <nav>
+          <a class="nav-item active" href="#overview"><span>◉</span>Overview</a>
+          <a class="nav-item" href="#performance"><span>⌁</span>Performance</a>
+          <a class="nav-item" href="#categories"><span>▤</span>Categories</a>
+          <a class="nav-item" href="#campaigns"><span>◇</span>Campaigns</a>
+          <a class="nav-item" href="#systems"><span>⌘</span>Systems</a>
+        </nav>
+        <div class="system-summary">
+          <small>System status</small>
+          <strong><i></i> Degraded</strong>
+          <span>1 critical incident</span>
+        </div>
+      </aside>
+
+      <main id="overview">
+        <section class="filter-context" aria-live="polite">
+          <div>
+            <span class="eyebrow">Viewing</span>
+            <strong id="filter-summary">All countries · All channels</strong>
+            <small id="filter-detail">Full 11.11 traffic and commerce population</small>
+          </div>
+          <div class="filter-actions">
+            <span id="result-context">78.6M active users</span>
+            <button id="reset-filters" type="button" disabled>Reset filters</button>
+          </div>
+        </section>
+
+        <section class="incident-banner" aria-label="Critical incident">
+          <span class="incident-icon">!</span>
+          <div>
+            <strong>Checkout service degradation</strong>
+            <span>15:06–15:46 · 40 min · Impact high</span>
+          </div>
+          <p>Slower checkouts and failures reported. Mitigation in progress.</p>
+          <button type="button">View incident</button>
+        </section>
+
+        <section class="kpi-grid" aria-label="Headline metrics">
+          <article class="kpi" data-tone="cyan">
+            <div class="kpi-heading"><span>DAU</span><small data-kpi-target="dau">Target 69.4M</small></div>
+            <div class="kpi-value" data-kpi-value="dau">78.6M</div>
+            <div class="kpi-foot"><strong class="positive" data-kpi-delta="dau">▲ 13.2%</strong><span>vs plan</span></div>
+            <div class="kpi-details">
+              <span><small>New users</small><strong data-kpi-detail="newUsers">11.8M</strong></span>
+              <span><small>Peak CCU</small><strong data-kpi-detail="peakCcu">18.4M</strong></span>
+              <span><small>7-day</small><strong class="positive" data-kpi-detail="dau7d">+9.6%</strong></span>
+            </div>
+            <svg class="sparkline" data-values="21,24,23,29,31,34,32,39,43,41,48,47,52,56,53,60,59,63,67,66" aria-label="DAU rising trend"></svg>
+          </article>
+          <article class="kpi" data-tone="violet">
+            <div class="kpi-heading"><span>Conversion rate</span><small data-kpi-target="cr">Target 4.54%</small></div>
+            <div class="kpi-value" data-kpi-value="cr">4.23%</div>
+            <div class="kpi-foot"><strong class="negative" data-kpi-delta="cr">▼ 0.31pp</strong><span>vs plan</span></div>
+            <div class="kpi-details">
+              <span><small>PDP→cart</small><strong data-kpi-detail="pdpCart">15.8%</strong></span>
+              <span><small>Cart→pay</small><strong class="negative" data-kpi-detail="cartPay">35.1%</strong></span>
+              <span><small>Abandon</small><strong class="negative" data-kpi-detail="abandon">64.9%</strong></span>
+            </div>
+            <svg class="sparkline" data-values="44,43,41,40,39,41,43,45,46,44,43,45,47,48,47,50,51,52,54,55" aria-label="Conversion rate trend"></svg>
+          </article>
+          <article class="kpi" data-tone="orange">
+            <div class="kpi-heading"><span>GMV</span><small data-kpi-target="gmv">Target US$633.2M</small></div>
+            <div class="kpi-value" data-kpi-value="gmv">US$732.8M</div>
+            <div class="kpi-foot"><strong class="positive" data-kpi-delta="gmv">▲ 15.7%</strong><span>vs plan</span></div>
+            <div class="kpi-details">
+              <span><small>Pace / min</small><strong data-kpi-detail="gmvPace">US$509K</strong></span>
+              <span><small>Forecast</small><strong data-kpi-detail="forecast">US$1.02B</strong></span>
+              <span><small>Promo GMV</small><strong data-kpi-detail="promoGmv">61.4%</strong></span>
+            </div>
+            <svg class="sparkline" data-values="12,17,21,27,31,35,41,47,51,55,60,66,70,75,81,84,91,98,104,112" aria-label="GMV rising trend"></svg>
+          </article>
+          <article class="kpi" data-tone="blue">
+            <div class="kpi-heading"><span>Orders</span><small data-kpi-target="orders">Target 11.42M</small></div>
+            <div class="kpi-value" data-kpi-value="orders">12.43M</div>
+            <div class="kpi-foot"><strong class="positive" data-kpi-delta="orders">▲ 8.9%</strong><span>vs plan</span></div>
+            <div class="kpi-details">
+              <span><small>AOV</small><strong data-kpi-detail="aov">US$58.95</strong></span>
+              <span><small>Items/order</small><strong data-kpi-detail="itemsOrder">2.38</strong></span>
+              <span><small>Cancel rate</small><strong data-kpi-detail="cancelRate">1.7%</strong></span>
+            </div>
+            <svg class="sparkline" data-values="14,17,19,23,21,28,31,35,39,37,44,47,51,50,56,61,66,69,76,81" aria-label="Orders rising trend"></svg>
+          </article>
+        </section>
+
+        <div class="dashboard-grid">
+          <section class="panel performance-panel" id="performance">
+            <div class="panel-head">
+              <div>
+                <small>24-hour view</small>
+                <h1>Intraday performance</h1>
+              </div>
+              <div class="metric-tabs" role="group" aria-label="Chart metric">
+                <button class="active" data-metric="gmv" type="button">GMV</button>
+                <button data-metric="cr" type="button">CR</button>
+                <button data-metric="dau" type="button">DAU</button>
+              </div>
+            </div>
+            <div class="chart-summary">
+              <span><i class="legend actual"></i>Actual</span>
+              <span><i class="legend plan"></i>Plan</span>
+              <span class="chart-total">GMV <strong>US$732.8M</strong></span>
+            </div>
+            <div class="main-chart-wrap">
+              <svg id="main-chart" viewBox="0 0 900 330" role="img" aria-label="Intraday performance with a checkout incident between 15:06 and 15:46"></svg>
+            </div>
+            <div class="chart-footer">
+              <span><i class="status-dot"></i>Live</span>
+              <span>Data as of 11:42</span>
+              <span>Source: Ecomm Data Platform</span>
+            </div>
+          </section>
+
+          <aside class="panel incident-panel" id="systems">
+            <div class="panel-head">
+              <div><small>Operational health</small><h2>Incident inspector</h2></div>
+              <span class="critical-badge">Critical</span>
+            </div>
+            <div class="incident-detail">
+              <strong>Checkout service degradation</strong>
+              <span>15:06–15:46 · In progress</span>
+              <p>Traffic shifted to a backup cluster. Monitoring recovery.</p>
+            </div>
+            <div class="service-list" aria-label="Service health">
+              <div><span><i class="critical"></i>Checkout</span><b>2,853 ms</b><em>12.35%</em></div>
+              <div><span><i></i>Payment</span><b>412 ms</b><em>0.21%</em></div>
+              <div><span><i></i>Search</span><b>275 ms</b><em>0.17%</em></div>
+              <div><span><i class="warning"></i>Inventory</span><b>689 ms</b><em>1.02%</em></div>
+              <div><span><i></i>Ads</span><b>198 ms</b><em>0.09%</em></div>
+            </div>
+            <div class="impact-grid">
+              <span><small>GMV impact</small><strong data-incident-impact="gmv">US$18.7M</strong></span>
+              <span><small>Orders</small><strong data-incident-impact="orders">315K</strong></span>
+              <span><small>Buyers</small><strong data-incident-impact="buyers">620K</strong></span>
+            </div>
+            <button class="primary-button" type="button">Acknowledge incident</button>
+          </aside>
+
+          <section class="panel funnel-panel" id="funnel">
+            <div class="panel-head">
+              <div><small>Unique users · session funnel</small><h2>User funnel & drop-off</h2></div>
+              <div class="funnel-health"><i></i><span>Checkout leakage elevated</span></div>
+            </div>
+            <div class="funnel-layout">
+              <div class="funnel-visual" id="funnel-visual" aria-label="User conversion funnel"></div>
+              <aside class="dropoff-insights">
+                <div class="insight-title"><span>Priority drop-offs</span><small>vs normal 11.11 baseline</small></div>
+                <article class="dropoff-alert critical-drop">
+                  <div><span class="drop-rank">1</span><strong>Checkout → Paid</strong></div>
+                  <b data-dropoff="checkout">−45.9%</b>
+                  <p><span data-funnel-impact-buyers>620K buyers affected</span><em>+11.8pp worse</em></p>
+                  <small>Correlated with checkout latency and 12.35% error rate.</small>
+                </article>
+                <article class="dropoff-alert warning-drop">
+                  <div><span class="drop-rank">2</span><strong>Product view → Cart</strong></div>
+                  <b data-dropoff="pdp">−84.2%</b>
+                  <p><span>Price sensitivity</span><em>+3.4pp worse</em></p>
+                  <small>Largest losses in Luxury, Digital Goods and Automotive.</small>
+                </article>
+                <article class="dropoff-alert">
+                  <div><span class="drop-rank">3</span><strong>Cart → Checkout</strong></div>
+                  <b data-dropoff="cart">−35.1%</b>
+                  <p><span>Voucher friction</span><em>+1.6pp worse</em></p>
+                  <small>Stacking validation adds 1.8 seconds at peak traffic.</small>
+                </article>
+              </aside>
+            </div>
+          </section>
+
+          <section class="panel categories-panel" id="categories">
+            <div class="panel-head">
+              <div><small>Vs plan by GMV</small><h2>Category performance</h2></div>
+              <div class="rank-toggle" role="group" aria-label="Category ranking">
+                <button class="active" data-rank="top" type="button">Top 10</button>
+                <button data-rank="bottom" type="button">Bottom 10</button>
+              </div>
+            </div>
+            <div class="category-columns">
+              <div class="category-list" data-category-list="top"></div>
+              <div class="category-list" data-category-list="bottom"></div>
+            </div>
+          </section>
+
+          <section class="panel campaign-panel" id="campaigns">
+            <div class="panel-head">
+              <div><small>Revenue levers</small><h2>Campaign & pricing</h2></div>
+              <button class="text-button" type="button">Manage campaigns →</button>
+            </div>
+            <div class="table-wrap">
+              <table>
+                <thead>
+                  <tr><th>Promo</th><th>Campaign</th><th>Discount</th><th>Price index</th><th>Voucher burn</th><th>Incremental GMV</th><th>Vs plan</th></tr>
+                </thead>
+                <tbody id="campaign-body">
+                  <tr><td><i class="promo-dot blue"></i>Mega voucher</td><td>11.11 Mega Voucher Drop</td><td>18%</td><td>97</td><td>US$24.3M</td><td>US$96.8M</td><td class="positive">+22.4%</td></tr>
+                  <tr><td><i class="promo-dot cyan"></i>Flash sale</td><td>Brand Mega Offer</td><td>28%</td><td>102</td><td>US$18.1M</td><td>US$71.3M</td><td class="positive">+19.6%</td></tr>
+                  <tr><td><i class="promo-dot violet"></i>Platform voucher</td><td>Daily Stackable</td><td>12%</td><td>95</td><td>US$13.6M</td><td>US$38.7M</td><td class="positive">+12.3%</td></tr>
+                  <tr><td><i class="promo-dot orange"></i>Store voucher</td><td>Store Follower</td><td>10%</td><td>96</td><td>US$6.2M</td><td>US$19.2M</td><td class="positive">+8.1%</td></tr>
+                </tbody>
+              </table>
+            </div>
+          </section>
+        </div>
+      </main>
+
+      <footer class="footer">
+        <span><i class="status-dot"></i> Data freshness: live</span>
+        <span>Illustrative, unaudited data · Delay up to 5 minutes</span>
+        <span>Theme preference saved on this device</span>
+      </footer>
+    </div>
+    <script src="./app.js"></script>
+  </body>
+</html>
