@@ -20,6 +20,7 @@ Each project explores how information hierarchy, interaction design, responsive 
 - Day and night themes preserve the same information hierarchy.
 - Alerts use dedicated semantic colors rather than decorative emphasis.
 - Filters update the full analytical state, not just isolated widgets.
+- Every project includes a verified, clickable live URL suitable for sharing with clients.
 
 ## View online
 
