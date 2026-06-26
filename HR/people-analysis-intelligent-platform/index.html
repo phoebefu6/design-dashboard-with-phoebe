@@ -1,0 +1,277 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>PeopleLens HR Intelligence Platform</title>
+  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+  <style>
+    :root{
+      --ink:#3B3638;--muted:#7A7072;--line:#E9DED6;--paper:#FBF6EE;--panel:#FFFFFF;
+      --plum:#B8AEDF;--plum2:#9488C7;--rose:#D9A0A8;--rose2:#EBC4CA;--lav:#B8AEDF;
+      --champagne:#FBF6EE;--cream:#FFFCF8;--gold:#B7A99A;--green:#8FB6A3;--red:#D58A92;
+      --blue:#9DA7D9;--shadow:0 10px 26px rgba(59,54,56,.06);--radius:20px;
+    }
+    *{box-sizing:border-box}
+    body{margin:0;font-family:ui-sans-serif,-apple-system,BlinkMacSystemFont,"Segoe UI","Helvetica Neue",Arial,sans-serif;background:#FBF6EE;color:var(--ink);letter-spacing:-.01em}
+    button,input,select,textarea{font:inherit}
+    .shell{min-height:100vh;display:grid;grid-template-rows:auto 1fr}
+    .topbar{position:sticky;top:0;z-index:20;background:rgba(251,246,238,.96);backdrop-filter:blur(22px);border-bottom:1px solid rgba(233,222,214,.95)}
+    .top-inner{display:grid;grid-template-columns:230px minmax(0,1fr);grid-template-areas:"brand filters" "tabs tabs";align-items:center;gap:10px 18px;padding:12px 24px}
+    .brand{grid-area:brand;display:flex;align-items:center;gap:11px;min-width:0}.mark{width:36px;height:36px;border-radius:13px;background:linear-gradient(135deg,#D9A0A8,#B8AEDF);display:grid;place-items:center;color:white;font-weight:760;box-shadow:0 8px 18px rgba(217,160,168,.16)}
+    .brand h1{font-size:17px;margin:0;letter-spacing:-.035em;font-weight:760;line-height:1.05}.brand p{margin:2px 0 0;color:var(--muted);font-size:11px;font-weight:560;white-space:nowrap}
+    .tabs{grid-area:tabs;display:flex;gap:6px;align-items:center;justify-content:flex-start;flex-wrap:wrap;overflow:visible;padding:4px 0 0}.tabs::-webkit-scrollbar{display:none}.tabs button{border:1px solid transparent;background:transparent;color:#625866;border-radius:999px;padding:7px 9px;font-weight:600;font-size:11px;cursor:pointer;white-space:nowrap}.tabs button.active{background:var(--plum);color:white;box-shadow:0 7px 16px rgba(142,125,174,.16)}.tabs button:hover{background:#f4ece8}
+    .filters{grid-area:filters;display:flex;gap:8px;align-items:center;justify-content:flex-end;min-width:0}.filters select{border:1px solid var(--line);background:white;border-radius:13px;padding:9px 11px;color:var(--ink);font-weight:560;font-size:12px;max-width:190px}.ai-chip{border:1px solid #f0cbd8;background:#fff7fa;color:#a43860;border-radius:999px;padding:8px 10px;font-weight:700;font-size:11px;white-space:nowrap}
+    .workspace{display:grid;grid-template-columns:minmax(0,1fr) 360px;gap:22px;padding:24px 28px 42px}
+    .main{min-width:0}.hero{background:rgba(255,255,255,.94);border:1px solid var(--line);border-radius:24px;color:var(--ink);padding:24px;box-shadow:var(--shadow);position:relative;overflow:hidden}
+    .hero:before{content:"";position:absolute;inset:auto -58px -92px auto;width:230px;height:230px;border-radius:50%;background:rgba(217,160,168,.08)}
+    .hero-grid{display:grid;grid-template-columns:1.25fr .75fr;gap:20px;position:relative}.eyebrow{font-size:10px;text-transform:uppercase;letter-spacing:.13em;font-weight:700;color:#a191aa}.hero .eyebrow{color:#9B5964}.hero h2{font-size:32px;line-height:1.05;margin:10px 0;letter-spacing:-.045em;font-weight:700}.hero p{color:#6f6470;line-height:1.48;margin:0;font-size:14px}
+    .hero-score{background:#FFFCF8;border:1px solid var(--line);border-radius:22px;padding:17px}.hero-score b{font-size:46px;letter-spacing:-.055em;font-weight:710}.hero-score span{display:block;color:#756775;font-size:12px;font-weight:620}
+    .metrics{display:grid;grid-template-columns:repeat(4,1fr);gap:12px;margin:16px 0}.metric{background:rgba(255,255,255,.94);border:1px solid var(--line);border-radius:18px;padding:14px;box-shadow:var(--shadow)}.metric strong{display:block;font-size:25px;letter-spacing:-.04em;margin-top:7px;font-weight:700}.metric small{font-weight:650}.good{color:var(--green)}.warn{color:#9a6a14}.bad{color:var(--red)}.info{color:var(--blue)}
+    .operating-grid{display:grid;grid-template-columns:repeat(6,1fr);gap:10px;margin:14px 0}.op-card{background:rgba(255,255,255,.94);border:1px solid var(--line);border-radius:16px;padding:12px;box-shadow:0 7px 18px rgba(47,41,51,.035)}.op-card b{display:block;font-size:19px;letter-spacing:-.035em;margin:5px 0 2px;font-weight:700}.op-card span{display:block;color:var(--muted);font-size:10px;font-weight:650;text-transform:uppercase;letter-spacing:.07em}.op-card small{font-weight:600}
+    .lifecycle{background:rgba(255,255,255,.92);border:1px solid var(--line);border-radius:28px;padding:18px;box-shadow:var(--shadow);margin-bottom:18px}
+    .life-head{display:flex;justify-content:space-between;gap:14px;align-items:center;margin-bottom:14px}.life-head h3{margin:0;font-size:18px;letter-spacing:-.035em}.life-head p{margin:4px 0 0;color:var(--muted);font-size:13px}
+    .journey-map{display:grid;grid-template-columns:repeat(6,1fr);gap:11px}.node{border:1px solid var(--line);background:#ffffff;border-radius:20px;padding:13px;min-height:116px;cursor:pointer;position:relative}.node.active{border-color:#d9467d;box-shadow:0 0 0 3px rgba(217,70,125,.12)}.node b{display:block;font-size:13px}.node small{display:block;color:var(--muted);font-size:11px;line-height:1.35;margin:6px 0}.node .num{font-size:22px;font-weight:950;letter-spacing:-.05em}.node:after{content:"";position:absolute;right:-10px;top:52px;width:10px;height:2px;background:#decbd7}.node:last-child:after{display:none}
+    .panel-grid{display:grid;grid-template-columns:1.05fr .95fr;gap:16px}.panel,.feature{background:rgba(255,255,255,.94);border:1px solid var(--line);border-radius:26px;padding:18px;box-shadow:var(--shadow)}.panel-title{display:flex;align-items:flex-start;justify-content:space-between;gap:10px;margin-bottom:12px}.panel-title h3{font-size:17px;margin:0;letter-spacing:-.035em}.panel-title p{margin:4px 0 0;color:var(--muted);font-size:12px}.pill{border-radius:999px;padding:6px 10px;font-size:11px;font-weight:950;border:1px solid var(--line);background:#fff;color:var(--muted);white-space:nowrap}.pill.rose{background:#fdf2f8;color:#be185d;border-color:#fbcfe8}.pill.gold{background:#fffbeb;color:#a16207;border-color:#fde68a}.pill.green{background:#ecfdf5;color:#047857;border-color:#a7f3d0}.pill.plum{background:#f5f3ff;color:#6d28d9;border-color:#ddd6fe}
+    .chart{height:275px}.chart.tall{height:340px}.section{display:none}.section.active{display:block}
+    table{width:100%;border-collapse:collapse;font-size:13px}th{text-align:left;font-size:10px;text-transform:uppercase;letter-spacing:.1em;color:#8a7f91;padding:0 0 10px}td{border-top:1px solid #f0e6ec;padding:12px 0;vertical-align:top}td:last-child,th:last-child{text-align:right}
+    .ai-panel{position:sticky;top:88px;align-self:start;background:#ffffff;border:1px solid #ebd6e1;border-radius:30px;box-shadow:0 14px 34px rgba(59,54,56,.07);overflow:hidden}.ai-top{background:linear-gradient(135deg,#D9A0A8,#B8AEDF);color:white;padding:20px}.ai-top h3{margin:0;font-size:19px;letter-spacing:-.04em}.ai-top p{margin:6px 0 0;color:#fffaf7;font-size:13px;line-height:1.4}.ai-body{padding:16px;display:grid;gap:14px}.prompt textarea{width:100%;height:96px;border:1px solid var(--line);border-radius:17px;padding:12px;background:white;color:var(--ink);resize:vertical}.btns{display:flex;gap:8px;flex-wrap:wrap}.btn{border:0;border-radius:13px;padding:10px 12px;font-weight:950;cursor:pointer}.btn.primary{background:var(--rose);color:white}.btn.secondary{background:#f5eaf2;color:#6b2250}.ai-output{border-left:4px solid var(--rose);background:white;border-radius:16px;padding:13px;color:#4c4053;font-size:13px;line-height:1.45}.ai-card{background:#fff;border:1px solid var(--line);border-radius:18px;padding:13px}.ai-card b{display:block;font-size:13px}.ai-card small{display:block;color:var(--muted);line-height:1.4;margin-top:5px}
+    .domain{display:grid;gap:10px}.domain-row{display:grid;grid-template-columns:142px 1fr 42px;gap:10px;align-items:center}.bar{height:10px;background:#eadfe6;border-radius:999px;overflow:hidden}.bar i{display:block;height:100%;border-radius:999px;background:linear-gradient(90deg,var(--rose),var(--green))}
+    .feature textarea{width:100%;height:94px;border:1px solid var(--line);border-radius:16px;padding:12px;background:#fff;resize:vertical}.feature-output{margin-top:11px;background:#FFFCF8;border:1px solid #E9DED6;border-radius:17px;padding:13px;font-size:13px;color:#3B3638;line-height:1.45}
+    .report-card{background:linear-gradient(180deg,#fff,#fff8f4);border:1px solid var(--line);border-radius:22px;padding:16px}.report-card h4{margin:0 0 8px}.report-score{font-size:46px;font-weight:950;letter-spacing:-.07em;color:var(--plum)}
+    .module-stack{display:grid;gap:14px}.heat-list{display:grid;gap:10px}.heat-row{display:grid;grid-template-columns:135px 1fr 54px;gap:10px;align-items:center}.heat-track{height:12px;background:#eadfe6;border-radius:999px;overflow:hidden}.heat-track i{display:block;height:100%;background:linear-gradient(90deg,var(--rose),var(--green));border-radius:999px}.two-by-two{display:grid;grid-template-columns:1fr 1fr;gap:16px}
+    @media(max-width:1180px){.workspace{grid-template-columns:1fr}.ai-panel{position:relative;top:auto}.journey-map{grid-template-columns:repeat(3,1fr)}.metrics{grid-template-columns:1fr 1fr}.operating-grid{grid-template-columns:repeat(3,1fr)}}
+    @media(max-width:780px){.top-inner{grid-template-columns:1fr;grid-template-areas:"brand" "filters" "tabs";align-items:flex-start}.tabs{width:100%;flex-wrap:wrap;overflow:visible}.workspace{padding:16px 13px 34px}.hero-grid,.panel-grid,.metrics,.journey-map,.operating-grid,.two-by-two{grid-template-columns:1fr}.filters{width:100%;flex-wrap:wrap;justify-content:flex-start}.filters select{flex:1;min-width:150px}.hero h2{font-size:30px}.node:after{display:none}.domain-row,.heat-row{grid-template-columns:1fr}.chart{height:235px}}
+  </style>
+</head>
+<body>
+  <div class="shell">
+    <header class="topbar">
+      <div class="top-inner">
+        <div class="brand"><div class="mark">PL</div><div><h1>PeopleLens</h1><p>Tech workforce intelligence</p></div></div>
+        <nav class="tabs" id="tabs">
+          <button class="active" data-view="command">Overview</button>
+          <button data-view="workforce">Workforce Plan</button>
+          <button data-view="acquisition">Talent Pipeline</button>
+          <button data-view="screening">Candidate Match</button>
+          <button data-view="interview">Interview Hub</button>
+          <button data-view="report">Decision Report</button>
+          <button data-view="employee">Retention</button>
+          <button data-view="skills">Skills</button>
+          <button data-view="performance">Performance</button>
+          <button data-view="compensation">Rewards</button>
+          <button data-view="dei">Inclusion</button>
+          <button data-view="journeys">Employee Journeys</button>
+          <button data-view="tenure">Tenure</button>
+        </nav>
+        <div class="filters">
+          <select id="companyFilter"><option value="all">All tech companies</option><option value="aurora">Aurora Cloud</option><option value="nexora">Nexora AI</option><option value="shared">Platform Shared Services</option></select>
+          <select id="countryFilter"><option value="all">All countries</option><option value="sg">Singapore</option><option value="my">Malaysia</option><option value="id">Indonesia</option><option value="ph">Philippines</option><option value="vn">Vietnam</option><option value="th">Thailand</option><option value="in">India</option><option value="jp">Japan</option><option value="kr">South Korea</option><option value="au">Australia</option></select>
+          <select id="deptFilter"><option value="all">All tech departments</option><option value="eng">Engineering</option><option value="product">Product Management</option><option value="data">Data & AI</option><option value="design">Product Design</option><option value="security">Security</option><option value="sre">DevOps / SRE</option><option value="sales">Enterprise Sales</option><option value="cs">Customer Success</option><option value="people">People Team</option><option value="finance">Finance</option></select>
+          <span class="ai-chip">AI reviewed</span>
+        </div>
+      </div>
+    </header>
+
+    <div class="workspace">
+      <main class="main">
+        <section class="hero">
+          <div class="hero-grid">
+            <div>
+              <div class="eyebrow">Enterprise people intelligence</div>
+              <h2>Workforce intelligence for scaling tech teams.</h2>
+              <p>PeopleLens connects hiring demand, candidate quality, structured interviews, skills, retention, rewards, onboarding, offboarding, and tenure analysis across company, country, and department.</p>
+            </div>
+            <div class="hero-score"><span id="scopeLabel">All tech companies · All countries · All departments</span><b id="healthScore">84</b><span id="pressureText">Pressure point: early-tenure attrition in Malaysia Sales</span></div>
+          </div>
+        </section>
+
+        <section class="metrics">
+          <div class="metric"><div class="eyebrow">Hiring load</div><strong id="openRoles">52</strong><small class="info">14 priority roles</small></div>
+          <div class="metric"><div class="eyebrow">JD match avg</div><strong id="matchAvg">78%</strong><small class="good">+8 pts after AI screen</small></div>
+          <div class="metric"><div class="eyebrow">Regretted attrition</div><strong id="attrition">9.6%</strong><small class="bad">+1.2 pts YoY</small></div>
+          <div class="metric"><div class="eyebrow">L&D completion</div><strong id="learning">74%</strong><small class="warn">11 pts under target</small></div>
+        </section>
+
+        <section class="lifecycle">
+          <div class="life-head"><div><h3>Employee lifecycle intelligence map</h3><p>Different from a dashboard menu: this is the operating spine from market signal to exit risk.</p></div><span class="pill rose">Click stages to switch workspace</span></div>
+          <div class="journey-map" id="journeyMap">
+            <div class="node active" data-view="acquisition"><b>Acquire</b><small>Funnel health, source quality, role pressure</small><div class="num" id="nodeAcquire">1,240</div></div>
+            <div class="node" data-view="screening"><b>Screen</b><small>Resume summary, JD match, risk flags</small><div class="num" id="nodeScreen">82%</div></div>
+            <div class="node" data-view="interview"><b>Interview</b><small>Case generation, panel feedback, rubric</small><div class="num" id="nodeInterview">64</div></div>
+            <div class="node" data-view="employee"><b>Retain</b><small>Attrition risk, save actions, learning gaps</small><div class="num" id="nodeRetain">126</div></div>
+            <div class="node" data-view="journeys"><b>Journey</b><small>Onboarding and offboarding controls</small><div class="num" id="nodeJourney">72%</div></div>
+            <div class="node" data-view="tenure"><b>Tenure</b><small>Workforce mix and flight-risk windows</small><div class="num" id="nodeTenure">2.4y</div></div>
+          </div>
+        </section>
+
+        <section class="section active" id="command">
+          <div class="panel-grid">
+            <div class="panel"><div class="panel-title"><div><h3>People risk and control strength</h3><p>What needs executive attention this week.</p></div><span class="pill gold">Lifecycle radar</span></div><div class="chart"><canvas id="riskChart"></canvas></div></div>
+            <div class="panel"><div class="panel-title"><div><h3>Headcount by company and country</h3><p>Enterprise breakdown for portfolio-level planning.</p></div><span class="pill plum">Stacked</span></div><div class="chart"><canvas id="breakdownChart"></canvas></div></div>
+          </div>
+          <div class="panel-grid" style="margin-top:16px">
+            <div class="panel"><h3>AI-prioritized interventions</h3><table id="priorityTable"></table></div>
+            <div class="panel"><h3>Department health</h3><div class="chart"><canvas id="deptChart"></canvas></div></div>
+          </div>
+        </section>
+
+        <section class="section" id="workforce">
+          <div class="panel-grid">
+            <div class="panel"><div class="panel-title"><div><h3>Workforce plan vs hiring capacity</h3><p>Tech headcount demand, approved openings, and recruiting load.</p></div><span class="pill plum">Planning</span></div><table id="workforceTable"></table></div>
+            <div class="panel"><div class="panel-title"><div><h3>Role coverage by job family</h3><p>Engineering, product, design, data, security, and GTM coverage.</p></div><span class="pill gold">Tech focus</span></div><div class="chart"><canvas id="workforceChart"></canvas></div></div>
+          </div>
+        </section>
+
+        <section class="section" id="acquisition">
+          <div class="panel-grid">
+            <div class="panel"><div class="panel-title"><div><h3>Acquisition funnel</h3><p>Candidate movement from applied to accepted offer.</p></div><span class="pill rose">Funnel management</span></div><div class="chart tall"><canvas id="funnelChart"></canvas></div></div>
+            <div class="panel"><div class="panel-title"><div><h3>Source quality matrix</h3><p>Volume alone is not enough. Quality-weighted source health.</p></div><span class="pill plum">Quality weighted</span></div><div class="chart tall"><canvas id="sourceChart"></canvas></div></div>
+          </div>
+        </section>
+
+        <section class="section" id="screening">
+          <div class="panel-grid">
+            <div class="feature"><div class="panel-title"><div><h3>Resume summarization</h3><p>Enterprise-safe summary for recruiters and hiring managers.</p></div><span class="pill rose">AI screen</span></div><textarea id="resumeText">Candidate: Maya Chen. 7 years product management. Led checkout conversion, marketplace search, pricing experiments. Strong SQL, stakeholder leadership, B2C growth. Limited direct people-management exposure.</textarea><div style="margin-top:10px"><button class="btn primary" id="summarizeBtn">Summarize</button> <button class="btn secondary" id="matchBtn">Score against JD</button></div><div class="feature-output" id="resumeOutput">AI output will appear here.</div></div>
+            <div class="panel"><div class="panel-title"><div><h3>Resume to JD match score</h3><p>Domain-level fit, not one mysterious number.</p></div><span class="pill green">82 overall</span></div><div class="domain" id="matchDomains"></div></div>
+          </div>
+          <div class="panel-grid" style="margin-top:16px"><div class="panel"><h3>Shortlist</h3><table id="candidateTable"></table></div><div class="panel"><h3>Screening risk flags</h3><table id="resumeRiskTable"></table></div></div>
+        </section>
+
+        <section class="section" id="interview">
+          <div class="panel-grid">
+            <div class="feature"><div class="panel-title"><div><h3>Interview case study generator</h3><p>Creates case prompts and rubrics from role context.</p></div><span class="pill rose">AI studio</span></div><textarea id="caseText">Generate a 45-minute case study for a Senior Product Manager improving checkout conversion across SG, MY, and ID.</textarea><div style="margin-top:10px"><button class="btn primary" id="caseBtn">Generate case</button> <button class="btn secondary" id="rubricBtn">Add rubric</button></div><div class="feature-output" id="caseOutput">Generated case and rubric will appear here.</div></div>
+            <div class="panel"><div class="panel-title"><div><h3>Panel feedback coverage</h3><p>Which interviewers submitted structured inputs.</p></div><span class="pill gold">1 pending</span></div><table id="panelTable"></table></div>
+          </div>
+        </section>
+
+        <section class="section" id="report">
+          <div class="panel-grid">
+            <div class="panel"><div class="panel-title"><div><h3>Interviewer score aggregation</h3><p>Combines panel feedback into one decision view.</p></div><span class="pill green">Hire</span></div><div class="chart"><canvas id="interviewScoreChart"></canvas></div></div>
+            <div class="report-card"><h4>Generated interview report</h4><div class="report-score">84</div><p><strong>Recommendation: Hire.</strong> Strong product strategy, experimentation, and stakeholder communication. Probe people leadership depth before final leveling.</p><div class="domain" id="interviewDomains"></div></div>
+          </div>
+          <div class="panel" style="margin-top:16px"><h3>Interviewer feedback inputs</h3><table id="feedbackTable"></table></div>
+        </section>
+
+        <section class="section" id="employee">
+          <div class="panel-grid">
+            <div class="panel"><div class="panel-title"><div><h3>Retention and attrition trend</h3><p>Regretted attrition against target.</p></div><span class="pill rose">Early tenure risk</span></div><div class="chart"><canvas id="attritionChart"></canvas></div></div>
+            <div class="panel"><div class="panel-title"><div><h3>Learning completion by population</h3><p>L&D coverage against 85% target.</p></div><span class="pill gold">Skills gap</span></div><div class="chart"><canvas id="learningChart"></canvas></div></div>
+          </div>
+          <div class="panel-grid" style="margin-top:16px"><div class="panel"><h3>Recommended learning paths</h3><table id="learningTable"></table></div><div class="panel"><h3>Save actions</h3><table id="saveTable"></table></div></div>
+        </section>
+
+        <section class="section" id="skills">
+          <div class="panel-grid">
+            <div class="panel"><div class="panel-title"><div><h3>Critical tech skill coverage</h3><p>Coverage by AI, cloud, security, platform engineering, and data skills.</p></div><span class="pill plum">Skills graph</span></div><div class="chart"><canvas id="skillsChart"></canvas></div></div>
+            <div class="panel"><h3>Skills gap actions</h3><table id="skillsTable"></table></div>
+          </div>
+        </section>
+
+        <section class="section" id="performance">
+          <div class="panel-grid">
+            <div class="panel"><div class="panel-title"><div><h3>Performance distribution</h3><p>Calibration view by department and level.</p></div><span class="pill rose">Calibration</span></div><div class="chart"><canvas id="performanceChart"></canvas></div></div>
+            <div class="panel"><h3>Promotion and mobility queue</h3><table id="performanceTable"></table></div>
+          </div>
+        </section>
+
+        <section class="section" id="compensation">
+          <div class="panel-grid">
+            <div class="panel"><div class="panel-title"><div><h3>Compensation band health</h3><p>Below-band, in-band, and above-band population by tech family.</p></div><span class="pill gold">Rewards</span></div><div class="chart"><canvas id="compChart"></canvas></div></div>
+            <div class="panel"><h3>Rewards risk list</h3><table id="compTable"></table></div>
+          </div>
+        </section>
+
+        <section class="section" id="dei">
+          <div class="panel-grid">
+            <div class="panel"><div class="panel-title"><div><h3>Inclusion and representation</h3><p>Representation and movement across hiring, promotion, and retention.</p></div><span class="pill green">Inclusion</span></div><div class="chart"><canvas id="deiChart"></canvas></div></div>
+            <div class="panel"><h3>Inclusion actions</h3><table id="deiTable"></table></div>
+          </div>
+        </section>
+
+        <section class="section" id="journeys">
+          <div class="panel-grid">
+            <div class="panel"><div class="panel-title"><div><h3>Onboarding journey health</h3><p>Completion and early attrition risk by milestone.</p></div><span class="pill gold">Week 2 dip</span></div><div class="chart"><canvas id="onboardingChart"></canvas></div></div>
+            <div class="panel"><div class="panel-title"><div><h3>Offboarding controls</h3><p>Exit journey, access removal, payroll and knowledge transfer.</p></div><span class="pill rose">5 access risks</span></div><table id="offboardingTable"></table></div>
+          </div>
+        </section>
+
+        <section class="section" id="tenure">
+          <div class="panel-grid">
+            <div class="panel"><div class="panel-title"><div><h3>Tenure distribution</h3><p>Where workforce maturity and flight risk sit.</p></div><span class="pill plum">Tenure bands</span></div><div class="chart"><canvas id="tenureChart"></canvas></div></div>
+            <div class="panel"><h3>Tenure insights and manager actions</h3><table id="tenureTable"></table></div>
+          </div>
+        </section>
+      </main>
+
+      <aside class="ai-panel">
+        <div class="ai-top"><h3>PeopleLens AI Copilot</h3><p>Visible assistant panel for resume summaries, JD matching, case generation, interview reports, and people-risk narratives.</p></div>
+        <div class="ai-body">
+          <div class="prompt"><textarea id="copilotPrompt">Summarize the top people risk for Malaysia Sales and recommend actions for HRBP, TA, and manager.</textarea><div class="btns"><button class="btn primary" id="copilotBtn">Generate insight</button><button class="btn secondary" id="reportBtn">Draft board note</button></div></div>
+          <div class="ai-output" id="copilotOutput"><strong>Ready.</strong> Ask the copilot to summarize talent risk, explain a candidate score, generate an interview case, or draft a decision report.</div>
+          <div class="ai-card"><b>Governance</b><small>All AI outputs should remain explainable, auditable, and reviewed by HR before use in employment decisions.</small></div>
+          <div class="ai-card"><b>Current anomaly</b><small id="anomalyText">Malaysia Sales: early-tenure attrition is 4.2 pts above company baseline, with onboarding Week 2 completion at 61%.</small></div>
+          <div class="ai-card"><b>Next best action</b><small>Launch stay interviews for 38 employees and assign hiring-manager calibration for roles with high interview score variance.</small></div>
+        </div>
+      </aside>
+    </div>
+  </div>
+
+  <script>
+    const views=["command","acquisition","screening","interview","report","employee","journeys","tenure"];
+    const titles={command:"Command",acquisition:"Acquire",screening:"Screen",interview:"Interview",report:"Decide",employee:"Retain & Grow",journeys:"Journeys",tenure:"Tenure"};
+    const scoreData={all:[84,52,78,9.6,74],aurora:[87,41,82,8.4,79],nexora:[79,67,74,11.8,69],shared:[86,24,81,7.9,83]};
+    const countryAdjust={all:[0,0,0,0,0],sg:[2,6,3,-1.1,4],my:[-5,12,-4,2.8,-6],id:[-4,10,-3,2.0,-5],ph:[-1,5,1,.8,-2],vn:[1,8,2,-.2,1],th:[0,4,0,.4,-1],in:[3,16,4,-.8,3],jp:[1,3,1,-.5,2],kr:[0,4,0,.2,1],au:[2,5,2,-.7,3]};
+    const deptAdjust={all:[0,0,0,0,0],eng:[1,18,2,.2,-1],product:[2,8,3,-.4,2],data:[0,12,1,.6,-3],design:[1,4,2,-.1,1],security:[-2,9,-5,1.4,-7],sre:[-3,10,-4,1.7,-8],sales:[-5,14,-6,2.8,-4],cs:[-2,6,-2,1.2,-1],people:[4,2,5,-1.2,6],finance:[3,1,4,-.8,5]};
+    const match=[["Relevant experience",92],["JD coverage",86],["Leadership scope",68],["Domain knowledge",88],["Analytics depth",84],["Culture signals",77]];
+    const domains=[["Product strategy",88],["Analytical thinking",86],["Execution",82],["Stakeholder leadership",85],["People leadership",72],["Communication",91]];
+    function setView(id){document.querySelectorAll(".section").forEach(s=>s.classList.toggle("active",s.id===id));document.querySelectorAll(".tabs button").forEach(b=>b.classList.toggle("active",b.dataset.view===id));document.querySelectorAll(".node").forEach(n=>n.classList.toggle("active",n.dataset.view===id))}
+    tabs.addEventListener("click",e=>{const b=e.target.closest("button[data-view]");if(b)setView(b.dataset.view)});journeyMap.addEventListener("click",e=>{const n=e.target.closest(".node[data-view]");if(n)setView(n.dataset.view)});
+    function rows(id,h,rs){document.getElementById(id).innerHTML=`<thead><tr>${h.map(x=>`<th>${x}</th>`).join("")}</tr></thead><tbody>${rs.map(r=>`<tr>${r.map(c=>`<td>${c}</td>`).join("")}</tr>`).join("")}</tbody>`}
+    function domain(id,items){document.getElementById(id).innerHTML=items.map(([n,s])=>`<div class="domain-row"><strong>${n}</strong><div class="bar"><i style="width:${s}%"></i></div><b>${s}</b></div>`).join("")}
+    function initTables(){domain("matchDomains",match);domain("interviewDomains",domains);rows("priorityTable",["Signal","Impact","Action"],[["Malaysia Sales early attrition","+4.2 pts","HRBP stay interviews"],["Engineering SG pipeline thin","1.8 qualified / role","Source calibration"],["Ops onboarding Week 2 dip","61% completion","Buddy reset"]]);rows("workforceTable",["Job family","Approved","Gap"],[["Backend engineering","86","18"],["AI / ML engineering","42","15"],["Security engineering","24","9"],["Product management","31","7"],["Product design","18","4"]]);rows("candidateTable",["Candidate","Role","Match"],[["Maya Chen","Senior PM","82"],["Ravi Menon","Data Lead","78"],["Aisha Tan","Ops Manager","88"]]);rows("resumeRiskTable",["Risk","Evidence","Probe"],[["Leadership depth","Team of 4","Panel"],["Domain gap","No B2B exposure","Case"],["Short tenure","2 roles <18m","Recruiter"]]);rows("panelTable",["Interviewer","Domain","Status"],[["Hannah Lee","Strategy","Submitted"],["Marco Lim","Analytics","Submitted"],["Priya Rao","Stakeholders","Pending"],["Daniel Wu","Culture","Submitted"]]);rows("feedbackTable",["Interviewer","Score","Note"],[["Hannah Lee","87","Strong product framing"],["Marco Lim","84","Solid experiment design"],["Priya Rao","Pending","Feedback due today"],["Daniel Wu","81","Good communication"]]);rows("learningTable",["Audience","Skill gap","Path"],[["New managers","Feedback quality","Manager Essentials"],["Sales MY","Negotiation","Commercial Academy"],["Engineering SG","System design","Tech Lead Path"]]);rows("saveTable",["Action","Employees","Owner"],[["Stay interviews","38","HRBP"],["Manager coaching","12 teams","People Partner"],["Comp review","18 critical roles","Rewards"]]);rows("skillsTable",["Skill","Gap","Action"],[["GenAI product delivery","42 engineers","Internal academy"],["Cloud cost optimization","31 engineers","FinOps lab"],["AppSec threat modeling","19 squads","Security guild"]]);rows("performanceTable",["Queue","Employees","Action"],[["Promotion-ready engineers","64","Calibration"],["Mobility candidates","38","Internal marketplace"],["Low performance support","21","Manager plan"]]);rows("compTable",["Risk","Population","Action"],[["Below band critical roles","37","Market adjustment"],["Equity refresh risk","52","Refresh planning"],["Offer declines due comp","11 roles","Band review"]]);rows("deiTable",["Area","Signal","Action"],[["Women in senior engineering","22%","Sponsorship"],["Promotion rate variance","-3.8 pts","Calibration audit"],["Hiring slate diversity","68%","Source expansion"]]);rows("offboardingTable",["Step","Risk","SLA"],[["Knowledge transfer","8 incomplete","7d"],["Access removal","5 overdue","24h"],["Exit interview","11 pending","5d"],["Final payroll","2 exceptions","3d"]]);rows("tenureTable",["Tenure band","Signal","Action"],[["0-6 months","Attrition 13.8%","Fix onboarding Week 2"],["18-30 months","Promotion wait risk","Career path review"],["5+ years","L&D participation low","Expert track design"]])}
+    let deptChart, riskChartObj, workforceChartObj, funnelChartObj, skillsChartObj, learningChartObj;function charts(){const grid="#E9DED6",plum="#B8AEDF",rose="#D9A0A8",lav="#C7BDE8",gold="#B7A99A",green="#8FB6A3",red="#D58A92",blue="#9DA7D9",cyan="#A9CFC2";Chart.defaults.font.family="ui-sans-serif, -apple-system, BlinkMacSystemFont, Segoe UI, Helvetica Neue, Arial";Chart.defaults.color="#64748b";
+      riskChartObj=new Chart(document.getElementById("riskChart"),{type:"radar",data:{labels:["Hiring","Screening","Interview","Onboarding","Retention","Learning"],datasets:[{label:"Risk heat",data:[58,46,42,72,78,54],borderColor:red,backgroundColor:"rgba(213,138,146,.14)"},{label:"Control strength",data:[74,82,84,61,56,69],borderColor:blue,backgroundColor:"rgba(184,174,223,.16)"}]},options:{responsive:true,maintainAspectRatio:false,plugins:{legend:{position:"bottom"}},scales:{r:{suggestedMin:0,suggestedMax:100,grid:{color:grid}}}}});
+      new Chart(document.getElementById("breakdownChart"),{type:"bar",data:{labels:["Aurora","Nexora","Shared"],datasets:[{label:"SG",data:[420,260,180],backgroundColor:plum},{label:"MY",data:[360,110,90],backgroundColor:rose},{label:"ID",data:[520,90,120],backgroundColor:lav},{label:"PH",data:[260,80,110],backgroundColor:gold}]},options:{responsive:true,maintainAspectRatio:false,plugins:{legend:{position:"bottom"}},scales:{x:{stacked:true,grid:{display:false}},y:{stacked:true,title:{display:true,text:"Headcount"},grid:{color:grid}}}}});
+      deptChart=new Chart(document.getElementById("deptChart"),{type:"doughnut",data:{labels:["Sales","Operations","Product","Engineering"],datasets:[{data:[28,34,16,22],backgroundColor:[rose,gold,lav,plum],borderWidth:0}]},options:{responsive:true,maintainAspectRatio:false,plugins:{legend:{position:"bottom"}}}});
+      funnelChartObj=new Chart(document.getElementById("funnelChart"),{type:"bar",data:{labels:["Applied","AI qualified","Recruiter","HM","Case","Panel","Offer","Accepted"],datasets:[{label:"Candidates",data:[1240,486,312,158,92,64,34,24],backgroundColor:[plum,plum,rose,rose,lav,lav,green,green]}]},options:{responsive:true,maintainAspectRatio:false,plugins:{legend:{display:false}},scales:{y:{title:{display:true,text:"Candidate count"},grid:{color:grid}},x:{grid:{display:false}}}}});
+      new Chart(document.getElementById("sourceChart"),{type:"bar",data:{labels:["LinkedIn","Referral","Agency","Campus","Internal"],datasets:[{label:"Qualified candidates",data:[144,96,72,51,38],backgroundColor:rose},{label:"Interview pass %",data:[34,48,29,21,52],backgroundColor:lav,yAxisID:"y1"}]},options:{responsive:true,maintainAspectRatio:false,plugins:{legend:{position:"bottom"}},scales:{y:{position:"left",title:{display:true,text:"Qualified count"},grid:{color:grid}},y1:{position:"right",title:{display:true,text:"Pass %"},grid:{drawOnChartArea:false}}}}});
+      new Chart(document.getElementById("interviewScoreChart"),{type:"bar",data:{labels:["Recruiter","Hiring mgr","Case","Panel","Culture"],datasets:[{label:"Interviewer score",data:[82,87,84,79,88],backgroundColor:[plum,rose,lav,gold,green]},{label:"Role benchmark",data:[75,80,82,78,80],backgroundColor:"#F2EEF8"}]},options:{responsive:true,maintainAspectRatio:false,plugins:{legend:{position:"bottom"}},scales:{y:{min:50,max:100,title:{display:true,text:"Score / 100"},grid:{color:grid}},x:{grid:{display:false}}}}});
+      new Chart(document.getElementById("attritionChart"),{type:"line",data:{labels:["Jan","Feb","Mar","Apr","May","Jun"],datasets:[{label:"Regretted attrition %",data:[8.1,8.4,8.9,9.2,9.6,9.8],borderColor:red,backgroundColor:"rgba(213,138,146,.12)",fill:true,tension:.32},{label:"Target",data:[8,8,8,8,8,8],borderColor:green,borderDash:[5,5]}]},options:{responsive:true,maintainAspectRatio:false,plugins:{legend:{position:"bottom"}},scales:{y:{title:{display:true,text:"Annualized %"},grid:{color:grid}},x:{grid:{display:false}}}}});
+      learningChartObj=new Chart(document.getElementById("learningChart"),{type:"bar",data:{labels:["Sales","Operations","Product","Engineering","Managers"],datasets:[{label:"Completion %",data:[72,69,81,78,64],backgroundColor:plum},{label:"Target",data:[85,85,85,85,85],type:"line",borderColor:green,borderDash:[5,5]}]},options:{responsive:true,maintainAspectRatio:false,plugins:{legend:{position:"bottom"}},scales:{y:{max:100,title:{display:true,text:"Completion %"},grid:{color:grid}},x:{grid:{display:false}}}}});
+      new Chart(document.getElementById("onboardingChart"),{type:"line",data:{labels:["Pre-board","Day 1","Week 1","Week 2","Day 30"],datasets:[{label:"Completion %",data:[92,88,81,67,74],borderColor:blue,backgroundColor:"rgba(184,174,223,.14)",fill:true,tension:.32},{label:"Early attrition risk",data:[8,9,13,24,18],borderColor:red,yAxisID:"y1",tension:.32}]},options:{responsive:true,maintainAspectRatio:false,plugins:{legend:{position:"bottom"}},scales:{y:{max:100,title:{display:true,text:"Completion %"},grid:{color:grid}},y1:{position:"right",title:{display:true,text:"Risk %"},grid:{drawOnChartArea:false}},x:{grid:{display:false}}}}});
+      workforceChartObj=new Chart(document.getElementById("workforceChart"),{type:"bar",data:{labels:["Backend","AI/ML","Security","Product","Design","SRE"],datasets:[{label:"Approved HC",data:[86,42,24,31,18,29],backgroundColor:"#F2EEF8"},{label:"Open gap",data:[18,15,9,7,4,8],backgroundColor:rose}]},options:{responsive:true,maintainAspectRatio:false,plugins:{legend:{position:"bottom"}},scales:{y:{title:{display:true,text:"Headcount"},grid:{color:grid}},x:{grid:{display:false}}}}});
+      skillsChartObj=new Chart(document.getElementById("skillsChart"),{type:"bar",data:{labels:["GenAI","Cloud","Security","Data","Mobile","Platform"],datasets:[{label:"Coverage %",data:[61,74,58,72,69,66],backgroundColor:plum},{label:"Target",data:[85,85,85,85,85,85],type:"line",borderColor:green,borderDash:[5,5]}]},options:{responsive:true,maintainAspectRatio:false,plugins:{legend:{position:"bottom"}},scales:{y:{max:100,title:{display:true,text:"Coverage %"},grid:{color:grid}},x:{grid:{display:false}}}}});
+      new Chart(document.getElementById("performanceChart"),{type:"bar",data:{labels:["Exceeds","Strong","Meets","Developing","Support"],datasets:[{label:"Employees",data:[118,486,902,184,42],backgroundColor:[plum,lav,blue,gold,red]}]},options:{responsive:true,maintainAspectRatio:false,plugins:{legend:{display:false}},scales:{y:{title:{display:true,text:"Employees"},grid:{color:grid}},x:{grid:{display:false}}}}});
+      new Chart(document.getElementById("compChart"),{type:"bar",data:{labels:["Eng","Product","Data","Design","Security","SRE"],datasets:[{label:"Below band",data:[37,12,18,7,9,14],backgroundColor:red},{label:"In band",data:[410,122,188,82,64,104],backgroundColor:lav},{label:"Above band",data:[46,16,21,9,8,11],backgroundColor:green}]},options:{responsive:true,maintainAspectRatio:false,plugins:{legend:{position:"bottom"}},scales:{x:{stacked:true,grid:{display:false}},y:{stacked:true,title:{display:true,text:"Employees"},grid:{color:grid}}}}});
+      new Chart(document.getElementById("deiChart"),{type:"bar",data:{labels:["Hiring slate","Interview pass","Promotion","Retention"],datasets:[{label:"Current %",data:[68,54,46,61],backgroundColor:rose},{label:"Target %",data:[75,60,55,70],backgroundColor:"#F2EEF8"}]},options:{responsive:true,maintainAspectRatio:false,plugins:{legend:{position:"bottom"}},scales:{y:{max:100,title:{display:true,text:"Representation / parity %"},grid:{color:grid}},x:{grid:{display:false}}}}});
+      new Chart(document.getElementById("tenureChart"),{type:"bar",data:{labels:["0-6m","6-12m","1-2y","2-5y","5+y"],datasets:[{label:"Headcount",data:[212,308,684,812,326],backgroundColor:[red,gold,blue,plum,lav]}]},options:{responsive:true,maintainAspectRatio:false,plugins:{legend:{display:false}},scales:{y:{title:{display:true,text:"Employees"},grid:{color:grid}},x:{grid:{display:false}}}}})}
+    function labelOf(el){return el.options[el.selectedIndex].text}
+    function clamp(n,min,max){return Math.max(min,Math.min(max,n))}
+    function updateScope(){
+      const base=scoreData[companyFilter.value]||scoreData.all, ca=countryAdjust[countryFilter.value]||countryAdjust.all, da=deptAdjust[deptFilter.value]||deptAdjust.all;
+      const health=clamp(Math.round(base[0]+ca[0]+da[0]),55,96), roles=Math.max(4,base[1]+ca[1]+da[1]), match=clamp(Math.round(base[2]+ca[2]+da[2]),48,94), attr=clamp((base[3]+ca[3]+da[3]),4.5,18.5), learn=clamp(Math.round(base[4]+ca[4]+da[4]),45,92);
+      healthScore.textContent=health;openRoles.textContent=roles;matchAvg.textContent=match+"%";attrition.textContent=attr.toFixed(1)+"%";learning.textContent=learn+"%";
+      scopeLabel.textContent=`${labelOf(companyFilter)} · ${labelOf(countryFilter)} · ${labelOf(deptFilter)}`;
+      const focus=`${labelOf(countryFilter).replace("All countries","multi-country")} ${labelOf(deptFilter).replace("All tech departments","tech workforce")}`;
+      pressureText.textContent=`Pressure point: ${focus} attrition and skill coverage`;
+      anomalyText.textContent=`${focus}: regretted attrition is ${attr.toFixed(1)}%, L&D completion is ${learn}%, and open role load is ${roles}.`;
+      nodeAcquire.textContent=(roles*24).toLocaleString();nodeScreen.textContent=match+"%";nodeInterview.textContent=Math.max(12,Math.round(roles*1.2));nodeRetain.textContent=Math.round(attr*13);nodeJourney.textContent=learn+"%";nodeTenure.textContent=(2.1+(health-70)/25).toFixed(1)+"y";
+      if(deptChart){deptChart.data.datasets[0].data=deptFilter.value==="all"?[24,18,14,12,9,8,6,5,3,1]:[18,8,24,50];deptChart.data.labels=deptFilter.value==="all"?["Eng","Product","Data","Design","Security","SRE","Sales","CS","People","Finance"]:["Selected","Adjacent","Hiring","Risk"];deptChart.update()}
+      if(riskChartObj){riskChartObj.data.datasets[0].data=[clamp(roles,20,90),46,42,clamp(learn,45,90),clamp(attr*7,35,95),clamp(100-learn,20,70)];riskChartObj.update()}
+      if(funnelChartObj){const factor=roles/52;funnelChartObj.data.datasets[0].data=[1240,486,312,158,92,64,34,24].map(v=>Math.round(v*factor));funnelChartObj.update()}
+      if(workforceChartObj){workforceChartObj.data.datasets[1].data=[18,15,9,7,4,8].map(v=>Math.max(1,Math.round(v*roles/52)));workforceChartObj.update()}
+      if(skillsChartObj){skillsChartObj.data.datasets[0].data=[61,74,58,72,69,66].map(v=>clamp(v+(learn-74),35,94));skillsChartObj.update()}
+      if(learningChartObj){learningChartObj.data.datasets[0].data=[72,69,81,78,64].map(v=>clamp(v+(learn-74),35,95));learningChartObj.update()}
+    }
+    companyFilter.addEventListener("change",updateScope);countryFilter.addEventListener("change",updateScope);deptFilter.addEventListener("change",updateScope);
+    summarizeBtn.addEventListener("click",()=>resumeOutput.innerHTML="<strong>AI resume summary:</strong> 7-year product leader with B2C growth, checkout optimization, marketplace experimentation, SQL fluency, and strong stakeholder leadership. Main gap: limited direct people-management scale.");
+    matchBtn.addEventListener("click",()=>resumeOutput.innerHTML="<strong>JD match score: 82 / 100.</strong> Strong match for product strategy, experimentation, and analytics. Probe people leadership and multi-country operating depth.");
+    caseBtn.addEventListener("click",()=>caseOutput.innerHTML="<strong>Case study:</strong> Candidate receives checkout funnel data across SG, MY, and ID. Task: identify conversion leak, prioritize two experiments, define success metrics, and present a 30/60/90-day rollout.");
+    rubricBtn.addEventListener("click",()=>caseOutput.innerHTML="<strong>Rubric:</strong> Problem framing 20%, analytical depth 25%, prioritization 20%, customer/commercial judgment 15%, communication 10%, risk trade-offs 10%.");
+    copilotBtn.addEventListener("click",()=>copilotOutput.innerHTML="<strong>Top people risk:</strong> Malaysia Sales has elevated early-tenure attrition, weak Week 2 onboarding completion, and high manager-change exposure. Recommended actions: HRBP stay interviews, TA recalibration of role preview, manager onboarding checklist refresh.");
+    reportBtn.addEventListener("click",()=>copilotOutput.innerHTML="<strong>Board note draft:</strong> People system health is 84/100. Hiring conversion improved through AI screening, but retention pressure is concentrated in Malaysia Sales and Operations onboarding. Management should prioritize early-tenure interventions and manager enablement this quarter.");
+    initTables();charts();updateScope();
+  </script>
+</body>
+</html>
