@@ -13,6 +13,13 @@ Each project explores how information hierarchy, interaction design, responsive 
   
   **[View the live dashboard](https://phoebefu6.github.io/design-dashboard-with-phoebe/Ecommerce/mega-campaign-live-dashboard/)**
 
+### Aquaculture
+
+- [AquaPrime Delivery Control](./Aquaculture/aquaprime-delivery-control/)  
+  A hatchery-to-client delivery control portal for monitoring production readiness, broodstock and hatchery risk, grow-out health, fillet yield, sales allocation, logistics, cold-chain excursions, and end-to-end risk of missing committed fish fillet tonnes.
+
+  **[View the live dashboard](https://phoebefu6.github.io/design-dashboard-with-phoebe/Aquaculture/aquaprime-delivery-control/)**
+
 ## Design principles
 
 - Evidence and operational context remain visible without hover.
@@ -27,6 +34,7 @@ Each project explores how information hierarchy, interaction design, responsive 
 The dashboards are published with GitHub Pages. Visitors can use them directly in a browser without installing anything.
 
 - [Open the Mega Campaign Live Dashboard](https://phoebefu6.github.io/design-dashboard-with-phoebe/Ecommerce/mega-campaign-live-dashboard/)
+- [Open AquaPrime Delivery Control](https://phoebefu6.github.io/design-dashboard-with-phoebe/Aquaculture/aquaprime-delivery-control/)
 
 ## Running a project locally
 

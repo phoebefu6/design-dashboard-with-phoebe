@@ -1,0 +1,330 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>AquaPrime Delivery Control</title>
+  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <style>
+    :root{
+      --ink:#1e293b;--muted:#64748b;--line:#e7e5e4;--soft:#fafaf9;--panel:#ffffff;
+      --nav:#0f172a;--nav-2:#1e1b4b;--blue:#2563eb;--blue-2:#eff6ff;--sky:#38bdf8;
+      --indigo:#4f46e5;--amber:#f59e0b;--amber-2:#fffbeb;--green:#059669;--red:#dc2626;
+      --violet:#7c3aed;--shadow:0 10px 28px rgba(15,23,42,.08);--radius:16px;
+    }
+    *{box-sizing:border-box}
+    body{margin:0;font-family:Inter,system-ui,-apple-system,Segoe UI,sans-serif;background:#fafaf9;color:var(--ink)}
+    button,input,select{font:inherit}
+    .app{min-height:100vh;display:flex}
+    .sidebar{width:280px;background:linear-gradient(180deg,var(--nav),#020617);color:#cbd5e1;position:fixed;inset:0 auto 0 0;z-index:20;display:flex;flex-direction:column}
+    .brand{padding:28px 24px 22px;border-bottom:1px solid rgba(255,255,255,.08)}
+    .brand-mark{width:42px;height:42px;border-radius:14px;background:linear-gradient(135deg,var(--blue),var(--sky));display:grid;place-items:center;color:white;font-weight:900;margin-bottom:14px;box-shadow:0 10px 24px rgba(37,99,235,.28)}
+    .brand h1{font-size:22px;line-height:1.05;margin:0;color:white;letter-spacing:-.03em}
+    .brand p{font-size:12px;letter-spacing:.12em;text-transform:uppercase;margin:8px 0 0;color:#84a1bd}
+    .nav{padding:18px 14px;overflow:auto}
+    .nav small{display:block;color:#7891aa;text-transform:uppercase;font-weight:800;letter-spacing:.14em;font-size:10px;margin:18px 12px 8px}
+    .nav button{width:100%;border:0;background:transparent;color:inherit;display:flex;gap:12px;align-items:center;border-radius:14px;padding:12px 14px;cursor:pointer;text-align:left;font-weight:700;font-size:14px}
+    .nav button span:first-child{width:24px;text-align:center;opacity:.9}
+    .nav button.active{background:var(--blue);color:#fff;box-shadow:0 8px 18px rgba(37,99,235,.28)}
+    .nav button:hover{background:#1e293b;color:#fff}
+    .sidebar-foot{margin-top:auto;padding:18px 20px;border-top:1px solid rgba(255,255,255,.08);font-size:12px;color:#91a8bf}
+    .main{margin-left:280px;width:calc(100% - 280px);min-height:100vh}
+    .topbar{position:sticky;top:0;z-index:10;background:rgba(255,255,255,.92);backdrop-filter:blur(18px);border-bottom:1px solid var(--line);padding:18px 28px;box-shadow:0 1px 4px rgba(15,23,42,.04)}
+    .toprow{display:flex;align-items:center;justify-content:space-between;gap:18px}
+    .mobile-menu{display:none;border:0;background:var(--nav);color:white;border-radius:12px;width:42px;height:42px}
+    .title h2{font-size:24px;margin:0;letter-spacing:-.04em}.title p{margin:4px 0 0;color:var(--muted);font-size:13px}
+    .filters{display:flex;gap:10px;align-items:center;flex-wrap:wrap}
+    .filters select,.filters input{border:1px solid var(--line);background:white;border-radius:12px;padding:10px 12px;color:var(--ink);min-width:132px}
+    .filters .live{border:1px solid #a7f3d0;background:#ecfdf5;color:#047857;border-radius:999px;padding:9px 12px;font-weight:800;font-size:12px}
+    .content{padding:24px 28px 46px}
+    .promise{display:grid;grid-template-columns:1.3fr repeat(4,1fr);gap:14px;margin-bottom:20px}
+    .promise .lead{background:linear-gradient(135deg,#2563eb,#4338ca 58%,#0f172a);color:white;border-radius:var(--radius);padding:20px;box-shadow:0 14px 32px rgba(37,99,235,.22);position:relative;overflow:hidden}
+    .promise .lead:after{content:"";position:absolute;right:-42px;bottom:-46px;width:150px;height:150px;border-radius:999px;background:rgba(255,255,255,.12)}
+    .lead .eyebrow,.card .eyebrow{font-size:11px;text-transform:uppercase;letter-spacing:.12em;font-weight:900;color:#64748b}
+    .lead .eyebrow{color:#bfdbfe}.lead h3{font-size:30px;margin:8px 0 8px;letter-spacing:-.05em}.lead p{margin:0;color:#dbeafe;font-size:13px;position:relative}
+    .promise-card,.card{background:var(--panel);border:1px solid var(--line);border-radius:var(--radius);padding:18px;box-shadow:var(--shadow)}
+    .promise-card{border-top:4px solid var(--blue)}
+    .promise-card:nth-child(3){border-top-color:var(--amber)}.promise-card:nth-child(4){border-top-color:var(--red)}.promise-card:nth-child(5){border-top-color:var(--green)}
+    .metric{font-size:26px;font-weight:900;letter-spacing:-.05em;margin:8px 0 2px}.metric small{font-size:13px;color:var(--muted);font-weight:700}
+    .delta{font-size:12px;font-weight:800}.good{color:var(--green)}.bad{color:var(--red)}.warn{color:var(--amber)}.info{color:var(--blue)}
+    .grid{display:grid;gap:16px}.cols-2{grid-template-columns:1fr 1fr}.cols-3{grid-template-columns:repeat(3,1fr)}.cols-4{grid-template-columns:repeat(4,1fr)}
+    .card h3{margin:0 0 14px;font-size:16px;letter-spacing:-.02em}.card p{color:var(--muted);font-size:13px;line-height:1.45}
+    .panel-title{display:flex;align-items:center;justify-content:space-between;gap:12px;margin-bottom:12px}.panel-title h3{margin:0}
+    .pill{border-radius:999px;padding:6px 10px;font-size:12px;font-weight:900;border:1px solid var(--line);background:#f8fafc;color:var(--muted)}
+    .pill.orange{background:var(--amber-2);color:#b45309;border-color:#fde68a}.pill.blue{background:var(--blue-2);color:#1d4ed8;border-color:#bfdbfe}.pill.red{background:#fef2f2;color:#b91c1c;border-color:#fecaca}.pill.green{background:#ecfdf5;color:#047857;border-color:#a7f3d0}.pill.violet{background:#f5f3ff;color:#6d28d9;border-color:#ddd6fe}
+    .chart{height:270px}.chart.tall{height:340px}.chart canvas{max-height:100%}
+    .section{display:none}.section.active{display:block}
+    .risk-chain{display:grid;grid-template-columns:repeat(6,1fr);gap:10px}.risk-step{background:#f8fafc;border:1px solid var(--line);border-radius:16px;padding:12px}.risk-step strong{display:block;font-size:13px}.risk-step em{display:block;font-style:normal;color:var(--muted);font-size:12px;margin-top:4px}
+    table{width:100%;border-collapse:collapse;font-size:13px}th{text-align:left;color:#64748b;font-size:11px;text-transform:uppercase;letter-spacing:.09em;padding:0 0 10px}td{padding:12px 0;border-top:1px solid #edf2f7}td:last-child,th:last-child{text-align:right}
+    .funnel{display:grid;gap:10px}.funnel-row{display:grid;grid-template-columns:170px 1fr 90px;gap:12px;align-items:center}.bar{height:12px;border-radius:999px;background:#e2e8f0;overflow:hidden}.fill{height:100%;border-radius:999px;background:linear-gradient(90deg,var(--blue),var(--sky))}
+    .timeline{display:grid;gap:12px}.event{display:grid;grid-template-columns:96px 1fr auto;gap:14px;align-items:center;border-top:1px solid var(--line);padding-top:12px}
+    .insight-strip{display:grid;grid-template-columns:repeat(3,1fr);gap:10px;margin-bottom:14px}
+    .insight{background:#f8fafc;border:1px solid #e2e8f0;border-radius:14px;padding:12px}
+    .insight b{display:block;font-size:20px;letter-spacing:-.04em}.insight span{font-size:11px;color:var(--muted);text-transform:uppercase;letter-spacing:.08em;font-weight:900}
+    .mobile-overlay{display:none}
+    @media(max-width:1100px){.promise{grid-template-columns:1fr 1fr}.cols-4,.cols-3{grid-template-columns:1fr 1fr}.risk-chain{grid-template-columns:1fr 1fr 1fr}}
+    @media(max-width:760px){
+      .sidebar{transform:translateX(-100%);transition:.25s ease}.sidebar.open{transform:translateX(0)}
+      .mobile-overlay.show{display:block;position:fixed;inset:0;background:rgba(15,23,42,.42);z-index:15}
+      .main{margin-left:0;width:100%}.mobile-menu{display:inline-grid;place-items:center}.toprow{align-items:flex-start}.title h2{font-size:20px}
+      .filters{margin-top:14px}.filters select,.filters input{width:100%;min-width:0}.toprow{flex-wrap:wrap}.content{padding:18px 14px 32px}
+      .promise,.cols-2,.cols-3,.cols-4,.risk-chain{grid-template-columns:1fr}.promise .lead{order:-1}.chart{height:230px}
+      .funnel-row{grid-template-columns:1fr}.event{grid-template-columns:1fr}.sidebar{width:86vw}
+    }
+  </style>
+</head>
+<body>
+  <div class="mobile-overlay" id="overlay"></div>
+  <div class="app">
+    <aside class="sidebar" id="sidebar">
+      <div class="brand">
+        <div class="brand-mark">AP</div>
+        <h1>AquaPrime<br>Delivery Control</h1>
+        <p>Hatchery to client promise</p>
+      </div>
+      <nav class="nav" id="nav">
+        <small>Control room</small>
+        <button class="active" data-view="overview"><span>⌁</span><span>Executive Overview</span></button>
+        <button data-view="genetics"><span>◌</span><span>Genetics & Broodstock</span></button>
+        <button data-view="hatchery"><span>◍</span><span>Hatchery</span></button>
+        <button data-view="growout"><span>≈</span><span>Fingerlings & Grow-out</span></button>
+        <small>Commercial flow</small>
+        <button data-view="processing"><span>▣</span><span>Processing & Yield</span></button>
+        <button data-view="sales"><span>◧</span><span>Sales & Contracts</span></button>
+        <button data-view="logistics"><span>⇄</span><span>Logistics</span></button>
+        <small>Assurance</small>
+        <button data-view="risk"><span>⚠</span><span>Enterprise Risk</span></button>
+      </nav>
+      <div class="sidebar-foot">
+        <strong>Last sync</strong><br>
+        26 Jun 2026, 09:42 SGT<br>
+        Data mode: demo client review
+      </div>
+    </aside>
+
+    <main class="main">
+      <header class="topbar">
+        <div class="toprow">
+          <button class="mobile-menu" id="menuBtn">☰</button>
+          <div class="title">
+            <h2 id="pageTitle">Executive Overview</h2>
+            <p id="pageSubtitle">One clean view of whether the client tonnage promise is safe.</p>
+          </div>
+          <div class="filters">
+            <select id="siteFilter"><option value="all">All farms</option><option value="north">North Hatchery</option><option value="coast">Coastal Grow-out</option><option value="river">River Nursery</option></select>
+            <select id="clientFilter"><option value="all">All clients</option><option value="hotel">Hotel & F&B</option><option value="export">Export buyers</option><option value="retail">Retail pack</option></select>
+            <input id="promiseInput" type="number" value="480" min="200" max="900" />
+            <span class="live">● Live risk watch</span>
+          </div>
+        </div>
+      </header>
+
+      <div class="content">
+        <section class="promise" aria-label="Delivery promise bar">
+          <div class="lead">
+            <div class="eyebrow">Delivery promise</div>
+            <h3><span id="forecastTons">421</span>t / <span id="contractTons">480</span>t</h3>
+            <p><span id="gapTons">59</span> tonnes gap, <span id="revenueRisk">$1.16M</span> revenue at risk. Highest pressure: larval survival, fillet yield, and cold-chain capacity.</p>
+          </div>
+          <div class="promise-card"><div class="eyebrow">Harvest ready</div><div class="metric" id="harvestReady">312t</div><div class="delta good">+18t vs last week</div></div>
+          <div class="promise-card"><div class="eyebrow">Projected fillet</div><div class="metric" id="filletForecast">421t</div><div class="delta warn">88% of promise</div></div>
+          <div class="promise-card"><div class="eyebrow">Risk exposure</div><div class="metric" id="riskExposure">24%</div><div class="delta bad">3 critical nodes</div></div>
+          <div class="promise-card"><div class="eyebrow">On-time confidence</div><div class="metric" id="confidence">76%</div><div class="delta info">+4 pts after reroute</div></div>
+        </section>
+
+        <section class="section active" id="overview">
+          <div class="grid cols-2">
+            <div class="card">
+              <div class="panel-title"><h3>Delivery forecast vs promise</h3><span class="pill orange">Gap visible</span></div>
+              <div class="chart"><canvas id="forecastChart"></canvas></div>
+            </div>
+            <div class="card">
+              <div class="panel-title"><h3>End-to-end production funnel</h3><span class="pill blue">Drop-off points</span></div>
+              <div class="funnel" id="funnel"></div>
+            </div>
+          </div>
+          <div class="grid cols-3" style="margin-top:16px">
+            <div class="card"><h3>Top delivery blockers</h3><table id="blockerTable"></table></div>
+            <div class="card"><h3>Client allocation health</h3><div class="chart"><canvas id="clientChart"></canvas></div></div>
+            <div class="card"><h3>Today’s operating notes</h3><div class="timeline" id="notes"></div></div>
+          </div>
+        </section>
+
+        <section class="section" id="genetics">
+          <div class="grid cols-3">
+            <div class="card"><div class="eyebrow">Grandparent lines</div><div class="metric">14</div><p>Diversity score 82/100. Two family lines need controlled pairing to protect growth uniformity.</p></div>
+            <div class="card"><div class="eyebrow">Parent broodstock</div><div class="metric">2,840</div><p>Readiness 91%. Fecundity dip seen in Batch P-18, now under diet adjustment.</p></div>
+            <div class="card"><div class="eyebrow">Selection risk</div><div class="metric warn">Medium</div><p>Risk: narrowing genetic diversity can reduce harvest weight consistency.</p></div>
+          </div>
+          <div class="grid cols-2" style="margin-top:16px">
+            <div class="card"><h3>Broodstock readiness by line</h3><div class="chart"><canvas id="geneticsChart"></canvas></div></div>
+            <div class="card"><h3>Genetic risk watchlist</h3><table id="geneticsTable"></table></div>
+          </div>
+        </section>
+
+        <section class="section" id="hatchery">
+          <div class="grid cols-4">
+            <div class="card"><div class="eyebrow">Eggs incubating</div><div class="metric">8.6M</div><span class="delta good">96% viable</span></div>
+            <div class="card"><div class="eyebrow">Hatch rate</div><div class="metric">78%</div><span class="delta bad">-6 pts vs plan</span></div>
+            <div class="card"><div class="eyebrow">Larval survival</div><div class="metric">64%</div><span class="delta warn">main gap driver</span></div>
+            <div class="card"><div class="eyebrow">Biosecurity</div><div class="metric">92</div><span class="delta good">stable</span></div>
+          </div>
+          <div class="grid cols-2" style="margin-top:16px">
+            <div class="card"><h3>Larva survival trend</h3><div class="chart"><canvas id="hatcheryChart"></canvas></div></div>
+            <div class="card"><h3>Hatchery touchpoints</h3><table id="hatcheryTable"></table></div>
+          </div>
+        </section>
+
+        <section class="section" id="growout">
+          <div class="grid cols-2">
+            <div class="card"><h3>Growth and FCR by cohort</h3><div class="chart tall"><canvas id="growoutChart"></canvas></div></div>
+            <div class="card"><h3>Water quality exceptions</h3><table id="waterTable"></table></div>
+          </div>
+          <div class="grid cols-3" style="margin-top:16px">
+            <div class="card"><div class="eyebrow">Fingerlings stocked</div><div class="metric">5.2M</div><p>Nursery capacity remains tight for July transfers.</p></div>
+            <div class="card"><div class="eyebrow">Average weight</div><div class="metric">842g</div><p>12 days behind plan in Pond G-07 due to temperature variance.</p></div>
+            <div class="card"><div class="eyebrow">Feed cover</div><div class="metric">23d</div><p>Enough for baseline, short for accelerated growth recovery.</p></div>
+          </div>
+        </section>
+
+        <section class="section" id="processing">
+          <div class="grid cols-2">
+            <div class="card"><h3>Fillet yield bridge</h3><div class="chart"><canvas id="yieldChart"></canvas></div></div>
+            <div class="card"><h3>Processing line readiness</h3><table id="processingTable"></table></div>
+          </div>
+          <div class="grid cols-3" style="margin-top:16px">
+            <div class="card"><div class="eyebrow">Planned whole fish</div><div class="metric">1,115t</div></div>
+            <div class="card"><div class="eyebrow">Fillet yield</div><div class="metric">37.8%</div><span class="delta warn">-1.4 pts vs target</span></div>
+            <div class="card"><div class="eyebrow">QA rejection</div><div class="metric">2.8%</div><span class="delta bad">texture risk rising</span></div>
+          </div>
+        </section>
+
+        <section class="section" id="sales">
+          <div class="grid cols-2">
+            <div class="card"><h3>Contract fulfilment by client segment</h3><div class="chart"><canvas id="salesChart"></canvas></div></div>
+            <div class="card"><h3>Revenue at risk register</h3><table id="salesTable"></table></div>
+          </div>
+        </section>
+
+        <section class="section" id="logistics">
+          <div class="grid cols-2">
+            <div class="card">
+              <div class="panel-title"><h3>Cold-chain route capacity vs committed tonnes</h3><span class="pill red">18t late risk</span></div>
+              <div class="insight-strip">
+                <div class="insight"><span>Dispatched</span><b>126t</b></div>
+                <div class="insight"><span>At temp risk</span><b class="bad">18t</b></div>
+                <div class="insight"><span>Avg temp</span><b>1.8°C</b></div>
+              </div>
+              <div class="chart"><canvas id="logisticsChart"></canvas></div>
+            </div>
+            <div class="card">
+              <div class="panel-title"><h3>Temperature excursion watch</h3><span class="pill orange">Bay 2 above limit</span></div>
+              <div class="chart"><canvas id="tempChart"></canvas></div>
+            </div>
+          </div>
+          <div class="grid cols-2" style="margin-top:16px">
+            <div class="card"><h3>Shipment exceptions by cause</h3><table id="logisticsTable"></table></div>
+            <div class="card"><h3>Client delivery actions</h3><table id="deliveryActionTable"></table></div>
+          </div>
+        </section>
+
+        <section class="section" id="risk">
+          <div class="card">
+            <div class="panel-title"><h3>End-to-end risk chain</h3><span class="pill orange">Promise gap causality</span></div>
+            <div class="risk-chain" id="riskChain"></div>
+          </div>
+          <div class="grid cols-2" style="margin-top:16px">
+            <div class="card"><h3>Enterprise risk heat</h3><div class="chart"><canvas id="riskChart"></canvas></div></div>
+            <div class="card"><h3>Action queue</h3><table id="actionTable"></table></div>
+          </div>
+        </section>
+      </div>
+    </main>
+  </div>
+
+  <script>
+    const titles={
+      overview:["Executive Overview","One clean view of whether the client tonnage promise is safe."],
+      genetics:["Genetics & Broodstock","Grandparent and parent fish selection risks before they become delivery gaps."],
+      hatchery:["Hatchery","Egg, hatch, larva and early mortality monitoring."],
+      growout:["Fingerlings & Grow-out","Nursery, pond, feed and water quality signals that decide harvest readiness."],
+      processing:["Processing & Yield","From whole fish to fillet yield, QA and pack-out readiness."],
+      sales:["Sales & Contracts","Client allocation, contracted tonnes and revenue exposure."],
+      logistics:["Logistics","Cold-chain, route, customs and dispatch monitoring."],
+      risk:["Enterprise Risk","End-to-end risk management from genetic selection to client delivery."]
+    };
+    const data={
+      all:{forecast:421,ready:312,exposure:24,confidence:76},
+      north:{forecast:438,ready:328,exposure:19,confidence:81},
+      coast:{forecast:407,ready:302,exposure:29,confidence:72},
+      river:{forecast:396,ready:286,exposure:33,confidence:68}
+    };
+    const funnel=[
+      ["Grandparent selection",100,"Genetic diversity below 80 creates growth variance"],
+      ["Parent broodstock",92,"Fecundity dip in P-18 removes 18t future fillet"],
+      ["Eggs spawned",84,"Timing mismatch against nursery capacity"],
+      ["Larvae survived",64,"Main drop-off: mortality and micro-feed transition"],
+      ["Fingerlings stocked",57,"Biosecurity hold on two nursery tanks"],
+      ["Grow-out harvestable",49,"Weight lag and FCR drift"],
+      ["Processed fillet",38,"Yield variance and QA rejection"],
+      ["Delivered to clients",35,"Cold-chain and dispatch constraints"]
+    ];
+    const riskItems=[
+      ["Grandparent selection","Genetic diversity","Medium"],["Parent broodstock","Readiness and fecundity","Medium"],["Eggs","Hatch rate variance","High"],["Larvae","Mortality spike","Critical"],["Fingerlings","Nursery capacity","High"],["Grow-out","FCR and water quality","High"],["Harvest","Timing and weight variance","Medium"],["Processing","Yield and downtime","High"],["Cold storage","Temperature breach","Medium"],["Sales allocation","Client priority conflict","Medium"],["Logistics","Truck/port delay","High"],["Delivery","Spec rejection","Medium"]
+    ];
+    function money(n){return "$"+(n*0.0197).toFixed(2)+"M"}
+    function updatePromise(){
+      const site=document.getElementById("siteFilter").value, contract=+document.getElementById("promiseInput").value||480, d=data[site]||data.all, gap=Math.max(contract-d.forecast,0);
+      contractTons.textContent=contract;forecastTons.textContent=d.forecast;gapTons.textContent=gap;revenueRisk.textContent=money(gap);
+      harvestReady.textContent=d.ready+"t";filletForecast.textContent=d.forecast+"t";riskExposure.textContent=d.exposure+"%";confidence.textContent=d.confidence+"%";
+      forecastChart.data.datasets[0].data=[310,340,366,392,d.forecast,contract];forecastChart.update();
+    }
+    function rows(id,headers,rows){
+      document.getElementById(id).innerHTML=`<thead><tr>${headers.map(h=>`<th>${h}</th>`).join("")}</tr></thead><tbody>${rows.map(r=>`<tr>${r.map(c=>`<td>${c}</td>`).join("")}</tr>`).join("")}</tbody>`;
+    }
+    function initTables(){
+      rows("blockerTable",["Risk","Impact","Status"],[["Larval survival","-31t","<span class='pill red'>Critical</span>"],["Fillet yield","-18t","<span class='pill orange'>Watch</span>"],["Cold-chain bay 2","-10t","<span class='pill orange'>Mitigate</span>"]]);
+      rows("geneticsTable",["Line","Signal","Action"],[["GP-A7","Low diversity","Rotate pairing"],["P-18","Fecundity dip","Diet boost"],["P-22","High growth","Prioritize eggs"]]);
+      rows("hatcheryTable",["Touchpoint","Risk cause","Owner"],[["Spawning","Late egg collection","Hatchery lead"],["Incubation","Temp swing >1.5°C","QA"],["Larvae","Micro-feed transition","Nutrition"]]);
+      rows("waterTable",["Pond","Exception","Risk"],[["G-07","DO below 5.2","Growth lag"],["G-12","Ammonia elevated","Mortality"],["N-03","Temp variance","Feed conversion"]]);
+      rows("processingTable",["Line","Readiness","Concern"],[["Fillet A","96%","Stable"],["Fillet B","82%","Blade calibration"],["Packing","88%","Labor cover"]]);
+      rows("salesTable",["Client","Committed","Exposure"],[["Hotel & F&B","180t","$0.31M"],["Export buyers","220t","$0.62M"],["Retail pack","80t","$0.23M"]]);
+      rows("logisticsTable",["Route","Shipment","Exception"],[["Plant → Port","42t export loin","Truck delayed 6h"],["Cold bay 2","18t hotel fillet","Temp peaked 4.1°C"],["Export docs","64t frozen pack","Customs document check"]]);
+      rows("deliveryActionTable",["Action","Tonnage protected","Deadline"],[["Move hotel fillet to Bay 4 backup","18t","Today 15:00"],["Pull forward retail pack dispatch","12t","Today 18:00"],["Pre-clear export customs packet","64t","Tomorrow 09:00"]]);
+      rows("actionTable",["Priority","Action","Owner"],[["P0","Recover larval survival with feed protocol","Hatchery"],["P1","Reserve 40t third-party cold storage","Logistics"],["P1","Rebalance export allocation to high-yield lots","Sales"]]);
+      document.getElementById("funnel").innerHTML=funnel.map(([name,pct,note])=>`<div class="funnel-row"><strong>${name}</strong><div><div class="bar"><div class="fill" style="width:${pct}%"></div></div><small style="color:#64748b">${note}</small></div><b>${pct}%</b></div>`).join("");
+      document.getElementById("riskChain").innerHTML=riskItems.map(([a,b,c])=>`<div class="risk-step"><strong>${a}</strong><em>${b}</em><span class="pill ${c==="Critical"?"red":c==="High"?"orange":"blue"}" style="margin-top:10px;display:inline-block">${c}</span></div>`).join("");
+      document.getElementById("notes").innerHTML=[["08:10","Larval survival alert triggered in Tank L-04.","Critical"],["10:30","Cold storage reroute approved for export lot E-219.","Mitigating"],["13:45","Pond G-07 harvest shifted by 3 days.","Watch"]].map(e=>`<div class="event"><b>${e[0]}</b><span>${e[1]}</span><span class="pill ${e[2]==="Critical"?"red":"orange"}">${e[2]}</span></div>`).join("");
+    }
+    let forecastChart;
+    function makeCharts(){
+      const grid="#e7e5e4", label="#64748b", blue="#2563eb", sky="#38bdf8", amber="#f59e0b", red="#dc2626", green="#059669", violet="#7c3aed", slate="#334155";
+      Chart.defaults.font.family="Inter";Chart.defaults.color=label;
+      forecastChart=new Chart(document.getElementById("forecastChart"),{type:"line",data:{labels:["Jul","Aug","Sep","Oct","Nov","Promise"],datasets:[{label:"Forecast fillet tonnes",data:[310,340,366,392,421,480],borderColor:blue,backgroundColor:"rgba(37,99,235,.12)",fill:true,tension:.35,pointRadius:4},{label:"Required path",data:[320,350,385,420,455,480],borderColor:amber,borderDash:[6,6],tension:.35}]},options:{responsive:true,maintainAspectRatio:false,plugins:{legend:{position:"bottom"}},scales:{y:{title:{display:true,text:"Fillet tonnes"},grid:{color:grid}},x:{grid:{display:false}}}}});
+      new Chart(clientChart,{type:"doughnut",data:{labels:["Fulfilled","At risk","Unallocated"],datasets:[{data:[68,24,8],backgroundColor:[blue,amber,"#e2e8f0"],borderWidth:0}]},options:{responsive:true,maintainAspectRatio:false,plugins:{legend:{position:"bottom"}}}});
+      new Chart(geneticsChart,{type:"bar",data:{labels:["GP-A7","GP-B2","P-18","P-22","P-31"],datasets:[{label:"Readiness score",data:[78,88,69,94,84],backgroundColor:blue},{label:"Risk score",data:[34,18,46,12,22],backgroundColor:amber}]},options:{responsive:true,maintainAspectRatio:false,plugins:{legend:{position:"bottom"}},scales:{y:{max:100,title:{display:true,text:"Score / 100"},grid:{color:grid}},x:{grid:{display:false}}}}});
+      new Chart(hatcheryChart,{type:"line",data:{labels:["W1","W2","W3","W4","W5","W6"],datasets:[{label:"Actual larval survival %",data:[72,70,68,61,64,66],borderColor:red,backgroundColor:"rgba(220,38,38,.1)",fill:true,tension:.35},{label:"Plan survival %",data:[72,72,73,73,74,74],borderColor:blue,borderDash:[5,5],tension:.35}]},options:{responsive:true,maintainAspectRatio:false,plugins:{legend:{position:"bottom"}},scales:{y:{min:50,max:80,title:{display:true,text:"Survival %"},grid:{color:grid}},x:{grid:{display:false}}}}});
+      new Chart(growoutChart,{type:"bar",data:{labels:["G-01","G-04","G-07","G-12","N-03"],datasets:[{label:"Avg weight g",data:[910,870,760,840,690],backgroundColor:blue,yAxisID:"y"},{label:"FCR",data:[1.42,1.51,1.72,1.63,1.58],backgroundColor:amber,yAxisID:"y1"}]},options:{responsive:true,maintainAspectRatio:false,plugins:{legend:{position:"bottom"}},scales:{y:{position:"left",title:{display:true,text:"Average weight g"},grid:{color:grid}},y1:{position:"right",title:{display:true,text:"FCR"},grid:{drawOnChartArea:false}}}}});
+      new Chart(yieldChart,{type:"bar",data:{labels:["Whole fish input","Yield target","Actual fillet","Client promise"],datasets:[{label:"Tonnes",data:[1115,446,421,480],backgroundColor:[sky,blue,green,amber]}]},options:{responsive:true,maintainAspectRatio:false,plugins:{legend:{display:false}},scales:{y:{title:{display:true,text:"Tonnes"},grid:{color:grid}},x:{grid:{display:false}}}}});
+      new Chart(salesChart,{type:"bar",data:{labels:["Hotel & F&B","Export","Retail"],datasets:[{label:"Committed tonnes",data:[180,220,80],backgroundColor:"#bfdbfe"},{label:"Forecast tonnes",data:[156,182,83],backgroundColor:blue},{label:"At-risk tonnes",data:[24,38,0],backgroundColor:amber}]},options:{responsive:true,maintainAspectRatio:false,plugins:{legend:{position:"bottom"}},scales:{y:{title:{display:true,text:"Fillet tonnes"},grid:{color:grid}},x:{grid:{display:false}}}}});
+      new Chart(logisticsChart,{type:"bar",data:{labels:["Plant → Port","Bay 2 → Hotels","Plant → Retail"],datasets:[{label:"Committed tonnes",data:[64,58,42],backgroundColor:"#bfdbfe"},{label:"Cold-chain capacity",data:[70,40,46],backgroundColor:blue},{label:"Late / temp-risk tonnes",data:[0,18,4],backgroundColor:red}]},options:{responsive:true,maintainAspectRatio:false,plugins:{legend:{position:"bottom"}},scales:{y:{title:{display:true,text:"Tonnes"},grid:{color:grid}},x:{grid:{display:false}}}}});
+      new Chart(tempChart,{type:"line",data:{labels:["06:00","09:00","12:00","15:00","18:00","21:00"],datasets:[{label:"Bay 2 temperature °C",data:[1.4,1.7,2.8,4.1,3.2,2.1],borderColor:red,backgroundColor:"rgba(220,38,38,.1)",fill:true,tension:.3},{label:"Upper limit °C",data:[2,2,2,2,2,2],borderColor:amber,borderDash:[5,5],tension:0},{label:"Bay 4 backup °C",data:[1.2,1.1,1.2,1.3,1.4,1.3],borderColor:green,tension:.3}]},options:{responsive:true,maintainAspectRatio:false,plugins:{legend:{position:"bottom"}},scales:{y:{title:{display:true,text:"Temperature °C"},suggestedMin:0,suggestedMax:5,grid:{color:grid}},x:{grid:{display:false}}}}});
+      new Chart(riskChart,{type:"radar",data:{labels:["Genetics","Hatchery","Grow-out","Processing","Sales","Logistics"],datasets:[{label:"Risk heat",data:[44,86,68,72,41,63],borderColor:red,backgroundColor:"rgba(220,38,38,.13)"},{label:"Control strength",data:[78,56,62,64,72,58],borderColor:blue,backgroundColor:"rgba(37,99,235,.14)"}]},options:{responsive:true,maintainAspectRatio:false,plugins:{legend:{position:"bottom"}},scales:{r:{suggestedMin:0,suggestedMax:100,grid:{color:grid}}}}});
+    }
+    document.getElementById("nav").addEventListener("click",e=>{
+      const btn=e.target.closest("button[data-view]");if(!btn)return;
+      document.querySelectorAll(".nav button").forEach(b=>b.classList.toggle("active",b===btn));
+      document.querySelectorAll(".section").forEach(s=>s.classList.toggle("active",s.id===btn.dataset.view));
+      pageTitle.textContent=titles[btn.dataset.view][0];pageSubtitle.textContent=titles[btn.dataset.view][1];
+      sidebar.classList.remove("open");overlay.classList.remove("show");
+    });
+    menuBtn.addEventListener("click",()=>{sidebar.classList.add("open");overlay.classList.add("show")});
+    overlay.addEventListener("click",()=>{sidebar.classList.remove("open");overlay.classList.remove("show")});
+    siteFilter.addEventListener("change",updatePromise);promiseInput.addEventListener("input",updatePromise);clientFilter.addEventListener("change",()=>{confidence.textContent=clientFilter.value==="export"?"71%":clientFilter.value==="hotel"?"79%":"76%"});
+    initTables();makeCharts();updatePromise();
+  </script>
+</body>
+</html>
