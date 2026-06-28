@@ -27,6 +27,13 @@ Each project explores how information hierarchy, interaction design, responsive 
 
   **[View the live dashboard](https://phoebefu6.github.io/design-dashboard-with-phoebe/HR/people-analysis-intelligent-platform/)**
 
+### Finance
+
+- [FX Motion Real-time Converter](./Finance/real-time-fx-converter/)  
+  A one-page motion-led exchange-rate calculator for converting three currency routes at once, using latest daily FX rates with dated source status and Google lookup links for audit.
+
+  **[View the live dashboard](https://phoebefu6.github.io/design-dashboard-with-phoebe/Finance/real-time-fx-converter/)**
+
 ## Design principles
 
 - Evidence and operational context remain visible without hover.
@@ -43,6 +50,7 @@ The dashboards are published with GitHub Pages. Visitors can use them directly i
 - [Open the Mega Campaign Live Dashboard](https://phoebefu6.github.io/design-dashboard-with-phoebe/Ecommerce/mega-campaign-live-dashboard/)
 - [Open AquaPrime Delivery Control](https://phoebefu6.github.io/design-dashboard-with-phoebe/Aquaculture/aquaprime-delivery-control/)
 - [Open PeopleLens HR Intelligence Platform](https://phoebefu6.github.io/design-dashboard-with-phoebe/HR/people-analysis-intelligent-platform/)
+- [Open FX Motion Real-time Converter](https://phoebefu6.github.io/design-dashboard-with-phoebe/Finance/real-time-fx-converter/)
 
 ## Running a project locally
 
