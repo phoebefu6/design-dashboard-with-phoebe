@@ -34,6 +34,13 @@ Each project explores how information hierarchy, interaction design, responsive 
 
   **[View the live dashboard](https://phoebefu6.github.io/design-dashboard-with-phoebe/Finance/real-time-fx-converter/)**
 
+### Education
+
+- [CodeNest Python Learning Studio](./Education/coding-learning-platform/)  
+  An interactive coding learning platform concept with a guided Python path, PyCharm-style script lab, Jupyter-style notebook practice, AI tutor feedback, and learner progress signals.
+
+  **[View the live platform](https://phoebefu6.github.io/design-dashboard-with-phoebe/Education/coding-learning-platform/)**
+
 ## Design principles
 
 - Evidence and operational context remain visible without hover.
@@ -51,6 +58,7 @@ The dashboards are published with GitHub Pages. Visitors can use them directly i
 - [Open AquaPrime Delivery Control](https://phoebefu6.github.io/design-dashboard-with-phoebe/Aquaculture/aquaprime-delivery-control/)
 - [Open PeopleLens HR Intelligence Platform](https://phoebefu6.github.io/design-dashboard-with-phoebe/HR/people-analysis-intelligent-platform/)
 - [Open FX Motion Real-time Converter](https://phoebefu6.github.io/design-dashboard-with-phoebe/Finance/real-time-fx-converter/)
+- [Open CodeNest Python Learning Studio](https://phoebefu6.github.io/design-dashboard-with-phoebe/Education/coding-learning-platform/)
 
 ## Running a project locally
 

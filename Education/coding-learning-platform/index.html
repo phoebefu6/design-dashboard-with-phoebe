@@ -1,0 +1,213 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>CodeNest Python Learning Studio</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Instrument+Sans:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="styles.css" />
+</head>
+<body>
+  <div class="cursor-orb"></div>
+  <main class="app-shell">
+    <aside class="sidebar">
+      <a class="brand" href="#home" aria-label="CodeNest home">
+        <span class="brand-mark">CN</span>
+        <span>
+          <strong>CodeNest</strong>
+          <small>Python learning studio</small>
+        </span>
+      </a>
+
+      <nav class="nav" aria-label="Learning workspace">
+        <a class="nav-link active" href="#path" data-section="path"><span>01</span> Learning path</a>
+        <a class="nav-link" href="#ide" data-section="ide"><span>02</span> PyCharm lab</a>
+        <a class="nav-link" href="#notebook" data-section="notebook"><span>03</span> Notebook mode</a>
+        <a class="nav-link" href="#coach" data-section="coach"><span>04</span> AI tutor</a>
+        <a class="nav-link" href="#progress" data-section="progress"><span>05</span> Progress</a>
+      </nav>
+
+      <div class="sidebar-card">
+        <p>Today’s mission</p>
+        <strong>Build a price calculator</strong>
+        <span>Variables → functions → conditional checks</span>
+      </div>
+    </aside>
+
+    <section class="workspace">
+      <header class="topbar">
+        <div>
+          <p class="eyebrow">Interactive curriculum prototype</p>
+          <h1>Learn Python by writing, testing, and explaining code.</h1>
+        </div>
+        <div class="top-actions">
+          <button class="ghost-btn" id="resetBtn">Reset lesson</button>
+          <button class="primary-btn" id="runMainBtn">Run code</button>
+        </div>
+      </header>
+
+      <section class="hero-grid" id="home">
+        <article class="hero-card">
+          <div class="hero-copy">
+            <span class="pill">Beginner → job-ready foundation</span>
+            <h2>One platform, two coding modes.</h2>
+            <p>Students can follow a structured Python path, practice inside a PyCharm-style IDE, then switch into notebook mode for data, notes, and step-by-step experiments.</p>
+          </div>
+          <div class="hero-stats" aria-label="Learning overview">
+            <div><strong>8</strong><span>Python modules</span></div>
+            <div><strong>36</strong><span>guided labs</span></div>
+            <div><strong>2</strong><span>practice modes</span></div>
+          </div>
+        </article>
+
+        <article class="coach-card">
+          <div class="coach-avatar">AI</div>
+          <div>
+            <p class="eyebrow">Tutor hint</p>
+            <h3>Do not memorize syntax first.</h3>
+            <p>Predict what the code should do, run it, compare the output, then explain it in your own words.</p>
+          </div>
+        </article>
+      </section>
+
+      <section class="content-grid">
+        <section class="path-panel panel" id="path">
+          <div class="panel-head">
+            <div>
+              <p class="eyebrow">Guided Python path</p>
+              <h2>From zero to useful scripts</h2>
+            </div>
+            <select id="moduleFilter" aria-label="Select Python module">
+              <option value="all">All modules</option>
+              <option value="active">Active now</option>
+              <option value="locked">Locked</option>
+              <option value="done">Completed</option>
+            </select>
+          </div>
+          <div class="module-list" id="moduleList"></div>
+        </section>
+
+        <section class="studio-panel panel" id="ide">
+          <div class="panel-head compact">
+            <div>
+              <p class="eyebrow">PyCharm-style lab</p>
+              <h2>Script workspace</h2>
+            </div>
+            <div class="mode-tabs" role="tablist" aria-label="Coding modes">
+              <button class="mode-tab active" data-mode="ide">IDE</button>
+              <button class="mode-tab" data-mode="notebook">Notebook</button>
+            </div>
+          </div>
+
+          <div class="ide-window" data-current-mode="ide">
+            <div class="ide-top">
+              <span class="dot red"></span><span class="dot yellow"></span><span class="dot green"></span>
+              <strong>price_calculator.py</strong>
+              <small>Python 3.12 • safe browser simulation</small>
+            </div>
+            <div class="ide-body">
+              <aside class="file-tree" aria-label="Project files">
+                <p>PYTHON-101</p>
+                <button class="file active">price_calculator.py</button>
+                <button class="file">notes.md</button>
+                <button class="file">tests.py</button>
+              </aside>
+              <div class="editor-wrap">
+                <div class="editor-toolbar">
+                  <span>Exercise: variables + function</span>
+                  <button id="formatBtn">Format</button>
+                </div>
+                <textarea id="codeEditor" spellcheck="false" aria-label="Python code editor">price = 18
+quantity = 3
+
+def total(price, quantity):
+    return price * quantity
+
+print("Total:", total(price, quantity))</textarea>
+              </div>
+              <aside class="test-panel">
+                <p class="eyebrow">Auto-check</p>
+                <div class="check-item pass">Uses variables</div>
+                <div class="check-item pass">Defines a function</div>
+                <div class="check-item warn" id="returnCheck">Run to check output</div>
+                <div class="score-ring"><strong id="scoreValue">72</strong><span>readiness</span></div>
+              </aside>
+            </div>
+            <div class="terminal">
+              <div class="terminal-head">
+                <span>Run output</span>
+                <button id="clearOutputBtn">Clear</button>
+              </div>
+              <pre id="outputBox">Click “Run code” to test the lesson.</pre>
+            </div>
+          </div>
+        </section>
+
+        <section class="notebook-panel panel" id="notebook">
+          <div class="panel-head">
+            <div>
+              <p class="eyebrow">Jupyter-style practice</p>
+              <h2>Explain, run, reflect</h2>
+            </div>
+            <button class="ghost-btn small" id="runNotebookBtn">Run all cells</button>
+          </div>
+          <div class="notebook">
+            <article class="cell markdown-cell">
+              <span class="cell-label">Markdown</span>
+              <h3>Lesson note: why functions matter</h3>
+              <p>A function lets you reuse logic without rewriting it. In business analytics, this is how we avoid manual mistakes.</p>
+            </article>
+            <article class="cell code-cell">
+              <span class="cell-label">Code</span>
+              <code>discount = 0.15<br>subtotal = 120<br>subtotal * (1 - discount)</code>
+              <button class="cell-run" data-result="102.0">Run cell</button>
+              <pre class="cell-output">Waiting for run…</pre>
+            </article>
+            <article class="cell code-cell">
+              <span class="cell-label">Challenge</span>
+              <code>def shipping(weight):<br>&nbsp;&nbsp;&nbsp;&nbsp;return 4 + weight * 1.2</code>
+              <button class="cell-run" data-result="shipping(5) → 10.0">Run cell</button>
+              <pre class="cell-output">Waiting for run…</pre>
+            </article>
+          </div>
+        </section>
+
+        <section class="coach-panel panel" id="coach">
+          <div class="panel-head">
+            <div>
+              <p class="eyebrow">AI tutor flow</p>
+              <h2>Feedback that teaches</h2>
+            </div>
+          </div>
+          <div class="coach-flow">
+            <div class="bubble learner">Why did my function return 54?</div>
+            <div class="bubble tutor">Because <code>18 * 3</code> is the returned value. Next, try changing quantity to see cause and effect.</div>
+            <div class="insight-card">
+              <strong>Coach recommendation</strong>
+              <p>Ask the learner to explain each variable before introducing loops.</p>
+            </div>
+          </div>
+        </section>
+
+        <section class="progress-panel panel" id="progress">
+          <div class="panel-head">
+            <div>
+              <p class="eyebrow">Learning analytics</p>
+              <h2>Progress without pressure</h2>
+            </div>
+          </div>
+          <div class="progress-bars">
+            <div><span>Syntax confidence</span><i style="--w:76%"></i><strong>76%</strong></div>
+            <div><span>Debugging habit</span><i style="--w:58%"></i><strong>58%</strong></div>
+            <div><span>Problem solving</span><i style="--w:64%"></i><strong>64%</strong></div>
+            <div><span>Notebook fluency</span><i style="--w:41%"></i><strong>41%</strong></div>
+          </div>
+        </section>
+      </section>
+    </section>
+  </main>
+  <script src="app.js"></script>
+</body>
+</html>
