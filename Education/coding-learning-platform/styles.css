@@ -153,14 +153,14 @@ button, select { cursor: pointer; }
 .topbar {
   display: flex;
   justify-content: space-between;
-  align-items: flex-start;
-  gap: 16px;
-  margin-bottom: 12px;
-  padding: 2px 4px 0;
+  align-items: center;
+  gap: 12px;
+  margin-bottom: 8px;
+  padding: 0;
 }
 
 .eyebrow {
-  margin: 0 0 8px;
+  margin: 0 0 5px;
   color: var(--muted);
   font-size: .78rem;
   font-weight: 900;
@@ -173,9 +173,9 @@ h1, h2, h3, p { margin-top: 0; }
 h1 {
   max-width: 760px;
   margin-bottom: 0;
-  font-size: clamp(1.55rem, 2.75vw, 3.25rem);
-  line-height: .92;
-  letter-spacing: -.065em;
+  font-size: clamp(1.28rem, 1.75vw, 2.2rem);
+  line-height: .98;
+  letter-spacing: -.055em;
 }
 
 h2 { margin-bottom: 0; font-size: clamp(1.1rem, 1.35vw, 1.55rem); line-height: 1; letter-spacing: -.04em; }
@@ -212,9 +212,9 @@ h3 { margin-bottom: 8px; }
 
 .hero-grid {
   display: grid;
-  grid-template-columns: minmax(0, 1.55fr) minmax(280px, .7fr);
-  gap: 12px;
-  margin-bottom: 12px;
+  grid-template-columns: minmax(0, 1fr) 260px;
+  gap: 8px;
+  margin-bottom: 8px;
 }
 
 .hero-card, .coach-card, .panel {
@@ -227,47 +227,48 @@ h3 { margin-bottom: 8px; }
 
 .hero-card {
   display: grid;
-  grid-template-columns: minmax(0, 1fr) 360px;
-  gap: 14px;
-  padding: 16px 18px;
+  grid-template-columns: 280px minmax(0, 1fr);
+  align-items: center;
+  gap: 10px;
+  padding: 10px 12px;
   overflow: hidden;
 }
 
-.hero-card h2 { max-width: 700px; font-size: clamp(1.45rem, 2.4vw, 2.35rem); line-height: .92; }
+.hero-card h2 { max-width: 700px; font-size: clamp(1rem, 1.25vw, 1.32rem); line-height: 1; }
 .hero-card p { max-width: 760px; margin-bottom: 0; color: var(--ink-soft); font-size: .94rem; line-height: 1.45; }
 
 .pill {
   display: inline-flex;
-  margin-bottom: 10px;
-  padding: 6px 10px;
+  margin-bottom: 6px;
+  padding: 5px 8px;
   border-radius: 999px;
   background: rgba(201,255,59,.58);
-  font-size: .82rem;
+  font-size: .72rem;
   font-weight: 900;
 }
 
 .hero-stats {
   display: grid;
-  grid-template-columns: repeat(3, 1fr);
-  gap: 8px;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 6px;
   align-self: stretch;
 }
 
 .hero-stats div {
-  padding: 14px;
-  border-radius: 18px;
+  padding: 10px 12px;
+  border-radius: 14px;
   background: var(--ide);
   color: white;
 }
 
-.hero-stats strong { display: block; color: var(--lime); font-size: 1.55rem; line-height: .9; }
-.hero-stats span { display: block; margin-top: 6px; color: rgba(255,255,255,.72); font-size: .78rem; font-weight: 700; }
+.hero-stats strong { display: inline-block; color: var(--lime); font-size: 1.22rem; line-height: .9; }
+.hero-stats span { display: inline-block; margin-left: 6px; color: rgba(255,255,255,.72); font-size: .72rem; font-weight: 700; }
 
 .coach-card {
   display: flex;
-  gap: 12px;
-  align-items: flex-start;
-  padding: 16px;
+  gap: 8px;
+  align-items: center;
+  padding: 10px 12px;
   background: linear-gradient(145deg, rgba(255,253,245,.8), rgba(127,255,212,.24));
 }
 
@@ -275,39 +276,40 @@ h3 { margin-bottom: 8px; }
   flex: 0 0 auto;
   display: grid;
   place-items: center;
-  width: 44px;
-  height: 44px;
-  border-radius: 16px;
+  width: 36px;
+  height: 36px;
+  border-radius: 13px;
   background: var(--orange);
   color: var(--ink);
   font-weight: 950;
 }
 
-.coach-card p:last-child { margin-bottom: 0; color: var(--ink-soft); line-height: 1.5; }
+.coach-card h3 { margin-bottom: 3px; font-size: .92rem; }
+.coach-card p:last-child { margin-bottom: 0; color: var(--ink-soft); font-size: .82rem; line-height: 1.25; }
 
 .content-grid {
   display: grid;
-  grid-template-columns: minmax(260px, .68fr) minmax(560px, 1.35fr) minmax(290px, .74fr);
-  gap: 12px;
-  align-items: start;
+  grid-template-columns: 300px minmax(0, 1fr) 340px;
+  gap: 8px;
+  align-items: stretch;
 }
 
-.panel { padding: 16px; scroll-margin-top: 14px; }
-.path-panel { grid-column: 1; grid-row: 1 / span 2; }
+.panel { padding: 12px; scroll-margin-top: 10px; }
+.path-panel { grid-column: 1; grid-row: 1 / span 3; }
 .studio-panel { grid-column: 2; grid-row: 1 / span 3; padding: 0; overflow: hidden; }
 .notebook-panel { grid-column: 3; grid-row: 1; }
 .coach-panel { grid-column: 3; grid-row: 2; }
-.progress-panel { grid-column: 1; grid-row: 3; }
+.progress-panel { grid-column: 3; grid-row: 3; }
 
 .panel-head {
   display: flex;
   align-items: center;
   justify-content: space-between;
-  gap: 10px;
-  margin-bottom: 12px;
+  gap: 8px;
+  margin-bottom: 8px;
 }
 
-.panel-head.compact { padding: 16px 16px 0; margin-bottom: 12px; }
+.panel-head.compact { padding: 12px 12px 0; margin-bottom: 8px; }
 
 select {
   min-height: 36px;
@@ -326,9 +328,9 @@ select {
   grid-template-columns: auto 1fr auto;
   gap: 9px;
   align-items: center;
-  padding: 10px;
+  padding: 8px;
   border: 1px solid var(--line);
-  border-radius: 22px;
+  border-radius: 16px;
   background: rgba(255,255,255,.54);
 }
 
@@ -347,8 +349,8 @@ select {
   font-weight: 900;
 }
 
-.module-card strong { display: block; margin-bottom: 3px; font-size: .9rem; }
-.module-card small { color: var(--muted); font-size: .76rem; font-weight: 700; line-height: 1.2; }
+.module-card strong { display: block; margin-bottom: 2px; font-size: .84rem; }
+.module-card small { color: var(--muted); font-size: .71rem; font-weight: 700; line-height: 1.15; }
 
 .status {
   padding: 5px 7px;
@@ -408,8 +410,8 @@ select {
 
 .ide-body {
   display: grid;
-  grid-template-columns: 126px minmax(0, 1fr) 150px;
-  min-height: 374px;
+  grid-template-columns: 118px minmax(0, 1fr) 142px;
+  min-height: 410px;
 }
 
 .file-tree {
@@ -463,7 +465,7 @@ select {
 textarea {
   display: block;
   width: 100%;
-  height: 338px;
+  height: 374px;
   padding: 16px 18px;
   border: 0;
   outline: 0;
@@ -530,7 +532,7 @@ textarea {
 }
 
 .terminal pre {
-  min-height: 74px;
+  min-height: 88px;
   margin: 0;
   padding: 12px;
   color: var(--mint);
@@ -540,12 +542,12 @@ textarea {
 
 .notebook {
   display: grid;
-  gap: 9px;
+  gap: 7px;
 }
 
 .cell {
   position: relative;
-  padding: 12px;
+  padding: 10px;
   border: 1px solid var(--line);
   border-radius: 18px;
   background: rgba(255,255,255,.58);
@@ -566,7 +568,7 @@ textarea {
 
 .cell code {
   display: block;
-  padding: 10px;
+  padding: 8px;
   border-radius: 12px;
   background: #141922;
   color: var(--code);
@@ -595,12 +597,12 @@ textarea {
 
 .coach-flow {
   display: grid;
-  gap: 9px;
+  gap: 7px;
 }
 
 .bubble {
   max-width: 88%;
-  padding: 10px 12px;
+  padding: 9px 10px;
   border-radius: 16px;
   font-size: .86rem;
   line-height: 1.35;
@@ -621,7 +623,7 @@ textarea {
 
 .progress-bars {
   display: grid;
-  gap: 10px;
+  gap: 8px;
 }
 
 .progress-bars div {
@@ -636,7 +638,7 @@ textarea {
 
 .progress-bars i {
   position: relative;
-  height: 12px;
+  height: 10px;
   overflow: hidden;
   border-radius: 999px;
   background: rgba(17,24,39,.08);
