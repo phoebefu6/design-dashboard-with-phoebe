@@ -1,0 +1,150 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Resume Atelier AI Review Studio</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Instrument+Sans:wght@400;500;600;700;800;900&family=Libre+Baskerville:wght@400;700&family=JetBrains+Mono:wght@400;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="styles.css" />
+</head>
+<body>
+  <main class="studio-shell">
+    <aside class="left-rail">
+      <a class="brand" href="#top" aria-label="Resume Atelier home">
+        <span class="brand-mark">RA</span>
+        <span>
+          <strong>Resume Atelier</strong>
+          <small>AI review · design · PDF export</small>
+        </span>
+      </a>
+
+      <nav class="rail-nav" aria-label="Resume workflow">
+        <a href="#intake" class="active">01 Intake</a>
+        <a href="#review">02 AI review</a>
+        <a href="#approve">03 Approve</a>
+        <a href="#designs">04 Design</a>
+        <a href="#export">05 Export</a>
+      </nav>
+
+      <div class="skill-card">
+        <p>Activated skills</p>
+        <span>Resume strategy</span>
+        <span>Content rewrite</span>
+        <span>Design polish</span>
+        <span>PDF handoff</span>
+      </div>
+    </aside>
+
+    <section class="main-workspace" id="top">
+      <header class="topbar">
+        <div>
+          <p class="eyebrow">Resume review, rewrite, and visual polish</p>
+          <h1>Turn rough experience into a polished, editable resume.</h1>
+        </div>
+        <div class="action-row">
+          <button class="ghost-btn" id="sampleBtn">Load sample</button>
+          <button class="primary-btn" id="reviewBtn">Run AI review</button>
+        </div>
+      </header>
+
+      <section class="workflow-grid">
+        <section class="panel intake-panel" id="intake">
+          <div class="panel-head">
+            <div>
+              <p class="eyebrow">Input</p>
+              <h2>Upload or type experience</h2>
+            </div>
+            <span class="status-pill" id="fileStatus">No file</span>
+          </div>
+
+          <label class="upload-zone" for="resumeFile">
+            <input id="resumeFile" type="file" accept=".txt,.md,.doc,.docx,.pdf" />
+            <strong>Drop in resume</strong>
+            <span>Prototype reads text files directly; DOC/PDF are shown as intake metadata.</span>
+          </label>
+
+          <label class="field-label" for="targetRole">Target role</label>
+          <input class="text-input" id="targetRole" value="Senior Product Analyst" />
+
+          <label class="field-label" for="resumeInput">Experience / resume content</label>
+          <textarea id="resumeInput" spellcheck="true"></textarea>
+
+          <div class="input-actions">
+            <button class="ghost-btn small" id="clearBtn">Clear</button>
+            <button class="ghost-btn small" id="pasteModeBtn">Paste mode</button>
+          </div>
+        </section>
+
+        <section class="panel resume-panel" id="review">
+          <div class="panel-head">
+            <div>
+              <p class="eyebrow">Annotated resume</p>
+              <h2>Inline highlights explain what to revise</h2>
+            </div>
+            <div class="score-chip">
+              <strong id="scoreValue">68</strong>
+              <span>resume score</span>
+            </div>
+          </div>
+
+          <article class="resume-paper template-minimal" id="resumePaper">
+            <div class="resume-header">
+              <div>
+                <h3 id="resumeName">Phoebe Candidate</h3>
+                <p id="resumeTitle">Product & Data Leader · Singapore</p>
+              </div>
+              <span id="templateBadge">Minimal Editorial</span>
+            </div>
+            <div id="annotatedResume" class="annotated-resume"></div>
+          </article>
+        </section>
+
+        <aside class="panel suggestions-panel" id="approve">
+          <div class="panel-head">
+            <div>
+              <p class="eyebrow">AI suggestions</p>
+              <h2>Accept or reject each change</h2>
+            </div>
+          </div>
+
+          <div class="review-summary">
+            <div><strong id="issueCount">0</strong><span>issues</span></div>
+            <div><strong id="acceptedCount">0</strong><span>approved</span></div>
+            <div><strong id="rejectedCount">0</strong><span>rejected</span></div>
+          </div>
+
+          <div id="suggestionList" class="suggestion-list"></div>
+
+          <section class="approved-box">
+            <div class="approved-head">
+              <p class="eyebrow">Generated from approvals</p>
+              <button class="ghost-btn mini" id="generateBtn">Generate content</button>
+            </div>
+            <div id="approvedContent" class="approved-content">Approve suggestions, then generate the refined resume content.</div>
+          </section>
+        </aside>
+      </section>
+
+      <section class="design-studio panel" id="designs">
+        <div class="panel-head">
+          <div>
+            <p class="eyebrow">Resume design skills</p>
+            <h2>Choose one of 5 ATS-aware visual formats</h2>
+          </div>
+          <button class="primary-btn" id="exportBtn">Export polished PDF</button>
+        </div>
+
+        <div class="template-grid" id="templateGrid"></div>
+      </section>
+
+      <section class="export-note" id="export">
+        <strong>PDF export note:</strong> this prototype uses a resume-only print layout so users can save a polished PDF directly from the browser. A production version can add server-side PDF generation, DOCX packaging, and real AI API review.
+      </section>
+    </section>
+  </main>
+
+  <script src="app.js"></script>
+</body>
+</html>

@@ -41,6 +41,11 @@ Each project explores how information hierarchy, interaction design, responsive 
 
   **[View the live platform](https://phoebefu6.github.io/design-dashboard-with-phoebe/Education/coding-learning-platform/)**
 
+- [Resume Atelier AI Review Studio](./Education/resume-review-design-studio/)  
+  A resume review, rewrite, design, and PDF export website concept with AI-style suggestions, inline highlights, accept/reject controls, approved content generation, and five ATS-aware resume formats.
+
+  **[View the live website](https://phoebefu6.github.io/design-dashboard-with-phoebe/Education/resume-review-design-studio/)**
+
 ## Design principles
 
 - Evidence and operational context remain visible without hover.
@@ -59,6 +64,7 @@ The dashboards are published with GitHub Pages. Visitors can use them directly i
 - [Open PeopleLens HR Intelligence Platform](https://phoebefu6.github.io/design-dashboard-with-phoebe/HR/people-analysis-intelligent-platform/)
 - [Open FX Motion Real-time Converter](https://phoebefu6.github.io/design-dashboard-with-phoebe/Finance/real-time-fx-converter/)
 - [Open CodeNest Python Learning Studio](https://phoebefu6.github.io/design-dashboard-with-phoebe/Education/coding-learning-platform/)
+- [Open Resume Atelier AI Review Studio](https://phoebefu6.github.io/design-dashboard-with-phoebe/Education/resume-review-design-studio/)
 
 ## Running a project locally
 
