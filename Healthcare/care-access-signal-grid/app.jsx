@@ -21,7 +21,7 @@ function App({ payload }) {
   const [selectedId, setSelectedId] = useState(() => payload.records[0]?.id || null);
   const [region, setRegion] = useState("All regions");
   const [type, setType] = useState("All types");
-  const [sort, setSort] = useState("risk");
+  const [sort, setSort] = useState("load");
   const [query, setQuery] = useState("");
   const [panel, setPanel] = useState("guide");
   const [fields, setFields] = useState("provider_name, region, monthly_visits, avg_wait_days, accepted_insurance_rate, interpreter_coverage, visit_cost_index, no_show_rate");
