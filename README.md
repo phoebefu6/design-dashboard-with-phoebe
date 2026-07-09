@@ -1,10 +1,4 @@
-# Design Dashboard with Phoebe
-
-A dashboard design portfolio by Phoebe Fu.
-
-## View the Portfolio
-
-**[View live dashboard portfolio](https://phoebefu6.github.io/design-dashboard-with-phoebe/)**
+**[View live portfolio](https://phoebefu6.github.io/design-dashboard-with-phoebe/)**
 
 ## Industry Index
 
