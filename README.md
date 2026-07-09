@@ -49,6 +49,16 @@ Use this loop to add a new dashboard every day:
 6. Update this catalog and the relevant industry README.
 7. Publish and verify the live URL.
 
+## Push It
+
+After a dashboard is ready, publish current changes with:
+
+```bash
+./scripts/push-it.sh "Add dashboard 008"
+```
+
+The script stages the repo, creates a commit when there are local changes, and pushes the current branch to GitHub. If there are no local changes, it still runs `git push` so the remote state is confirmed.
+
 ## Design Principles
 
 - Treat dashboards as products, not chart dumps.

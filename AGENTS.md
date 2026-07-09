@@ -41,3 +41,17 @@ When real data is unavailable, use clearly labeled synthetic or mock data. Prefe
 When a dashboard is inspired by a public reference, transform the industry, layout, mark language, palette, typography, wording, and interaction model so the result is an original portfolio work rather than a close copy.
 
 For repeatable portfolio work, add project memory or a data-prep guide when it helps Phoebe reuse the workflow for future daily builds.
+
+## Push-it command
+
+When Phoebe says `push it`, treat that as permission to publish the current repository changes to GitHub.
+
+Use:
+
+```bash
+./scripts/push-it.sh "Update dashboard portfolio"
+```
+
+If the current task has a clearer commit message, pass that message instead. The script stages all current repository changes, commits them when needed, and pushes the current branch to `origin`.
+
+Before running it, make sure the current working directory is the repository root or a child of it. After running it, report the commit hash, push result, and the relevant GitHub Pages live URL when applicable.
