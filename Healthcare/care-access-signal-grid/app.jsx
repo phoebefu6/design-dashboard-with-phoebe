@@ -154,9 +154,9 @@ function App({ payload }) {
 }
 
 function SignalGlyph({ row, large = false }) {
-  const size = large ? 190 : 104;
+  const size = large ? 230 : 132;
   const center = size / 2;
-  const radius = large ? 74 : 40;
+  const radius = large ? 92 : 56;
   const axes = metricConfig.map((metric, index) => {
     const value = row[metric.key];
     const angle = (-90 + index * 72) * Math.PI / 180;
@@ -203,10 +203,10 @@ function SignalGlyph({ row, large = false }) {
       <polygon points={radarPoints} className="radarArea" />
       <polyline points={`${radarPoints} ${axes[0].x},${axes[0].y}`} className="radarStroke" />
       {axes.map((axis) => (
-        <circle key={axis.key} cx={axis.x} cy={axis.y} r={large ? 4 : 2.8} fill={axis.color} className="radarPoint" />
+        <circle key={axis.key} cx={axis.x} cy={axis.y} r={large ? 4.5 : 3.2} fill={axis.color} className="radarPoint" />
       ))}
-      <circle cx={center} cy={center} r={large ? 28 : 18} className="riskCore" filter={`url(#glow-${row.id})`} />
-      <text x={center} y={center + (large ? 8 : 5)} textAnchor="middle" className="coreText">{row.disparityRisk}</text>
+      <circle cx={center} cy={center} r={large ? 23 : 15} className="riskCore" filter={`url(#glow-${row.id})`} />
+      <text x={center} y={center + (large ? 7 : 5)} textAnchor="middle" className="coreText">{row.disparityRisk}</text>
     </svg>
   );
 }

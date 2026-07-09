@@ -254,8 +254,8 @@ textarea {
 
 .providerTile {
   position: relative;
-  min-height: 184px;
-  padding: 13px 10px 12px;
+  min-height: 212px;
+  padding: 14px 10px 12px;
   color: var(--text);
   text-align: left;
   border-radius: var(--radius);
@@ -298,7 +298,7 @@ textarea {
 .signalGlyph {
   display: block;
   width: 100%;
-  max-width: 116px;
+  max-width: 144px;
   margin: 0 auto;
   overflow: visible;
 }
@@ -335,12 +335,12 @@ textarea {
 .riskCore {
   fill: #ffffff;
   stroke: #ff6f98;
-  stroke-width: 5;
+  stroke-width: 4.5;
 }
 
 .coreText {
   fill: #17292d;
-  font-size: 13px;
+  font-size: 12px;
   font-weight: 900;
 }
 
@@ -483,7 +483,7 @@ textarea {
   }
 
   .providerTile {
-    min-height: 170px;
+    min-height: 200px;
   }
 }
 
