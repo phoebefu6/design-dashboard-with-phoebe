@@ -4,7 +4,7 @@ An interactive healthcare access dashboard concept built with Python-generated m
 
 ## Live Dashboard
 
-**[Open the interactive dashboard](https://phoebefu6.github.io/design-dashboard-with-phoebe/Healthcare/care-access-signal-grid/)**
+**[View live dashboard](https://phoebefu6.github.io/design-dashboard-with-phoebe/Healthcare/care-access-signal-grid/)**
 
 It runs directly in a browser through GitHub Pages. No installation or GitHub account is required.
 
@@ -48,7 +48,7 @@ Healthcare/care-access-signal-grid/data/providers.json
 - Python for data generation
 - React through CDN for interaction
 - SVG for custom signal glyphs
-- CSS for responsive layout, motion, and visual system
+- CSS for responsive layout and a light clinical visual system
 - GitHub Pages for static hosting
 
 ## Run Locally

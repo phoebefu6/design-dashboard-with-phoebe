@@ -1,4 +1,4 @@
-const { useEffect, useMemo, useState } = React;
+const { useMemo, useState } = React;
 
 const metricConfig = [
   { key: "appointmentSpeed", label: "Appointment speed", color: "#5fe1d2" },
@@ -17,24 +17,14 @@ const templateRules = [
   { test: ["no_show", "attendance", "visit"], result: "Demand reliability" },
 ];
 
-function App() {
-  const [payload, setPayload] = useState(null);
-  const [selectedId, setSelectedId] = useState(null);
+function App({ payload }) {
+  const [selectedId, setSelectedId] = useState(() => payload.records[0]?.id || null);
   const [region, setRegion] = useState("All regions");
   const [type, setType] = useState("All types");
   const [sort, setSort] = useState("risk");
   const [query, setQuery] = useState("");
   const [panel, setPanel] = useState("guide");
   const [fields, setFields] = useState("provider_name, region, monthly_visits, avg_wait_days, accepted_insurance_rate, interpreter_coverage, visit_cost_index, no_show_rate");
-
-  useEffect(() => {
-    fetch("./data/providers.json")
-      .then((response) => response.json())
-      .then((data) => {
-        setPayload(data);
-        setSelectedId(data.records[0]?.id);
-      });
-  }, []);
 
   const records = payload?.records || [];
   const regions = ["All regions", ...Array.from(new Set(records.map((row) => row.region)))];
@@ -57,10 +47,6 @@ function App() {
   const selected = records.find((row) => row.id === selectedId) || filtered[0] || records[0];
   const summary = useMemo(() => summarize(filtered), [filtered]);
   const fieldAdvice = useMemo(() => analyzeFields(fields), [fields]);
-
-  if (!payload) {
-    return <main className="loading">Loading signal grid...</main>;
-  }
 
   return (
     <main className="shell">
@@ -128,12 +114,11 @@ function App() {
           </div>
 
           <div className="tileGrid">
-            {filtered.map((row, index) => (
+            {filtered.map((row) => (
               <button
                 className={`providerTile ${selected?.id === row.id ? "active" : ""}`}
                 key={row.id}
                 onClick={() => setSelectedId(row.id)}
-                style={{ "--delay": `${Math.min(index * 18, 720)}ms` }}
               >
                 <SignalGlyph row={row} />
                 <span>{row.name}</span>
@@ -320,4 +305,21 @@ function analyzeFields(raw) {
   };
 }
 
-ReactDOM.createRoot(document.getElementById("root")).render(<App />);
+const root = ReactDOM.createRoot(document.getElementById("root"));
+
+async function bootDashboard() {
+  try {
+    const response = await fetch("./data/providers.json");
+    if (!response.ok) throw new Error(`Data request failed: ${response.status}`);
+    const payload = await response.json();
+    root.render(<App payload={payload} />);
+  } catch (error) {
+    root.render(
+      <main className="loading error">
+        Unable to load provider signals. Check the data file and try again.
+      </main>
+    );
+  }
+}
+
+bootDashboard();

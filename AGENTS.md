@@ -38,6 +38,8 @@ This repository is intended to scale to 200 dashboard designs. New dashboards sh
 
 When real data is unavailable, use clearly labeled synthetic or mock data. Prefer a reproducible data generator, usually Python, so the dashboard can be rebuilt and adapted later.
 
+Prefer clean, readable dashboard palettes with light or balanced backgrounds. Avoid making future dashboards feel overly dark unless the user explicitly asks for a dark operational theme.
+
 When a dashboard is inspired by a public reference, transform the industry, layout, mark language, palette, typography, wording, and interaction model so the result is an original portfolio work rather than a close copy.
 
 For repeatable portfolio work, add project memory or a data-prep guide when it helps Phoebe reuse the workflow for future daily builds.
