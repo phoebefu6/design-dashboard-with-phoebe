@@ -36,6 +36,8 @@ In the final handoff, briefly mention any material instruction or documentation 
 
 This repository is intended to scale to 200 dashboard designs. New dashboards should be organized by industry, include a project README, expose a public GitHub Pages URL, and update the root catalog table.
 
+The root README is client- and recruiter-facing. Use it to showcase Phoebe's dashboard taste, design range, skills, live work, and project catalog. Keep internal build steps, publishing commands, and agent workflow instructions in `AGENTS.md` or project memory files instead of the public README.
+
 When real data is unavailable, use clearly labeled synthetic or mock data. Prefer a reproducible data generator, usually Python, so the dashboard can be rebuilt and adapted later.
 
 Prefer clean, readable dashboard palettes with light or balanced backgrounds. Avoid making future dashboards feel overly dark unless the user explicitly asks for a dark operational theme.
