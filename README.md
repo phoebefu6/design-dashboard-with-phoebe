@@ -1,8 +1,8 @@
 Phoebe designs and ships dashboards across industries.
 
-If you are into data visualization too, come explore the work. Maybe we build something fun together with Claude Code, Codex, and a good metric model.
+This is a growing collection of dashboard experiments across ecommerce, healthcare, education, finance, HR, aquaculture, and whatever problem space feels interesting next. Each one tries a different mix of layout, chart language, interaction, density, color, and data story based on the industry and the decision it needs to support.
 
-**[View live portfolio](https://phoebefu6.github.io/design-dashboard-with-phoebe/)**
+If you are into data visualization too, come explore the work. Maybe we build something fun together with Claude Code, Codex, and a good metric model.
 
 ## Industry Index
 
