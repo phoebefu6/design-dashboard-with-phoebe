@@ -1,3 +1,7 @@
+Phoebe designs and ships dashboards across industries.
+
+If you are into data visualization too, come explore the work. Maybe we build something fun together with Claude Code, Codex, and a good metric model.
+
 **[View live portfolio](https://phoebefu6.github.io/design-dashboard-with-phoebe/)**
 
 ## Industry Index

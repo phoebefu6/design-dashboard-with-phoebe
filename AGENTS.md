@@ -36,7 +36,7 @@ In the final handoff, briefly mention any material instruction or documentation 
 
 This repository is intended to scale to 200 dashboard designs. New dashboards should be organized by industry, include a project README, expose a public GitHub Pages URL, and update the root catalog table.
 
-The root README is client- and recruiter-facing. Keep it concise and let the dashboard work speak. Because GitHub already shows the repository name above the README, avoid repeating the title with a redundant H1 or intro sentence. Use the README for the live portfolio link, industry navigation, and project catalog; avoid repetitive explanation, explicit claims about taste/skill, internal build steps, publishing commands, or agent workflow instructions. Keep those in `AGENTS.md` or project memory files instead of the public README.
+The root README is client- and recruiter-facing. Keep it concise and let the dashboard work speak, but include a short human introduction so the page has context and personality. Because GitHub already shows the repository name above the README, avoid repeating the title with a redundant H1. Use the README for a brief intro, live portfolio link, industry navigation, and project catalog; avoid repetitive explanation, explicit claims about taste/skill, internal build steps, publishing commands, or agent workflow instructions. Keep those in `AGENTS.md` or project memory files instead of the public README.
 
 When real data is unavailable, use clearly labeled synthetic or mock data. Prefer a reproducible data generator, usually Python, so the dashboard can be rebuilt and adapted later.
 
