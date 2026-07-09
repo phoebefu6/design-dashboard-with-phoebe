@@ -31,3 +31,13 @@ After every completed task, perform a short retention review before handoff:
 Retain only reusable information. Do not clutter instruction or README files with temporary debugging details, conversational history, duplicated guidance, secrets, credentials, or machine-specific state.
 
 In the final handoff, briefly mention any material instruction or documentation updates made during this review.
+
+## Portfolio growth standards
+
+This repository is intended to scale to 200 dashboard designs. New dashboards should be organized by industry, include a project README, expose a public GitHub Pages URL, and update the root catalog table.
+
+When real data is unavailable, use clearly labeled synthetic or mock data. Prefer a reproducible data generator, usually Python, so the dashboard can be rebuilt and adapted later.
+
+When a dashboard is inspired by a public reference, transform the industry, layout, mark language, palette, typography, wording, and interaction model so the result is an original portfolio work rather than a close copy.
+
+For repeatable portfolio work, add project memory or a data-prep guide when it helps Phoebe reuse the workflow for future daily builds.
