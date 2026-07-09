@@ -25,7 +25,7 @@ It runs directly in a browser through GitHub Pages. No installation or GitHub ac
 - Filter providers by region and provider type.
 - Sort by disparity risk, access score, demand load, or monthly visits.
 - Search providers by name.
-- Select any signal tile to inspect provider-level metrics.
+- Select any radar tile to inspect provider-level metrics.
 - Use the input layer to paste available field names and receive a dashboard/data-prep recommendation.
 - Open the data-prep guide for a reproducible real-data mapping.
 
@@ -47,7 +47,7 @@ Healthcare/care-access-signal-grid/data/providers.json
 
 - Python for data generation
 - React through CDN for interaction
-- SVG for custom signal glyphs
+- SVG for custom radar charts
 - CSS for responsive layout and a light clinical visual system
 - GitHub Pages for static hosting
 

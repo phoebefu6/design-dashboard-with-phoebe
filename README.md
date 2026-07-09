@@ -19,7 +19,7 @@
 | 004 | Finance | [FX Motion Real-time Converter](./Finance/real-time-fx-converter/) | Real-time conversion flow, exchange-rate status, audit links, motion-led interaction | [View live dashboard](https://phoebefu6.github.io/design-dashboard-with-phoebe/Finance/real-time-fx-converter/) |
 | 005 | Education | [CodeNest Python Learning Studio](./Education/coding-learning-platform/) | Guided learning dashboard, coding practice, notebook workflow, AI tutor feedback | [View live dashboard](https://phoebefu6.github.io/design-dashboard-with-phoebe/Education/coding-learning-platform/) |
 | 006 | Education | [Resume Atelier AI Review Studio](./Education/resume-review-design-studio/) | AI-assisted review, rewrite suggestions, resume structure, PDF-ready presentation | [View live dashboard](https://phoebefu6.github.io/design-dashboard-with-phoebe/Education/resume-review-design-studio/) |
-| 007 | Healthcare | [Care Access Signal Grid](./Healthcare/care-access-signal-grid/) | Provider access operations, disparity risk, custom signal glyphs, data-prep guidance | [View live dashboard](https://phoebefu6.github.io/design-dashboard-with-phoebe/Healthcare/care-access-signal-grid/) |
+| 007 | Healthcare | [Care Access Signal Grid](./Healthcare/care-access-signal-grid/) | Provider access operations, disparity risk, radar charts, data-prep guidance | [View live dashboard](https://phoebefu6.github.io/design-dashboard-with-phoebe/Healthcare/care-access-signal-grid/) |
 
 ## Notes
 

@@ -52,12 +52,10 @@ function App({ payload }) {
     <main className="shell">
       <section className="hero">
         <div>
-          <p className="eyebrow">Dashboard 007 / Healthcare operations</p>
           <h1>Care Access Signal Grid</h1>
           <p className="lede">
-            A synthetic healthcare access dashboard that scans provider capacity, coverage, language
-            access, affordability, and local demand pressure without borrowing the visual identity of
-            the reference dashboard.
+            A healthcare access dashboard that scans provider capacity, coverage, language access,
+            affordability, and local demand pressure.
           </p>
         </div>
         <div className="heroStats" aria-label="Portfolio dashboard summary">
@@ -70,13 +68,13 @@ function App({ payload }) {
       <section className="dashboard">
         <aside className="leftRail">
           <div className="module">
-            <h2>Signal grammar</h2>
+            <h2>Access radar</h2>
             <div className="demoTile" aria-hidden="true">
               <SignalGlyph row={selected} large />
             </div>
             <p>
-              Each tile is a provider. Edge bars show access dimensions, the center badge shows
-              disparity risk, and the sparkline shows 12-week access movement.
+              Each tile is a provider. The radar shape compares five access dimensions, while the
+              center badge shows disparity risk.
             </p>
           </div>
 
@@ -159,19 +157,29 @@ function SignalGlyph({ row, large = false }) {
   const size = large ? 190 : 104;
   const center = size / 2;
   const radius = large ? 74 : 40;
-  const bars = metricConfig.map((metric, index) => {
+  const axes = metricConfig.map((metric, index) => {
     const value = row[metric.key];
     const angle = (-90 + index * 72) * Math.PI / 180;
-    const length = radius * (0.35 + value / 145);
-    const x = center + Math.cos(angle) * length;
-    const y = center + Math.sin(angle) * length;
-    return { ...metric, x, y, value };
+    const endX = center + Math.cos(angle) * radius;
+    const endY = center + Math.sin(angle) * radius;
+    const pointRadius = radius * (value / 100);
+    const x = center + Math.cos(angle) * pointRadius;
+    const y = center + Math.sin(angle) * pointRadius;
+    return { ...metric, angle, endX, endY, x, y, value };
   });
+  const radarPoints = axes.map((axis) => `${axis.x},${axis.y}`).join(" ");
+  const rings = [0.25, 0.5, 0.75, 1].map((scale) =>
+    axes.map((axis) => {
+      const x = center + Math.cos(axis.angle) * radius * scale;
+      const y = center + Math.sin(axis.angle) * radius * scale;
+      return `${x},${y}`;
+    }).join(" ")
+  );
 
   return (
-    <svg className="signalGlyph" viewBox={`0 0 ${size} ${size}`} role="img" aria-label={`${row.name} signal glyph`}>
+    <svg className="signalGlyph radarChart" viewBox={`0 0 ${size} ${size}`} role="img" aria-label={`${row.name} access radar chart`}>
       <defs>
-        <filter id={`glow-${row.id}`} x="-50%" y="-50%" width="200%" height="200%">
+        <filter id={`glow-${row.id}`} x="-40%" y="-40%" width="180%" height="180%">
           <feGaussianBlur stdDeviation="3" result="blur" />
           <feMerge>
             <feMergeNode in="blur" />
@@ -179,31 +187,26 @@ function SignalGlyph({ row, large = false }) {
           </feMerge>
         </filter>
       </defs>
-      <circle cx={center} cy={center} r={radius} className="orbit" />
-      <circle cx={center} cy={center} r={radius * 0.62} className="innerOrbit" />
-      {bars.map((bar) => (
+      {rings.map((points, index) => (
+        <polygon key={index} points={points} className="radarRing" />
+      ))}
+      {axes.map((axis) => (
         <line
-          key={bar.key}
+          key={axis.key}
           x1={center}
           y1={center}
-          x2={bar.x}
-          y2={bar.y}
-          stroke={bar.color}
-          strokeWidth={large ? 14 : 8}
-          strokeLinecap="round"
-          style={{ "--dash": bar.value }}
+          x2={axis.endX}
+          y2={axis.endY}
+          className="radarAxis"
         />
+      ))}
+      <polygon points={radarPoints} className="radarArea" />
+      <polyline points={`${radarPoints} ${axes[0].x},${axes[0].y}`} className="radarStroke" />
+      {axes.map((axis) => (
+        <circle key={axis.key} cx={axis.x} cy={axis.y} r={large ? 4 : 2.8} fill={axis.color} className="radarPoint" />
       ))}
       <circle cx={center} cy={center} r={large ? 28 : 18} className="riskCore" filter={`url(#glow-${row.id})`} />
       <text x={center} y={center + (large ? 8 : 5)} textAnchor="middle" className="coreText">{row.disparityRisk}</text>
-      <polyline
-        className="spark"
-        points={row.trend.map((value, index) => {
-          const x = center - radius * 0.58 + index * ((radius * 1.16) / 11);
-          const y = center + radius * 0.72 - value * (radius * 0.72 / 100);
-          return `${x},${y}`;
-        }).join(" ")}
-      />
     </svg>
   );
 }

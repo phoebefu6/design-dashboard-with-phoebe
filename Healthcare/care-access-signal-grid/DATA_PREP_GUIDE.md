@@ -58,7 +58,7 @@ disparity_risk =
 ## Dashboard Prep Checklist
 
 - Keep raw fields, normalized fields, and final scores in separate columns.
-- Preserve reporting date so the sparkline can show movement.
+- Preserve reporting date for trend views or period-over-period comparisons.
 - Add a `source_last_updated_at` field before publishing real data.
 - Label mock, synthetic, estimated, and audited fields differently.
 - Do not publish patient-level data in this portfolio project.
