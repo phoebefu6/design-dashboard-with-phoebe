@@ -1,0 +1,210 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta
+      name="description"
+      content="An interactive, source-backed view of global generative AI adoption in Q1 2026. Each dot represents approximately one million working-age users."
+    />
+    <meta name="theme-color" content="#06080d" />
+    <title>Prompting the Planet — Global AI Adoption Atlas</title>
+    <link rel="stylesheet" href="./styles.css" />
+    <script src="./app.js" defer></script>
+  </head>
+  <body>
+    <a class="skip-link" href="#dashboard">Skip to dashboard</a>
+    <main id="dashboard" class="dashboard-shell">
+      <header class="masthead">
+        <a class="brand" href="../../../" aria-label="Back to dashboard portfolio">
+          <span class="brand-mark" aria-hidden="true"></span>
+          <span>PHOEBE / DATA STORIES</span>
+        </a>
+        <div class="masthead-meta">
+          <span class="live-pulse" aria-hidden="true"></span>
+          Q1 2026 SNAPSHOT
+          <button class="text-button" id="open-method" type="button">How this is measured</button>
+        </div>
+      </header>
+
+      <section class="story-panel" aria-labelledby="page-title">
+        <div class="eyebrow">GLOBAL GENERATIVE AI DIFFUSION</div>
+        <h1 id="page-title">A planet<br />learning to <em>prompt.</em></h1>
+        <p class="dek">
+          Generative AI moved from curiosity to daily infrastructure in under four years.
+          By March 2026, an estimated <strong>one in 5.6 working-age people</strong> had used
+          an AI product.
+        </p>
+
+        <div class="hero-stat" aria-live="polite">
+          <span class="hero-stat-value" id="world-users">946M</span>
+          <span class="hero-stat-label">estimated users, ages 15–64</span>
+        </div>
+
+        <section class="trend-card" aria-labelledby="trend-title">
+          <div class="section-heading-row">
+            <div>
+              <p class="micro-label">THE GAP IS GROWING</p>
+              <h2 id="trend-title">Adoption share over time</h2>
+            </div>
+            <span class="metric-badge">% of working-age population</span>
+          </div>
+          <div id="trend-chart" class="trend-chart" role="img" aria-label="Global North, Global South, and world AI adoption trends"></div>
+          <div class="trend-legend" aria-hidden="true">
+            <span><i class="north"></i>Global North</span>
+            <span><i class="world"></i>World</span>
+            <span><i class="south"></i>Global South</span>
+          </div>
+          <p class="chart-note">
+            The North–South adoption gap widened from <strong>9.8</strong> to
+            <strong>12.1 percentage points</strong> in nine months.
+          </p>
+        </section>
+
+        <div class="source-strip">
+          <span>PRIMARY SOURCE</span>
+          <a href="https://aka.ms/DiffusionReport2026Q1" target="_blank" rel="noreferrer">
+            Microsoft AI Economy Institute ↗
+          </a>
+        </div>
+      </section>
+
+      <section class="signal-panel" aria-labelledby="signal-title">
+        <div class="signal-heading">
+          <p class="micro-label">A HUMAN-SCALE VIEW OF THE ESTIMATE</p>
+          <h2 id="signal-title">Each dot ≈ 1 million AI users</h2>
+          <p>Color groups users by region. Select a region or country to isolate its signal.</p>
+        </div>
+
+        <div id="region-filter" class="region-filter" aria-label="Filter the visualization by region"></div>
+
+        <div class="signal-canvas-wrap">
+          <canvas
+            id="signal-canvas"
+            width="760"
+            height="900"
+            role="img"
+            aria-label="A field of 946 dots rising above Earth, with each dot representing approximately one million generative AI users"
+          ></canvas>
+          <div class="atmosphere-label top-label">
+            <span>Q1 2026</span><strong>17.8%</strong>
+          </div>
+          <div class="atmosphere-label mid-label">
+            <span>H2 2025</span><strong>16.3%</strong>
+          </div>
+          <div class="atmosphere-label low-label">
+            <span>H1 2025</span><strong>15.1%</strong>
+          </div>
+          <div class="earth-caption">
+            <span>WORLD WORKING-AGE POPULATION</span>
+            <strong>5.31 billion</strong>
+          </div>
+        </div>
+
+        <div class="selection-readout" id="selection-readout" aria-live="polite">
+          <span class="selection-kicker">ALL REGIONS</span>
+          <strong>946 dots</strong>
+          <span>≈ 946 million estimated users</span>
+        </div>
+      </section>
+
+      <aside class="context-panel" aria-label="Geographic AI adoption analysis">
+        <section class="map-card" aria-labelledby="map-title">
+          <div class="section-heading-row">
+            <div>
+              <p class="micro-label">WHERE THE SIGNAL IS STRONGEST</p>
+              <h2 id="map-title">147 economies measured</h2>
+            </div>
+            <button class="icon-button" id="reset-focus" type="button" aria-label="Reset country selection" title="Reset selection">↺</button>
+          </div>
+          <p class="panel-intro">Circle area represents estimated users. Hover or tap a country signal for detail.</p>
+          <div class="map-wrap">
+            <canvas
+              id="map-canvas"
+              width="650"
+              height="310"
+              role="img"
+              aria-label="World map showing estimated generative AI users by country"
+            ></canvas>
+            <div id="map-tooltip" class="map-tooltip" hidden></div>
+          </div>
+          <div id="country-focus" class="country-focus" aria-live="polite">
+            <div>
+              <span class="focus-kicker">LEADING BY USER BASE</span>
+              <strong>India</strong>
+            </div>
+            <div><strong>174M</strong><span>estimated users</span></div>
+            <div><strong>17.6%</strong><span>adoption share</span></div>
+            <div><strong>+3.4</strong><span>points since H1 ’25</span></div>
+          </div>
+        </section>
+
+        <section class="ranking-card" aria-labelledby="ranking-title">
+          <div class="section-heading-row ranking-heading">
+            <div>
+              <p class="micro-label">TWO DIFFERENT LEADERBOARDS</p>
+              <h2 id="ranking-title">Scale versus saturation</h2>
+            </div>
+            <div class="metric-toggle" role="group" aria-label="Ranking metric">
+              <button class="is-active" type="button" data-metric="users">Users</button>
+              <button type="button" data-metric="rate">Adoption</button>
+            </div>
+          </div>
+          <div id="ranking-bars" class="ranking-bars"></div>
+          <p class="ranking-note" id="ranking-note">
+            Large populations put India and China first by estimated users—even though smaller digital economies lead by adoption rate.
+          </p>
+        </section>
+
+        <section class="method-card" aria-labelledby="method-card-title">
+          <div class="method-index">01</div>
+          <div>
+            <h2 id="method-card-title">A measured estimate, not a headcount</h2>
+            <p>
+              Microsoft’s anonymized product telemetry is adjusted for device share,
+              internet access, and population. We multiply that rate by the 2024 population aged 15–64.
+            </p>
+          </div>
+        </section>
+      </aside>
+
+      <footer class="dashboard-footer">
+        <p>
+          This visual measures use across generative AI products—not market share for a specific model.
+          Country totals are estimates; 12 neutral dots cover the worldwide remainder without country-level assignment.
+        </p>
+        <div class="footer-links">
+          <a href="https://raw.githubusercontent.com/microsoft/ai-diffusion-report/main/data/AI_Diffusion_Q12026_Update.csv" target="_blank" rel="noreferrer">Data CSV ↗</a>
+          <a href="https://doi.org/10.48550/arXiv.2511.02781" target="_blank" rel="noreferrer">Method paper ↗</a>
+          <a href="https://ourworldindata.org/grapher/population-by-age-group-with-projections" target="_blank" rel="noreferrer">Population ↗</a>
+        </div>
+      </footer>
+    </main>
+
+    <dialog id="method-dialog" class="method-dialog">
+      <button class="dialog-close" id="close-method" type="button" aria-label="Close methodology">×</button>
+      <p class="micro-label">METHODOLOGY</p>
+      <h2>What each dot means</h2>
+      <p>
+        Microsoft defines AI diffusion as the share of people aged 15–64 who used a generative AI product during the reporting period. The estimate is based on aggregated, anonymized telemetry and adjusted for operating-system and device-market share, internet penetration, and population.
+      </p>
+      <div class="formula">
+        <span>Country AI user share</span><b>×</b><span>Population aged 15–64</span><b>=</b><span>Estimated users</span>
+      </div>
+      <p>
+        Dot counts use largest-remainder rounding so the full field totals 946 dots. Twelve neutral dots represent the difference between Microsoft’s global rate and the sum of its published country estimates. This avoids inventing a country assignment.
+      </p>
+      <p class="dialog-caveat">
+        Appropriate interpretation: directional adoption at population scale. Not appropriate: exact unique-user counts, product market share, or model preference.
+      </p>
+      <div class="dialog-links">
+        <a href="https://aka.ms/DiffusionReport2026Q1" target="_blank" rel="noreferrer">Read the Q1 2026 report ↗</a>
+        <a href="https://doi.org/10.48550/arXiv.2511.02781" target="_blank" rel="noreferrer">Read the technical paper ↗</a>
+      </div>
+    </dialog>
+
+    <div id="load-error" class="load-error" hidden>
+      The dashboard data could not be loaded. Please refresh or try again later.
+    </div>
+  </body>
+</html>

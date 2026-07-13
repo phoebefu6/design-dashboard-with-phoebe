@@ -40,6 +40,8 @@ The root README is client- and recruiter-facing. Keep it concise and let the das
 
 When real data is unavailable, use clearly labeled synthetic or mock data. Prefer a reproducible data generator, usually Python, so the dashboard can be rebuilt and adapted later.
 
+When a dashboard derives a headcount by combining an adoption rate with population data, label the result as an estimate, document the formula and source years, disclose any unallocated remainder, and avoid implying product- or model-level market share when the source only measures category-level use.
+
 Prefer clean, readable dashboard palettes with light or balanced backgrounds. Avoid making future dashboards feel overly dark unless the user explicitly asks for a dark operational theme.
 
 When a dashboard is inspired by a public reference, transform the industry, layout, mark language, palette, typography, wording, and interaction model so the result is an original portfolio work rather than a close copy.
