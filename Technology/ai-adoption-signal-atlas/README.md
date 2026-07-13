@@ -2,6 +2,8 @@
 
 [**View live dashboard**](https://phoebefu6.github.io/design-dashboard-with-phoebe/Technology/ai-adoption-signal-atlas/)
 
+[![AI Adoption Signal Atlas dashboard preview](./assets/dashboard-preview.jpg)](https://phoebefu6.github.io/design-dashboard-with-phoebe/Technology/ai-adoption-signal-atlas/)
+
 An interactive global view of generative AI diffusion in Q1 2026. The central signal field contains 946 dots, with each dot representing approximately one million estimated working-age users. Region filters, a country bubble map, and two ranking modes distinguish absolute user scale from adoption saturation.
 
 ## What the dashboard shows
@@ -11,8 +13,16 @@ An interactive global view of generative AI diffusion in Q1 2026. The central si
 - Global North, Global South, and worldwide adoption from H1 2025 to Q1 2026
 - Region-colored user dots above an Earth horizon
 - Country focus through the map and ranking rows
+- Map hover labels only the country; clicking a bubble moves full metrics into the detail strip below
+- Selecting a country also relocates its launch origin on the globe, so its dots rise from that country’s coordinates
+- The flat country map sits in the right analysis rail with its country detail bar; the trend chart stays with the story rail
 - Separate leaderboards for estimated users and adoption share
 - A visible methodology dialog and source links
+- A compact one-screen composition with pointer-driven lens light, drifting signal particles,
+  pulsing country halos, animated trend lines, responsive ranking bars, and a rotating globe
+  using simplified Natural Earth country outlines; it launches region-coded prompt-like signal trails into the sky
+- The globe and prompt stream render directly on the page canvas without a dark container card
+- Baskerville is the default type direction
 
 ## Data and calculation
 

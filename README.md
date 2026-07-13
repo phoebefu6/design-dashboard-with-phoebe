@@ -4,6 +4,10 @@ This is a growing collection of dashboard experiments across ecommerce, healthca
 
 If you are into data visualization too, come explore the work. Maybe we build something fun together with Claude Code, Codex, and a good metric model.
 
+[![AI Adoption Signal Atlas — live interactive dashboard](./Technology/ai-adoption-signal-atlas/assets/dashboard-preview.jpg)](https://phoebefu6.github.io/design-dashboard-with-phoebe/Technology/ai-adoption-signal-atlas/)
+
+**[Launch the featured AI Adoption Signal Atlas live demo →](https://phoebefu6.github.io/design-dashboard-with-phoebe/Technology/ai-adoption-signal-atlas/)**
+
 ## Industry Index
 
 - [Aquaculture](./Aquaculture/)

@@ -10,6 +10,8 @@
     <meta name="theme-color" content="#06080d" />
     <title>Prompting the Planet — Global AI Adoption Atlas</title>
     <link rel="stylesheet" href="./styles.css" />
+    <script src="./data/adoption-inline.js"></script>
+    <script src="./data/world-inline.js"></script>
     <script src="./app.js" defer></script>
   </head>
   <body>
@@ -73,7 +75,7 @@
         <div class="signal-heading">
           <p class="micro-label">A HUMAN-SCALE VIEW OF THE ESTIMATE</p>
           <h2 id="signal-title">Each dot ≈ 1 million AI users</h2>
-          <p>Color groups users by region. Select a region or country to isolate its signal.</p>
+          <p>Prompts lift off the rotating globe. Color identifies the region they came from.</p>
         </div>
 
         <div id="region-filter" class="region-filter" aria-label="Filter the visualization by region"></div>
@@ -84,7 +86,7 @@
             width="760"
             height="900"
             role="img"
-            aria-label="A field of 946 dots rising above Earth, with each dot representing approximately one million generative AI users"
+            aria-label="A rotating globe launching 946 dots into the sky, with each dot representing approximately one million generative AI users"
           ></canvas>
           <div class="atmosphere-label top-label">
             <span>Q1 2026</span><strong>17.8%</strong>
@@ -101,11 +103,6 @@
           </div>
         </div>
 
-        <div class="selection-readout" id="selection-readout" aria-live="polite">
-          <span class="selection-kicker">ALL REGIONS</span>
-          <strong>946 dots</strong>
-          <span>≈ 946 million estimated users</span>
-        </div>
       </section>
 
       <aside class="context-panel" aria-label="Geographic AI adoption analysis">
@@ -119,20 +116,11 @@
           </div>
           <p class="panel-intro">Circle area represents estimated users. Hover or tap a country signal for detail.</p>
           <div class="map-wrap">
-            <canvas
-              id="map-canvas"
-              width="650"
-              height="310"
-              role="img"
-              aria-label="World map showing estimated generative AI users by country"
-            ></canvas>
+            <canvas id="map-canvas" width="650" height="310" role="img" aria-label="World map showing estimated generative AI users by country"></canvas>
             <div id="map-tooltip" class="map-tooltip" hidden></div>
           </div>
           <div id="country-focus" class="country-focus" aria-live="polite">
-            <div>
-              <span class="focus-kicker">LEADING BY USER BASE</span>
-              <strong>India</strong>
-            </div>
+            <div><span class="focus-kicker">LEADING BY USER BASE</span><strong>India</strong></div>
             <div><strong>174M</strong><span>estimated users</span></div>
             <div><strong>17.6%</strong><span>adoption share</span></div>
             <div><strong>+3.4</strong><span>points since H1 ’25</span></div>
@@ -156,16 +144,6 @@
           </p>
         </section>
 
-        <section class="method-card" aria-labelledby="method-card-title">
-          <div class="method-index">01</div>
-          <div>
-            <h2 id="method-card-title">A measured estimate, not a headcount</h2>
-            <p>
-              Microsoft’s anonymized product telemetry is adjusted for device share,
-              internet access, and population. We multiply that rate by the 2024 population aged 15–64.
-            </p>
-          </div>
-        </section>
       </aside>
 
       <footer class="dashboard-footer">
@@ -206,5 +184,6 @@
     <div id="load-error" class="load-error" hidden>
       The dashboard data could not be loaded. Please refresh or try again later.
     </div>
+    <div class="cursor-aura" aria-hidden="true"></div>
   </body>
 </html>

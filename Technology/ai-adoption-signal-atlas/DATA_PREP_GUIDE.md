@@ -2,6 +2,8 @@
 
 The dashboard stores a processed snapshot in `data/adoption.json` and a local Natural Earth geometry file in `data/world-110m.geojson` so the published dashboard has no runtime API dependency.
 
+For direct `file://` previews, `data/adoption-inline.js` and `data/world-inline.js` mirror the processed snapshot and Natural Earth geometry because browsers commonly block local JSON fetches.
+
 ## Rebuild from public sources
 
 From the repository root:

@@ -1,10 +1,10 @@
 const REGION_COLORS = {
-  Americas: "#4CC9F0",
-  Europe: "#A78BFA",
-  Africa: "#FFB547",
-  Asia: "#FF5D8F",
-  Oceania: "#54E0B5",
-  Unallocated: "#93A4B8",
+  Americas: "#2C7BE5",
+  Europe: "#7C3AED",
+  Africa: "#F59E0B",
+  Asia: "#E11D48",
+  Oceania: "#0F9D8A",
+  Unallocated: "#64748B",
 };
 
 const state = {
@@ -15,6 +15,31 @@ const state = {
   rankingMetric: "users",
   dots: [],
   mapPoints: [],
+  globeFeatures: [],
+  signalPointer: { x: 0.5, y: 0.5, active: false },
+  lastMapPaint: 0,
+  lastSignalPaint: 0,
+};
+
+function regionColor(region) {
+  return REGION_COLORS[region] || REGION_COLORS.Unallocated;
+}
+
+// A lightweight silhouette keeps the file:// preview useful when browsers block local JSON fetches.
+const FILE_GEOJSON_FALLBACK = {
+  type: "FeatureCollection",
+  features: [
+    [[-168, 72], [-140, 70], [-112, 58], [-82, 50], [-60, 25], [-82, 8], [-112, 15], [-130, 35], [-168, 48]],
+    [[-82, 12], [-50, 10], [-36, -20], [-52, -55], [-74, -52], [-82, -20]],
+    [[-12, 36], [42, 36], [52, 8], [40, -35], [9, -35], [-18, 0]],
+    [[-12, 72], [42, 72], [58, 48], [26, 36], [-18, 42]],
+    [[42, 62], [148, 70], [172, 48], [132, 18], [92, 8], [62, 22]],
+    [[112, 2], [154, 0], [154, -42], [118, -38]],
+  ].map((coordinates) => ({
+    type: "Feature",
+    geometry: { type: "Polygon", coordinates: [[...coordinates, coordinates[0]]] },
+    properties: {},
+  })),
 };
 
 const prefersReducedMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
@@ -45,7 +70,7 @@ function hashString(value) {
 
 function sizeCanvas(canvas) {
   const rect = canvas.getBoundingClientRect();
-  const ratio = Math.min(window.devicePixelRatio || 1, 2);
+  const ratio = canvas.id === "signal-canvas" ? 1 : Math.min(window.devicePixelRatio || 1, 1.5);
   const width = Math.max(1, rect.width);
   const height = Math.max(1, rect.height);
   if (canvas.width !== Math.round(width * ratio) || canvas.height !== Math.round(height * ratio)) {
@@ -69,7 +94,10 @@ function buildDots() {
         a: random(),
         b: random(),
         c: random(),
-        size: 0.72 + random() * 1.3,
+        size: 2.6 + random() * 3.4,
+        color: regionColor(country.region),
+        lon: (country.lon * Math.PI / 180) + (random() - 0.5) * 0.16,
+        lat: (country.lat * Math.PI / 180) + (random() - 0.5) * 0.12,
       });
     }
   });
@@ -84,7 +112,10 @@ function buildDots() {
       a: random(),
       b: random(),
       c: random(),
-      size: 0.72 + random() * 1.2,
+      size: 2.6 + random() * 3.4,
+      color: regionColor("Unallocated"),
+      lon: (random() - 0.5) * Math.PI * 2,
+      lat: (random() - 0.5) * 1.9,
     });
   }
   state.dots = dots.sort((a, b) => a.b - b.b);
@@ -110,63 +141,107 @@ function traceGeometry(context, geometry, project) {
   });
 }
 
-function drawEarth(context, width, height, horizon) {
-  const radius = Math.max(width * 0.79, 420);
+function simplifyGeometry(geometry) {
+  const simplifyRing = (ring) => {
+    const step = Math.max(1, Math.ceil(ring.length / 70));
+    const reduced = ring.filter((_, index) => index % step === 0);
+    if (reduced.length > 2 && reduced[reduced.length - 1] !== ring[ring.length - 1]) reduced.push(ring[ring.length - 1]);
+    return reduced;
+  };
+  if (geometry.type === "Polygon") return { ...geometry, coordinates: geometry.coordinates.map(simplifyRing) };
+  return { ...geometry, coordinates: geometry.coordinates.map((polygon) => polygon.map(simplifyRing)) };
+}
+
+function traceGlobeGeometry(context, geometry, project) {
+  const polygons = geometry.type === "Polygon" ? [geometry.coordinates] : geometry.coordinates;
+  polygons.forEach((polygon) => polygon.forEach((ring) => {
+    let drawing = false;
+    let previous = null;
+    ring.forEach(([lon, lat]) => {
+      const point = project(lon, lat);
+      const closeToPrevious = previous && Math.hypot(point.x - previous.x, point.y - previous.y) < 120;
+      if (point.visible && (drawing ? closeToPrevious : true)) {
+        if (!drawing) context.moveTo(point.x, point.y);
+        else context.lineTo(point.x, point.y);
+        drawing = true;
+      } else {
+        drawing = false;
+      }
+      previous = point;
+    });
+  }));
+}
+
+function globePoint(lon, lat, rotation, centerX, centerY, radius) {
+  const longitude = lon + rotation;
+  const cosLat = Math.cos(lat);
+  const depth = cosLat * Math.cos(longitude);
+  return {
+    x: centerX + radius * cosLat * Math.sin(longitude),
+    y: centerY - radius * Math.sin(lat),
+    visible: depth > -0.05,
+    depth,
+  };
+}
+
+function drawEarth(context, width, height, centerY, now) {
+  const radius = Math.min(width * 0.33, height * 0.235, 178);
   const centerX = width / 2;
-  const centerY = horizon + radius * 0.86;
+  const rotation = now * 0.00032;
+
   context.save();
   context.beginPath();
   context.arc(centerX, centerY, radius, 0, Math.PI * 2);
   context.clip();
 
-  const ocean = context.createRadialGradient(
-    centerX,
-    horizon + radius * 0.04,
-    radius * 0.03,
-    centerX,
-    centerY,
-    radius,
-  );
-  ocean.addColorStop(0, "#174d72");
-  ocean.addColorStop(0.28, "#0b273f");
-  ocean.addColorStop(0.72, "#07121f");
-  ocean.addColorStop(1, "#02050a");
+  const ocean = context.createRadialGradient(centerX - radius * 0.28, centerY - radius * 0.34, radius * 0.05, centerX, centerY, radius * 1.05);
+  ocean.addColorStop(0, "#2f7edb");
+  ocean.addColorStop(0.38, "#173d72");
+  ocean.addColorStop(0.82, "#0c1c38");
+  ocean.addColorStop(1, "#071126");
   context.fillStyle = ocean;
-  context.fillRect(0, horizon - 20, width, height - horizon + 20);
+  context.fillRect(centerX - radius, centerY - radius, radius * 2, radius * 2);
 
-  const project = (lon, lat) => [
-    centerX + (lon / 180) * radius * 1.3,
-    horizon + radius * 0.19 - (lat / 90) * radius * 0.3,
-  ];
+  const project = (lon, lat) => globePoint(lon * Math.PI / 180, lat * Math.PI / 180, rotation, centerX, centerY, radius);
   context.beginPath();
-  state.geojson.features.forEach((feature) => traceGeometry(context, feature.geometry, project));
-  context.fillStyle = "rgba(75, 115, 137, 0.38)";
-  context.fill("evenodd");
-  context.strokeStyle = "rgba(162, 212, 230, 0.12)";
-  context.lineWidth = 0.45;
+  const globeFeatures = state.globeFeatures.length ? state.globeFeatures : FILE_GEOJSON_FALLBACK.features;
+  globeFeatures.forEach((feature) => traceGlobeGeometry(context, feature.geometry, project));
+  context.strokeStyle = "rgba(155, 239, 205, 0.55)";
+  context.lineWidth = 0.8;
   context.stroke();
 
-  context.strokeStyle = "rgba(93, 195, 232, 0.1)";
+  context.strokeStyle = "rgba(178, 229, 255, 0.22)";
   context.lineWidth = 0.7;
-  for (let index = 1; index < 5; index += 1) {
+  for (let index = -2; index <= 2; index += 1) {
     context.beginPath();
-    context.ellipse(centerX, horizon + index * 31, radius * (0.72 + index * 0.04), 18 + index * 4, 0, 0, Math.PI * 2);
+    context.ellipse(centerX, centerY, radius * (0.22 + Math.abs(index) * 0.18), radius, 0, 0, Math.PI * 2);
+    context.stroke();
+  }
+  for (let index = -2; index <= 2; index += 1) {
+    context.beginPath();
+    context.ellipse(centerX, centerY, radius, radius * (0.22 + (2 - Math.abs(index)) * 0.18), 0, 0, Math.PI * 2);
     context.stroke();
   }
   context.restore();
 
-  const rim = context.createLinearGradient(0, horizon - 12, 0, horizon + 24);
-  rim.addColorStop(0, "rgba(86, 212, 255, 0)");
-  rim.addColorStop(0.5, "rgba(86, 212, 255, 0.9)");
-  rim.addColorStop(1, "rgba(86, 212, 255, 0)");
-  context.strokeStyle = rim;
-  context.lineWidth = 3;
-  context.shadowColor = "#4CC9F0";
-  context.shadowBlur = 22;
+  const atmosphere = context.createRadialGradient(centerX, centerY, radius * 0.84, centerX, centerY, radius * 1.18);
+  atmosphere.addColorStop(0, "rgba(86, 212, 255, 0)");
+  atmosphere.addColorStop(0.78, "rgba(86, 212, 255, 0.06)");
+  atmosphere.addColorStop(0.96, "rgba(86, 212, 255, 0.7)");
+  atmosphere.addColorStop(1, "rgba(86, 212, 255, 0)");
+  context.fillStyle = atmosphere;
   context.beginPath();
-  context.arc(centerX, centerY, radius, Math.PI * 1.13, Math.PI * 1.87);
+  context.arc(centerX, centerY, radius * 1.18, 0, Math.PI * 2);
+  context.fill();
+  context.shadowColor = "#5ad5ff";
+  context.shadowBlur = 22;
+  context.strokeStyle = "rgba(114, 224, 255, 0.82)";
+  context.lineWidth = 2.2;
+  context.beginPath();
+  context.arc(centerX, centerY, radius * 1.02, Math.PI * 0.08, Math.PI * 0.92);
   context.stroke();
   context.shadowBlur = 0;
+  return { centerX, centerY, radius, rotation };
 }
 
 function dotOpacity(dot) {
@@ -175,7 +250,7 @@ function dotOpacity(dot) {
   return dot.region === "Unallocated" ? 0.55 : 0.84;
 }
 
-function renderSignal(progress = 1) {
+function renderSignal(progress = 1, now = performance.now()) {
   const canvas = document.querySelector("#signal-canvas");
   const { context, width, height } = sizeCanvas(canvas);
   context.clearRect(0, 0, width, height);
@@ -212,6 +287,23 @@ function renderSignal(progress = 1) {
     context.restore();
   });
 
+  const globe = drawEarth(context, width, height, height * 0.72, now);
+  const selected = state.selectedCountry && state.data.countries.find((country) => country.code === state.selectedCountry);
+  if (selected) {
+    const origin = globePoint(selected.lon * Math.PI / 180, selected.lat * Math.PI / 180, globe.rotation, globe.centerX, globe.centerY, globe.radius);
+    if (origin.visible) {
+      context.save();
+      context.globalAlpha = 0.85;
+      context.strokeStyle = regionColor(selected.region);
+      context.shadowColor = regionColor(selected.region);
+      context.shadowBlur = 18;
+      context.lineWidth = 1.5;
+      context.beginPath();
+      context.arc(origin.x, origin.y, 7 + Math.sin(now * 0.004) * 2, 0, Math.PI * 2);
+      context.stroke();
+      context.restore();
+    }
+  }
   const regionOffset = {
     Americas: -0.68,
     Europe: -0.25,
@@ -223,35 +315,58 @@ function renderSignal(progress = 1) {
   const visibleCount = Math.floor(state.dots.length * progress);
   for (let index = 0; index < visibleCount; index += 1) {
     const dot = state.dots[index];
-    const y = top + dot.b * range * 0.97;
-    const vertical = (horizon - y) / range;
-    const plumeWidth = 28 + vertical * Math.min(width * 0.37, 300);
-    const band = regionOffset[dot.region] * plumeWidth * 0.52;
-    const jitter = (dot.a - 0.5) * plumeWidth * 0.8;
-    const wave = Math.sin(dot.c * Math.PI * 2 + y * 0.018) * plumeWidth * 0.065;
-    const x = centerX + band + jitter + wave;
-    const alpha = dotOpacity(dot);
+    const flight = (now * 0.00011 + dot.b) % 1;
+    const source = globePoint(dot.lon, dot.lat, globe.rotation, globe.centerX, globe.centerY, globe.radius);
+    const y = source.y + (top - source.y) * flight;
+    const vertical = flight;
+    const plumeWidth = 24 + vertical * Math.min(width * 0.37, 300);
+    const band = regionOffset[dot.region] * plumeWidth * 0.52 * vertical;
+    const jitter = (dot.a - 0.5) * plumeWidth * 0.72 * vertical;
+    const wave = Math.sin(dot.c * Math.PI * 2 + y * 0.018 + now * 0.001) * plumeWidth * 0.065;
+    const drift = Math.sin(now * 0.0012 + dot.c * 8) * Math.min(10, plumeWidth * 0.025);
+    const pointerPull = state.signalPointer.active
+      ? (state.signalPointer.x - 0.5) * 24 * vertical
+      : 0;
+    const x = source.x * (1 - vertical) + (centerX + band + jitter + wave + drift + pointerPull) * vertical;
+    const alpha = dotOpacity(dot) * (source.visible ? 1 : 0.22);
     if (alpha < 0.06 && index % 2) continue;
 
+    if (index % 3 === 0) {
+      context.globalAlpha = alpha * 0.2;
+      context.strokeStyle = dot.color;
+      context.lineWidth = Math.max(0.5, dot.size * 0.28);
+      context.beginPath();
+      context.moveTo(x, y + 8 + dot.size);
+      context.lineTo(x - drift * 0.35, y + 28 + dot.size * 2);
+      context.stroke();
+    }
     context.globalAlpha = alpha;
-    context.fillStyle = REGION_COLORS[dot.region];
-    context.shadowColor = REGION_COLORS[dot.region];
-    context.shadowBlur = alpha > 0.5 ? dot.size * 4.5 : 0;
+    context.fillStyle = dot.color;
+    context.shadowColor = dot.color;
+    const pulse = 1 + Math.sin(now * 0.002 + dot.a * 16) * 0.18;
+    context.shadowBlur = alpha > 0.5 && index % 7 === 0 ? dot.size * 3.4 : 0;
     context.beginPath();
-    context.arc(x, y, dot.size, 0, Math.PI * 2);
+    context.arc(x, y, dot.size * pulse, 0, Math.PI * 2);
     context.fill();
+
+    if (state.signalPointer.active && Math.hypot(x - width * state.signalPointer.x, y - height * state.signalPointer.y) < 74) {
+      context.globalAlpha = 0.45;
+      context.strokeStyle = dot.color;
+      context.lineWidth = 0.8;
+      context.beginPath();
+      context.arc(x, y, dot.size * 2.7, 0, Math.PI * 2);
+      context.stroke();
+    }
   }
   context.globalAlpha = 1;
   context.shadowBlur = 0;
 
-  const originGlow = context.createRadialGradient(centerX, horizon, 0, centerX, horizon, 90);
+  const originGlow = context.createRadialGradient(globe.centerX, globe.centerY, 0, globe.centerX, globe.centerY, globe.radius * 1.8);
   originGlow.addColorStop(0, "rgba(230, 249, 255, 0.95)");
   originGlow.addColorStop(0.14, "rgba(76, 201, 240, 0.48)");
   originGlow.addColorStop(1, "rgba(76, 201, 240, 0)");
   context.fillStyle = originGlow;
-  context.fillRect(centerX - 100, horizon - 100, 200, 200);
-
-  drawEarth(context, width, height, horizon + 10);
+  context.fillRect(globe.centerX - globe.radius * 1.8, globe.centerY - globe.radius * 1.8, globe.radius * 3.6, globe.radius * 3.6);
 }
 
 function animateSignal() {
@@ -264,8 +379,15 @@ function animateSignal() {
   const frame = (now) => {
     const raw = Math.min(1, (now - start) / duration);
     const progress = 1 - Math.pow(1 - raw, 3);
-    renderSignal(progress);
-    if (raw < 1) requestAnimationFrame(frame);
+    if (raw < 1 || now - state.lastSignalPaint >= 33) {
+      renderSignal(progress, now);
+      state.lastSignalPaint = now;
+    }
+    if (now - state.lastMapPaint > 140) {
+      renderMap(now);
+      state.lastMapPaint = now;
+    }
+    if (raw < 1 || !prefersReducedMotion) requestAnimationFrame(frame);
   };
   requestAnimationFrame(frame);
 }
@@ -274,7 +396,7 @@ function mapProject(lon, lat, width, height) {
   return [((lon + 180) / 360) * width, ((90 - lat) / 180) * height];
 }
 
-function renderMap() {
+function renderMap(now = performance.now()) {
   const canvas = document.querySelector("#map-canvas");
   const { context, width, height } = sizeCanvas(canvas);
   context.clearRect(0, 0, width, height);
@@ -294,12 +416,21 @@ function renderMap() {
     const isSelected = country.code === state.selectedCountry;
     const isInFilter = state.filter === "All" || country.region === state.filter;
     context.globalAlpha = isSelected ? 1 : isInFilter ? 0.84 : 0.12;
-    context.fillStyle = REGION_COLORS[country.region];
-    context.shadowColor = REGION_COLORS[country.region];
-    context.shadowBlur = isSelected ? 15 : 5;
+    context.fillStyle = regionColor(country.region);
+    context.shadowColor = regionColor(country.region);
+    const pulse = 1 + Math.sin(now * 0.002 + country.lon) * 0.12;
+    context.shadowBlur = isSelected ? 18 : 7;
     context.beginPath();
-    context.arc(x, y, isSelected ? radius + 2 : radius, 0, Math.PI * 2);
+    context.arc(x, y, (isSelected ? radius + 2 : radius) * pulse, 0, Math.PI * 2);
     context.fill();
+    if (isSelected) {
+      context.globalAlpha = 0.42;
+      context.strokeStyle = regionColor(country.region);
+      context.lineWidth = 1;
+      context.beginPath();
+      context.arc(x, y, radius + 8 + Math.sin(now * 0.003) * 3, 0, Math.PI * 2);
+      context.stroke();
+    }
     if (isSelected) {
       context.strokeStyle = "#ffffff";
       context.lineWidth = 1.2;
@@ -342,7 +473,7 @@ function renderRegionFilter() {
     { name: "All", color: "#F7F4ED" },
     ...state.data.regions.map((region) => ({
       name: region.name,
-      color: region.color,
+      color: regionColor(region.name),
     })),
   ];
   container.innerHTML = regions.map((region) => {
@@ -364,6 +495,7 @@ function renderRegionFilter() {
 
 function updateSelectionReadout() {
   const readout = document.querySelector("#selection-readout");
+  if (!readout) return;
   if (state.selectedCountry) {
     const country = state.data.countries.find((item) => item.code === state.selectedCountry);
     readout.innerHTML = `<span class="selection-kicker">${country.name}</span><strong>${country.dots} ${country.dots === 1 ? "dot" : "dots"}</strong><span>≈ ${formatCompact(country.estimatedUsers, 1)} estimated users · ${country.rates.q1_2026}% adoption</span>`;
@@ -402,7 +534,7 @@ function renderRanking() {
     const label = metric === "users" ? formatCompact(value, 1) : `${value.toFixed(1)}%`;
     return `<div class="rank-row" tabindex="0" data-code="${country.code}" aria-label="${country.name}: ${label}">
       <span class="rank-label">${country.name}</span>
-      <span class="rank-track"><span class="rank-fill" style="--bar-width:${(value / max) * 100}%;--bar-color:${REGION_COLORS[country.region]}"></span></span>
+      <span class="rank-track"><span class="rank-fill" style="--bar-width:${(value / max) * 100}%;--bar-color:${regionColor(country.region)}"></span></span>
       <span class="rank-value">${label}</span>
     </div>`;
   }).join("");
@@ -455,10 +587,10 @@ function setupMapInteraction() {
       return;
     }
     const country = nearest.country;
-    tooltip.innerHTML = `<strong>${country.name}</strong><span>${formatCompact(country.estimatedUsers, 1)} estimated users · ${country.rates.q1_2026}% adoption</span>`;
+    tooltip.innerHTML = `<strong>${country.name}</strong>`;
     tooltip.hidden = false;
     tooltip.style.left = `${Math.min(x + 12, canvas.clientWidth - 180)}px`;
-    tooltip.style.top = `${Math.max(4, y - 44)}px`;
+    tooltip.style.top = `${Math.max(4, y - 26)}px`;
   });
   canvas.addEventListener("pointerleave", () => {
     tooltip.hidden = true;
@@ -467,6 +599,34 @@ function setupMapInteraction() {
     const { nearest } = locatePoint(event);
     if (nearest) selectCountry(nearest.country.code);
   });
+}
+
+function setupSignalInteraction() {
+  const canvas = document.querySelector("#signal-canvas");
+  const wrap = document.querySelector(".signal-canvas-wrap");
+  wrap.addEventListener("pointermove", (event) => {
+    const rect = canvas.getBoundingClientRect();
+    state.signalPointer = {
+      x: Math.max(0, Math.min(1, (event.clientX - rect.left) / rect.width)),
+      y: Math.max(0, Math.min(1, (event.clientY - rect.top) / rect.height)),
+      active: true,
+    };
+    wrap.style.setProperty("--lens-x", `${event.clientX - rect.left}px`);
+    wrap.style.setProperty("--lens-y", `${event.clientY - rect.top}px`);
+  });
+  wrap.addEventListener("pointerleave", () => {
+    state.signalPointer.active = false;
+  });
+}
+
+function setupCursorAura() {
+  const aura = document.querySelector(".cursor-aura");
+  if (!aura) return;
+  window.addEventListener("pointermove", (event) => {
+    aura.style.setProperty("--cursor-x", `${event.clientX}px`);
+    aura.style.setProperty("--cursor-y", `${event.clientY}px`);
+    aura.classList.add("is-visible");
+  }, { passive: true });
 }
 
 function setupControls() {
@@ -504,13 +664,26 @@ function debounce(callback, delay = 100) {
 
 async function init() {
   try {
-    const [dataResponse, mapResponse] = await Promise.all([
-      fetch("./data/adoption.json"),
-      fetch("./data/world-110m.geojson"),
-    ]);
-    if (!dataResponse.ok || !mapResponse.ok) throw new Error("Source files were not available");
-    state.data = await dataResponse.json();
-    state.geojson = await mapResponse.json();
+    const filePreview = window.location.protocol === "file:";
+    const dataPayload = window.__AI_ATLAS_DATA__
+      ? Promise.resolve(window.__AI_ATLAS_DATA__)
+      : fetch("./data/adoption.json").then((response) => {
+        if (!response.ok) throw new Error("Adoption data unavailable");
+        return response.json();
+      });
+    const mapPayload = window.__AI_ATLAS_GEOJSON__
+      ? Promise.resolve(window.__AI_ATLAS_GEOJSON__)
+      : filePreview
+        ? Promise.resolve(FILE_GEOJSON_FALLBACK)
+      : fetch("./data/world-110m.geojson").then((response) => {
+        if (!response.ok) throw new Error("Map geometry unavailable");
+        return response.json();
+      });
+    [state.data, state.geojson] = await Promise.all([dataPayload, mapPayload]);
+    state.globeFeatures = state.geojson.features.map((feature) => ({
+      ...feature,
+      geometry: simplifyGeometry(feature.geometry),
+    }));
     buildDots();
     document.querySelector("#world-users").textContent = formatCompact(state.data.world.estimatedUsers, 0);
     renderTrendChart();
@@ -519,6 +692,8 @@ async function init() {
     updateSelectionReadout();
     updateCountryFocus(state.data.countries[0], "LEADING BY USER BASE");
     setupControls();
+    setupSignalInteraction();
+    setupCursorAura();
     setupMapInteraction();
     renderMap();
     animateSignal();
