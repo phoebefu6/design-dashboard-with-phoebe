@@ -1,0 +1,103 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1440" height="1000" viewBox="0 0 1440 1000">
+  <defs>
+    <pattern id="grain" width="16" height="16" patternUnits="userSpaceOnUse">
+      <circle cx="2" cy="4" r="0.45" fill="#202522" opacity="0.06"/>
+      <circle cx="12" cy="11" r="0.4" fill="#202522" opacity="0.04"/>
+    </pattern>
+    <style>
+      .serif{font-family:Georgia,'Times New Roman',serif;fill:#202522}.sans{font-family:Arial,Helvetica,sans-serif;fill:#202522}.mono{font-family:'Courier New',monospace;fill:#202522}.muted{fill:#6e716b}.tiny{font-size:11px;letter-spacing:.08em}.small{font-size:13px}.label{font-size:12px;font-weight:700;letter-spacing:.12em}.rule{stroke:#202522;stroke-opacity:.18}.ink{stroke:#202522}.teal{stroke:#2d7773}.red{stroke:#b95d4b}.ochre{stroke:#c49b45}
+    </style>
+  </defs>
+  <rect width="1440" height="1000" fill="#f3f0e6"/>
+  <rect width="1440" height="1000" fill="url(#grain)"/>
+
+  <g transform="translate(64 54)">
+    <text class="mono tiny muted" x="0" y="0">TECHNOLOGY / DOCUMENTARY ATLAS / CONCEPT A</text>
+    <text class="mono tiny muted" x="1110" y="0">DATA THROUGH 2026 H1</text>
+    <line class="rule" x1="0" y1="18" x2="1312" y2="18"/>
+
+    <text class="serif" x="0" y="92" font-size="64">The Long Wave of AI</text>
+    <text class="sans muted" x="4" y="126" font-size="17">From research field to global industry, 1950–2026 H1</text>
+    <text class="sans" x="845" y="74" font-size="18">Today’s boom is not a beginning.</text>
+    <text class="sans muted" x="845" y="100" font-size="15">It is the latest crest in 75 years of</text>
+    <text class="sans muted" x="845" y="122" font-size="15">breakthrough, expectation and correction.</text>
+    <rect x="1139" y="62" width="173" height="47" rx="23.5" fill="#202522"/>
+    <text x="1172" y="91" font-size="13" font-family="Arial" fill="#f3f0e6">EXPLORE THE ARC →</text>
+
+    <g transform="translate(0 170)">
+      <rect width="414" height="90" rx="4" fill="#e8e4d7"/>
+      <text class="mono tiny muted" x="18" y="24">01 / COMPOUNDING</text>
+      <text class="serif" x="18" y="55" font-size="21">Breakthroughs accumulate.</text>
+      <text class="sans small muted" x="18" y="76">The foundations remain visible beneath each new era.</text>
+      <rect x="431" width="414" height="90" rx="4" fill="#e8e4d7"/>
+      <text class="mono tiny muted" x="449" y="24">02 / EXPECTATION GAP</text>
+      <text class="serif" x="449" y="55" font-size="21">Hype repeatedly outruns readiness.</text>
+      <text class="sans small muted" x="449" y="76">Winters are part of the system, not missing history.</text>
+      <rect x="862" width="450" height="90" rx="4" fill="#e8e4d7"/>
+      <text class="mono tiny muted" x="880" y="24">03 / ACCELERATION</text>
+      <text class="serif" x="880" y="55" font-size="21">The latest attention cycle moves faster.</text>
+      <text class="sans small muted" x="880" y="76">Search, news and surveys expose a sharper public pulse.</text>
+    </g>
+
+    <g transform="translate(0 303)">
+      <text class="mono label" x="0" y="0">PUBLIC ATTENTION — EVIDENCE CHANGES BY ERA</text>
+      <text class="mono tiny muted" x="986" y="0">SELECT A TURNING POINT FOR SOURCE DETAIL</text>
+      <line class="rule" x1="0" y1="18" x2="1312" y2="18"/>
+
+      <g transform="translate(0 36)">
+        <rect x="0" y="0" width="366" height="336" fill="#2d7773" opacity=".035"/>
+        <rect x="366" y="0" width="494" height="336" fill="#c49b45" opacity=".045"/>
+        <rect x="860" y="0" width="452" height="336" fill="#70658b" opacity=".045"/>
+        <text class="mono tiny muted" x="10" y="22">BOOK-LANGUAGE PROXY</text>
+        <text class="mono tiny muted" x="378" y="22">NEWS + BOOK EVIDENCE</text>
+        <text class="mono tiny muted" x="872" y="22">SEARCH + PAGEVIEWS + SURVEYS</text>
+        <line x1="366" y1="0" x2="366" y2="336" stroke="#202522" stroke-dasharray="4 5" opacity=".35"/>
+        <line x1="860" y1="0" x2="860" y2="336" stroke="#202522" stroke-dasharray="4 5" opacity=".35"/>
+
+        <line x1="0" y1="190" x2="1312" y2="190" stroke="#202522" opacity=".5"/>
+        <line x1="0" y1="111" x2="1312" y2="111" class="rule" stroke-dasharray="2 5"/>
+        <line x1="0" y1="269" x2="1312" y2="269" class="rule" stroke-dasharray="2 5"/>
+
+        <path d="M0 190 C48 177,58 146,90 152 C120 158,130 102,166 113 C194 122,207 168,244 176 C276 184,300 236,338 245 C370 253,392 207,425 198 C464 186,481 158,516 169 C554 181,575 218,610 226 C650 236,674 180,710 167 C748 153,776 129,810 143 C842 156,861 111,892 105 C922 99,943 51,980 71 C1012 88,1030 116,1058 109 C1088 102,1104 34,1142 48 C1180 62,1196 87,1222 70 C1250 52,1272 24,1312 31" fill="none" stroke="#2d7773" stroke-width="5"/>
+        <path d="M0 190 C48 177,58 146,90 152 C120 158,130 102,166 113 C194 122,207 168,244 176 C276 184,300 236,338 245 C370 253,392 207,425 198 C464 186,481 158,516 169 C554 181,575 218,610 226 C650 236,674 180,710 167 C748 153,776 129,810 143 C842 156,861 111,892 105 C922 99,943 51,980 71 C1012 88,1030 116,1058 109 C1088 102,1104 34,1142 48 C1180 62,1196 87,1222 70 C1250 52,1272 24,1312 31 L1312 190 L0 190 Z" fill="#2d7773" opacity=".08"/>
+        <path d="M0 190 C48 202,75 220,108 213 C150 204,172 196,210 203 C250 211,270 270,315 279 C353 287,383 210,425 201 C470 191,500 206,536 224 C575 244,603 284,646 291 C687 297,714 211,760 198 C802 185,830 201,870 199 C912 198,938 226,978 218 C1020 209,1043 247,1084 240 C1125 234,1156 205,1192 199 C1234 191,1273 213,1312 205" fill="none" stroke="#b95d4b" stroke-width="3" opacity=".9"/>
+
+        <g class="sans small">
+          <circle cx="92" cy="151" r="6" fill="#f3f0e6" stroke="#202522" stroke-width="2"/><text x="68" y="86">1956</text><text class="muted" x="68" y="103">Field named</text><line x1="92" y1="111" x2="92" y2="140" class="rule"/>
+          <circle cx="314" cy="279" r="6" fill="#b95d4b"/><text x="260" y="312">1974–80</text><text class="muted" x="260" y="329">First winter</text>
+          <circle cx="516" cy="169" r="6" fill="#f3f0e6" stroke="#202522" stroke-width="2"/><text x="470" y="111">Expert systems</text><line x1="516" y1="121" x2="516" y2="158" class="rule"/>
+          <circle cx="646" cy="291" r="6" fill="#b95d4b"/><text x="610" y="318">Second winter</text>
+          <circle cx="810" cy="143" r="6" fill="#f3f0e6" stroke="#202522" stroke-width="2"/><text x="778" y="88">ImageNet</text><line x1="810" y1="98" x2="810" y2="132" class="rule"/>
+          <circle cx="980" cy="71" r="7" fill="#c49b45"/><text x="944" y="44">AlphaGo</text>
+          <circle cx="1142" cy="48" r="8" fill="#70658b"/><text x="1095" y="25">ChatGPT</text>
+          <circle cx="1312" cy="31" r="8" fill="#f3f0e6" stroke="#202522" stroke-width="2"/><text class="mono tiny" x="1230" y="12">2026 H1</text>
+        </g>
+
+        <g class="mono tiny muted" transform="translate(0 357)">
+          <text x="0" y="0">1950</text><text x="176" y="0">1965</text><text x="350" y="0">1980</text><text x="526" y="0">1990</text><text x="702" y="0">2000</text><text x="878" y="0">2010</text><text x="1054" y="0">2020</text><text x="1250" y="0">2026 H1</text>
+        </g>
+      </g>
+    </g>
+
+    <g transform="translate(0 724)">
+      <text class="mono label" x="0" y="0">CHAPTERS</text>
+      <line class="rule" x1="0" y1="18" x2="1312" y2="18"/>
+      <g transform="translate(0 42)">
+        <rect width="204" height="116" rx="4" fill="#202522"/><text x="16" y="24" font-family="Courier New" font-size="11" fill="#f3f0e6">01 / 1950–1969</text><text x="16" y="57" font-family="Georgia" font-size="20" fill="#f3f0e6">The promise</text><text x="16" y="81" font-family="Arial" font-size="12" fill="#d9d5c9">A field declares itself.</text><text x="16" y="102" font-family="Arial" font-size="11" fill="#d9d5c9">OPEN CHAPTER →</text>
+        <rect x="220" width="204" height="116" rx="4" fill="#e5e1d5"/><text class="mono tiny" x="236" y="24">02 / 1970–1982</text><text class="serif" x="236" y="57" font-size="20">Limits surface</text><text class="sans small muted" x="236" y="81">Expectation meets reality.</text>
+        <rect x="440" width="204" height="116" rx="4" fill="#e5e1d5"/><text class="mono tiny" x="456" y="24">03 / 1983–1996</text><text class="serif" x="456" y="57" font-size="20">Boom, then winter</text><text class="sans small muted" x="456" y="81">Commercial systems stall.</text>
+        <rect x="660" width="204" height="116" rx="4" fill="#e5e1d5"/><text class="mono tiny" x="676" y="24">04 / 1997–2011</text><text class="serif" x="676" y="57" font-size="20">Quiet accumulation</text><text class="sans small muted" x="676" y="81">Data, compute, methods.</text>
+        <rect x="880" width="204" height="116" rx="4" fill="#e5e1d5"/><text class="mono tiny" x="896" y="24">05 / 2012–2021</text><text class="serif" x="896" y="57" font-size="20">Deep learning</text><text class="sans small muted" x="896" y="81">Capability becomes visible.</text>
+        <rect x="1100" width="212" height="116" rx="4" fill="#e5e1d5"/><text class="mono tiny" x="1116" y="24">06 / 2022–2026 H1</text><text class="serif" x="1116" y="57" font-size="20">Public encounter</text><text class="sans small muted" x="1116" y="81">Adoption, anxiety, policy.</text>
+      </g>
+    </g>
+
+    <g transform="translate(0 916)">
+      <circle cx="5" cy="0" r="5" fill="#2d7773"/><text class="mono tiny muted" x="18" y="4">DIRECT MEASURE</text>
+      <rect x="158" y="-5" width="10" height="10" fill="#c49b45"/><text class="mono tiny muted" x="180" y="4">PROXY</text>
+      <path d="M272 -6 L278 5 L266 5 Z" fill="#70658b"/><text class="mono tiny muted" x="290" y="4">ESTIMATE</text>
+      <circle cx="400" cy="0" r="5" fill="none" stroke="#202522" stroke-width="1.5"/><text class="mono tiny muted" x="414" y="4">EDITORIAL CLASSIFICATION</text>
+      <text class="mono tiny muted" x="1055" y="4">METHOD / SOURCES / DOWNLOAD</text>
+    </g>
+  </g>
+</svg>

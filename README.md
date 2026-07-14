@@ -30,6 +30,7 @@ If you are into data visualization too, come explore the work. Maybe we build so
 | 006 | Education | [Resume Atelier AI Review Studio](./Education/resume-review-design-studio/) | AI-assisted review, rewrite suggestions, resume structure, PDF-ready presentation | [View live dashboard](https://phoebefu6.github.io/design-dashboard-with-phoebe/Education/resume-review-design-studio/) |
 | 007 | Healthcare | [Care Access Signal Grid](./Healthcare/care-access-signal-grid/) | Provider access operations, disparity risk, radar charts, data-prep guidance | [View live dashboard](https://phoebefu6.github.io/design-dashboard-with-phoebe/Healthcare/care-access-signal-grid/) |
 | 008 | Technology | [AI Adoption Signal Atlas](./Technology/ai-adoption-signal-atlas/) | Global generative AI diffusion, million-user dot field, regional signals, country rankings | [View live dashboard](https://phoebefu6.github.io/design-dashboard-with-phoebe/Technology/ai-adoption-signal-atlas/) |
+| 009 | Technology | [AI Evolution Garden](./Technology/ai-industry-evolution-atlas/) | AI history, boom–winter cycles, radial attention blooms, sourced turning points | [View live dashboard](https://phoebefu6.github.io/design-dashboard-with-phoebe/Technology/ai-industry-evolution-atlas/) |
 
 ## Notes
 

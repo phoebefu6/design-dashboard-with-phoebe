@@ -1,0 +1,46 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1440" height="1000" viewBox="0 0 1440 1000">
+  <defs>
+    <pattern id="dots" width="20" height="20" patternUnits="userSpaceOnUse"><circle cx="2" cy="2" r=".5" fill="#202522" opacity=".05"/></pattern>
+    <style>.serif{font-family:Georgia,serif;fill:#202522}.sans{font-family:Arial,sans-serif;fill:#202522}.mono{font-family:'Courier New',monospace;fill:#202522}.muted{fill:#74766f}.tiny{font-size:11px;letter-spacing:.08em}.small{font-size:13px}.rule{stroke:#202522;stroke-opacity:.18}</style>
+  </defs>
+  <rect width="1440" height="1000" fill="#f3f0e6"/><rect width="1440" height="1000" fill="url(#dots)"/>
+  <g transform="translate(64 48)">
+    <text class="mono tiny muted">TECHNOLOGY / DOCUMENTARY ATLAS / CONCEPT C</text><text class="mono tiny muted" x="1100">A BRAIDED HISTORY</text><line class="rule" x1="0" y1="18" x2="1312" y2="18"/>
+    <text class="serif" x="0" y="88" font-size="62">The Long Wave of AI</text><text class="sans muted" x="4" y="120" font-size="17">Follow the currents that carried AI from research field to global industry.</text>
+    <rect x="1115" y="57" width="197" height="48" rx="24" fill="#202522"/><text x="1149" y="86" font-family="Arial" font-size="12" fill="#f3f0e6">FOLLOW THE CURRENT →</text>
+
+    <g transform="translate(0 159)">
+      <rect width="1312" height="690" rx="6" fill="#e9e5da"/>
+      <path d="M58 601 C160 578,194 524,274 510 C360 495,404 523,479 452 C556 379,584 398,660 331 C735 264,774 288,852 222 C933 154,980 188,1055 116 C1124 50,1203 63,1261 40" fill="none" stroke="#2d7773" stroke-width="18" opacity=".9"/>
+      <path d="M58 630 C148 610,190 565,268 568 C350 572,390 492,470 482 C544 473,575 440,650 420 C729 399,772 313,845 301 C925 288,971 231,1050 205 C1120 181,1194 107,1261 91" fill="none" stroke="#c49b45" stroke-width="9" opacity=".82"/>
+      <path d="M58 655 C145 650,197 624,270 614 C353 603,395 574,475 559 C550 545,588 485,658 469 C735 452,779 435,850 398 C928 357,971 351,1054 296 C1128 246,1199 220,1261 174" fill="none" stroke="#70658b" stroke-width="6" opacity=".8"/>
+      <path d="M58 575 C154 552,191 548,270 548 C352 548,404 580,478 552 C558 522,592 523,660 526 C738 529,779 493,850 486 C929 477,979 439,1055 430 C1131 421,1198 372,1261 342" fill="none" stroke="#b95d4b" stroke-width="5" stroke-dasharray="10 8" opacity=".85"/>
+
+      <g fill="#f3f0e6" stroke="#202522" stroke-width="2">
+        <circle cx="115" cy="579" r="11"/><circle cx="274" cy="510" r="13"/><circle cx="479" cy="452" r="14"/><circle cx="660" cy="331" r="15"/><circle cx="852" cy="222" r="16"/><circle cx="1055" cy="116" r="18"/><circle cx="1215" cy="57" r="20"/>
+      </g>
+      <g class="mono tiny">
+        <text x="90" y="550">1956</text><text x="241" y="478">1974</text><text x="442" y="418">1987</text><text x="619" y="295">1997</text><text x="809" y="183">2012</text><text x="1004" y="72">2017</text><text x="1162" y="21">2022–26</text>
+      </g>
+      <g class="sans small muted">
+        <text x="84" y="617">The field</text><text x="235" y="545">First winter</text><text x="434" y="487">Second winter</text><text x="616" y="365">Deep Blue</text><text x="808" y="258">Deep learning</text><text x="1018" y="153">Transformers</text><text x="1158" y="96">Public encounter</text>
+      </g>
+
+      <g transform="translate(38 35)">
+        <rect width="225" height="136" rx="4" fill="#f3f0e6" opacity=".96"/><text class="mono tiny muted" x="16" y="24">HOW TO READ THE CURRENT</text>
+        <line x1="16" y1="50" x2="56" y2="50" stroke="#2d7773" stroke-width="8"/><text class="sans small" x="70" y="54">Public attention</text>
+        <line x1="16" y1="76" x2="56" y2="76" stroke="#c49b45" stroke-width="6"/><text class="sans small" x="70" y="80">Research + capability</text>
+        <line x1="16" y1="102" x2="56" y2="102" stroke="#70658b" stroke-width="5"/><text class="sans small" x="70" y="106">Industry + capital</text>
+        <line x1="16" y1="126" x2="56" y2="126" stroke="#b95d4b" stroke-width="4" stroke-dasharray="7 5"/><text class="sans small" x="70" y="130">Backlash + governance</text>
+      </g>
+
+      <g transform="translate(1006 475)">
+        <rect width="268" height="177" rx="4" fill="#202522"/><text x="18" y="26" font-family="Courier New" font-size="11" fill="#c9c5ba">SELECTED CONFLUENCE / 2022</text><text x="18" y="59" font-family="Georgia" font-size="22" fill="#f3f0e6">The public encounter</text><text x="18" y="86" font-family="Arial" font-size="12" fill="#c9c5ba">Generative systems become a mass</text><text x="18" y="104" font-family="Arial" font-size="12" fill="#c9c5ba">consumer experience. Adoption and</text><text x="18" y="122" font-family="Arial" font-size="12" fill="#c9c5ba">anxiety rise together.</text><text x="18" y="151" font-family="Courier New" font-size="10" fill="#f3f0e6">3 DIRECT · 2 PROXY · 8 SOURCES</text><text x="18" y="169" font-family="Courier New" font-size="10" fill="#f3f0e6">OPEN EVIDENCE SHEET →</text>
+      </g>
+
+      <g transform="translate(38 637)"><text class="mono tiny muted" x="0">1950</text><line class="rule" x1="52" y1="-4" x2="1120" y2="-4"/><circle cx="1120" cy="-4" r="5" fill="#202522"/><text class="mono tiny muted" x="1140">2026 H1</text></g>
+    </g>
+
+    <g transform="translate(0 882)"><text class="mono tiny muted">OVERVIEW</text><rect x="86" y="-13" width="840" height="18" rx="9" fill="#d8d4c8"/><rect x="590" y="-13" width="170" height="18" rx="9" fill="#202522"/><text class="mono tiny muted" x="950">JUMP TO ERA</text><text class="mono tiny" x="1050">1950s  1980s  2010s  2026</text><text class="mono tiny muted" x="0" y="43">WIDTH IS CATEGORICAL IN THIS CONCEPT — FINAL ENCODING REQUIRES SOURCE VALIDATION</text><text class="mono tiny muted" x="1042" y="43">METHOD · SOURCES · DOWNLOAD</text></g>
+  </g>
+</svg>

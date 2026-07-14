@@ -1,0 +1,142 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="theme-color" content="#f1edda">
+  <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='32' fill='%23f1edda'/%3E%3Cpath d='M32 7 38 23 54 17 45 32 58 42 40 41 37 58 29 43 14 53 20 36 5 29 23 27Z' fill='%23c49436'/%3E%3Ccircle cx='32' cy='32' r='8' fill='%23f1edda'/%3E%3C/svg%3E">
+  <meta name="description" content="A source-backed flower map tracing the booms, winters, breakthroughs, harms, and governance responses that shaped artificial intelligence from 1950 through 2026 H1.">
+  <title>The AI Evolution Garden</title>
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+  <a class="skip-link" href="#atlas">Skip to the evolution atlas</a>
+  <header class="masthead">
+    <div class="eyebrow-row">
+      <a class="portfolio-link" href="../../">Technology / Interactive documentary</a>
+      <span>1950–2026 H1</span>
+    </div>
+    <div class="title-row">
+      <div>
+        <h1><span class="desktop-title">The Evolution Garden of AI</span><span class="mobile-title">The long roots of AI</span></h1>
+        <p>How ideas, expectations, and public attention branched from a research field into a global industry.</p>
+      </div>
+      <a class="primary-action" href="#chapters">Follow the lineage <span aria-hidden="true">→</span></a>
+    </div>
+  </header>
+
+  <main>
+    <section class="atlas-shell" id="atlas" aria-labelledby="atlas-title">
+      <h2 class="sr-only" id="atlas-title">Interactive AI evolution atlas</h2>
+      <p class="mobile-thesis">Today’s boom grew from older roots. <span aria-hidden="true">↓</span></p>
+
+      <aside class="reading-key" aria-label="How to read the evolution garden">
+        <p class="kicker">The long view</p>
+        <h2>Today’s boom grew from older roots.</h2>
+        <p>Each bloom is an era. Together they show how attention rose, fractured, faded, and returned.</p>
+        <div class="key-rule"></div>
+        <h3>How to read a bloom</h3>
+        <svg class="key-bloom" viewBox="0 0 240 145" role="img" aria-label="A sample bloom showing attention petals and event spokes">
+          <g transform="translate(64 68)">
+            <circle r="39" fill="none" stroke="currentColor" opacity=".18"/>
+            <path d="M0,-42 L10,-24 L30,-31 L27,-10 L45,0 L27,11 L31,31 L10,25 L0,43 L-10,25 L-31,31 L-27,10 L-45,0 L-27,-11 L-31,-31 L-10,-24Z" fill="#3b817b" opacity=".72"/>
+            <circle r="11" fill="#f1edda" stroke="currentColor" opacity=".95"/>
+            <path d="M0,-11V-54M11,0H60M-8,8L-40,40" fill="none" stroke="currentColor"/>
+            <circle cy="-54" r="3" fill="currentColor"/><circle cx="60" r="4" fill="none" stroke="currentColor" stroke-width="2"/><circle cx="-40" cy="40" r="4" fill="none" stroke="currentColor" stroke-width="2"/>
+          </g>
+          <path d="M70 19L136 6M122 67H210M35 111L134 132" stroke="currentColor" opacity=".25"/>
+          <text x="143" y="10">turning point</text><text x="132" y="71">attention petal</text><text x="141" y="137">setback / response</text>
+        </svg>
+        <dl class="encoding-list">
+          <div><dt>Angle</dt><dd>time within an era</dd></div>
+          <div><dt>Radius</dt><dd>attention within that era</dd></div>
+          <div><dt>Spoke</dt><dd>sourced historical event</dd></div>
+          <div><dt>Halo</dt><dd>supporting events</dd></div>
+        </dl>
+        <div class="key-rule"></div>
+        <h3>Evidence status</h3>
+        <ul class="status-key">
+          <li><span class="status-symbol direct"></span> Direct measure</li>
+          <li><span class="status-symbol proxy"></span> Attention proxy</li>
+          <li><span class="status-symbol editorial"></span> Editorial classification</li>
+        </ul>
+        <p class="key-caveat">Petals are normalized within each bloom. Their size cannot be compared across eras or source methods.</p>
+      </aside>
+
+      <div class="garden-stage">
+        <svg id="garden" class="garden" viewBox="0 0 1040 710" role="img" aria-labelledby="garden-svg-title garden-svg-desc"></svg>
+        <div id="bloom-inspector" class="bloom-inspector" aria-live="polite">
+          <div class="inspector-heading">
+            <p class="kicker" id="inspector-kicker"></p>
+            <h2 id="inspector-title"></h2>
+            <p id="inspector-thesis"></p>
+          </div>
+          <svg id="selected-bloom" viewBox="0 0 420 420" role="img" aria-labelledby="selected-svg-title selected-svg-desc"></svg>
+          <div class="inspector-counts" id="inspector-counts"></div>
+          <article class="event-detail" id="event-detail">
+            <p class="event-type" id="event-type"></p>
+            <h3 id="event-title"></h3>
+            <p id="event-summary"></p>
+            <a id="event-source" target="_blank" rel="noreferrer">Open source <span aria-hidden="true">↗</span></a>
+          </article>
+        </div>
+      </div>
+
+      <nav class="era-navigation" aria-label="Select an era">
+        <button class="round-button" id="previous-era" type="button" aria-label="Previous era"><span aria-hidden="true">‹</span></button>
+        <div class="era-stepper" id="era-stepper"></div>
+        <a class="evidence-action" id="evidence-action" href="#chapters">Open this era’s evidence</a>
+        <button class="round-button" id="next-era" type="button" aria-label="Next era"><span aria-hidden="true">›</span></button>
+      </nav>
+    </section>
+
+    <section class="documentary" id="chapters" aria-labelledby="chapters-title">
+      <div class="documentary-intro">
+        <p class="kicker">Follow the lineage</p>
+        <h2 id="chapters-title">Seven cycles, one unfinished history.</h2>
+        <p>The garden is a map, not a scorecard. Read each chapter for the measurement behind its petals and the evidence behind its spokes.</p>
+      </div>
+      <div id="chapter-list" class="chapter-list"></div>
+    </section>
+
+    <section class="methodology" id="method" aria-labelledby="method-title">
+      <div>
+        <p class="kicker">Method / sources / limits</p>
+        <h2 id="method-title">What the flowers can—and cannot—say</h2>
+      </div>
+      <div class="method-grid">
+        <article>
+          <h3>Two attention lenses</h3>
+          <p>Historical blooms use the frequency of “artificial intelligence” in English-language books. From 2017 onward, blooms use user pageviews for the English Wikipedia article. A visible seam marks this method change.</p>
+        </article>
+        <article>
+          <h3>Local normalization</h3>
+          <p>Every bloom rescales its own observations from minimum to maximum. Radius reveals the contour within an era only; it never claims that one era had more absolute interest than another.</p>
+        </article>
+        <article>
+          <h3>Selected history</h3>
+          <p>Spokes are an editorial selection of documented turning points, not a complete history. Filled endpoints mark breakthroughs or adoption; hollow endpoints mark setbacks, harms, backlash, or governance.</p>
+        </article>
+        <article>
+          <h3>Partial latest year</h3>
+          <p>2026 includes January through June only. The final pageview observation is therefore labeled 2026 H1 and should not be compared with a full calendar year.</p>
+        </article>
+      </div>
+      <details open>
+        <summary>Sources and data downloads</summary>
+        <div id="source-list" class="source-list"></div>
+      </details>
+      <details>
+        <summary>Long description of the visualization</summary>
+        <div id="long-description" class="long-description"></div>
+      </details>
+    </section>
+  </main>
+
+  <footer>
+    <p>The AI Evolution Garden · Global scope · Data cutoff 2026 H1</p>
+    <a href="#atlas">Return to the garden ↑</a>
+  </footer>
+  <script src="app.js" defer></script>
+</body>
+</html>

@@ -1,0 +1,78 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="390" height="844" viewBox="0 0 390 844">
+  <defs>
+    <pattern id="grain" width="14" height="14" patternUnits="userSpaceOnUse"><circle cx="3" cy="5" r=".4" fill="#262823" opacity=".05"/><circle cx="11" cy="12" r=".3" fill="#262823" opacity=".04"/></pattern>
+    <filter id="shadow" x="-30%" y="-30%" width="160%" height="160%"><feDropShadow dx="0" dy="8" stdDeviation="9" flood-color="#262823" flood-opacity=".14"/></filter>
+    <style>.serif{font-family:Georgia,serif;fill:#262823}.sans{font-family:Arial,sans-serif;fill:#262823}.mono{font-family:'Courier New',monospace;fill:#262823}.muted{fill:#747269}.tiny{font-size:9px;letter-spacing:.08em}.small{font-size:12px}.rule{stroke:#262823;stroke-opacity:.17}</style>
+    <g id="bloom">
+      <circle r="92" fill="none" stroke="#262823" stroke-opacity=".11"/>
+      <circle r="69" fill="none" stroke="#262823" stroke-opacity=".14"/>
+      <circle r="46" fill="none" stroke="#262823" stroke-opacity=".18"/>
+      <path d="M0,-76 L14,-57 L32,-66 L43,-43 L68,-43 L60,-17 L80,0 L59,19 L68,42 L42,42 L34,68 L13,57 L0,80 L-15,57 L-37,68 L-44,42 L-70,39 L-59,14 L-81,0 L-61,-18 L-70,-44 L-43,-43 L-34,-67 L-13,-57 Z" fill="currentColor" opacity=".75"/>
+      <circle r="26" fill="#f5f1df" stroke="#262823" stroke-opacity=".2"/>
+      <g stroke="#262823" stroke-width="1.4" fill="none">
+        <line y1="-26" y2="-112"/><line x1="18" y1="-18" x2="72" y2="-76"/><line x1="26" x2="116"/><line x1="18" y1="18" x2="68" y2="72"/><line y1="26" y2="106"/><line x1="-18" y1="18" x2="-61" y2="65"/><line x1="-26" x2="-100"/><line x1="-18" y1="-18" x2="-60" y2="-64"/>
+      </g>
+      <g fill="#262823"><circle cy="-112" r="3"/><circle cx="72" cy="-76" r="3"/><circle cx="116" r="3.5"/><circle cx="68" cy="72" r="3"/><circle cy="106" r="3"/></g>
+      <g fill="#f5f1df" stroke="#262823" stroke-width="1.5"><circle cx="-61" cy="65" r="4"/><circle cx="-100" r="4"/><circle cx="-60" cy="-64" r="4"/></g>
+      <g fill="#262823" opacity=".65"><circle cx="25" cy="-91" r="1.8"/><circle cx="33" cy="-96" r="1.8"/><circle cx="42" cy="-98" r="1.8"/><circle cx="97" cy="26" r="1.8"/><circle cx="105" cy="31" r="1.8"/><circle cx="111" cy="38" r="1.8"/></g>
+    </g>
+  </defs>
+  <rect width="390" height="844" fill="#f1edda"/><rect width="390" height="844" fill="url(#grain)"/>
+
+  <g transform="translate(20 20)">
+    <text class="mono tiny muted">AI EVOLUTION GARDEN / MOBILE</text><text class="mono tiny muted" x="282">2026 H1</text>
+    <line class="rule" x1="0" y1="17" x2="350" y2="17"/>
+    <text class="serif" x="0" y="65" font-size="34">The long roots of AI</text>
+    <text class="sans muted" x="0" y="89" font-size="13">One bloom at a time, from research field to industry.</text>
+
+    <g transform="translate(0 112)">
+      <rect width="350" height="44" rx="22" fill="#262823"/>
+      <text x="18" y="27" font-family="Arial" font-size="11" fill="#f1edda">TODAY’S BOOM GREW FROM OLDER ROOTS.</text>
+      <text x="318" y="28" font-family="Arial" font-size="14" fill="#f1edda">↓</text>
+    </g>
+
+    <g transform="translate(0 176)">
+      <rect width="350" height="421" rx="5" fill="#e8e3d0" opacity=".78"/>
+      <text class="mono tiny muted" x="16" y="24">06 / 2022—2026 H1 · SELECTED BLOOM</text>
+      <text class="serif" x="16" y="55" font-size="24">The public encounter</text>
+      <text class="sans muted" x="16" y="76" font-size="12">Adoption and anxiety rise together.</text>
+
+      <!-- partial neighboring lineage -->
+      <path d="M175 92 C152 128,145 159,158 196 C169 229,190 253,175 291 C163 320,160 347,175 385" fill="none" stroke="#716486" stroke-width="4" stroke-linecap="round"/>
+      <circle cx="158" cy="100" r="13" fill="#c49436" opacity=".72"/><text class="mono tiny muted" x="184" y="104">2017 / TRANSFORMERS</text>
+      <circle cx="175" cy="387" r="12" fill="#77785f" opacity=".72"/><text class="mono tiny muted" x="198" y="391">NEXT / GOVERNANCE</text>
+
+      <g transform="translate(175 224)" style="color:#716486"><use href="#bloom"/></g>
+      <text class="sans small" x="244" y="151">ChatGPT</text><line class="rule" x1="224" y1="163" x2="255" y2="151"/>
+      <text class="sans small" x="257" y="226">adoption</text><line class="rule" x1="233" y1="224" x2="252" y2="224"/>
+      <text class="sans small" x="234" y="311">regulation</text><line class="rule" x1="220" y1="286" x2="245" y2="301"/>
+      <text class="sans small" x="34" y="300">copyright</text><line class="rule" x1="91" y1="286" x2="55" y2="295"/>
+      <text class="sans small" x="31" y="171">job anxiety</text><line class="rule" x1="102" y1="180" x2="69" y2="169"/>
+
+      <g transform="translate(16 354)">
+        <circle cx="5" cy="5" r="5" fill="#3b817b"/><text class="mono tiny muted" x="18" y="8">3 DIRECT</text>
+        <rect x="91" y="0" width="10" height="10" fill="#c49436"/><text class="mono tiny muted" x="111" y="8">2 PROXY</text>
+        <circle cx="192" cy="5" r="5" fill="none" stroke="#262823"/><text class="mono tiny muted" x="206" y="8">8 SOURCES</text>
+      </g>
+      <rect x="16" y="380" width="318" height="29" rx="14.5" fill="none" stroke="#262823" stroke-opacity=".35"/>
+      <text class="mono tiny" x="91" y="399">TAP A SPOKE FOR SOURCE + CONTEXT</text>
+    </g>
+
+    <g transform="translate(0 616)">
+      <text class="mono tiny muted">FOLLOW THE LINEAGE</text>
+      <g transform="translate(0 22)">
+        <circle cx="7" cy="7" r="7" fill="#3b817b" opacity=".45"/><circle cx="47" cy="7" r="7" fill="#c49436" opacity=".45"/><circle cx="87" cy="7" r="7" fill="#b06855" opacity=".45"/><circle cx="127" cy="7" r="7" fill="#41817d" opacity=".45"/><circle cx="167" cy="7" r="7" fill="#3b817b" opacity=".45"/><circle cx="207" cy="7" r="9" fill="#716486"/><circle cx="247" cy="7" r="7" fill="#77785f" opacity=".45"/>
+        <line class="rule" x1="7" y1="7" x2="247" y2="7"/>
+      </g>
+      <text class="mono tiny muted" x="0" y="60">1956</text><text class="mono tiny muted" x="187" y="60">2022</text><text class="mono tiny muted" x="241" y="60">NEXT</text>
+
+      <g transform="translate(0 82)">
+        <rect width="48" height="48" rx="24" fill="none" stroke="#262823"/><path d="M29 16 l-8 8 8 8" fill="none" stroke="#262823" stroke-width="1.7"/>
+        <rect x="62" width="226" height="48" rx="24" fill="#262823"/><text x="115" y="29" font-family="Arial" font-size="12" fill="#f1edda">OPEN THIS ERA’S EVIDENCE</text>
+        <rect x="302" width="48" height="48" rx="24" fill="none" stroke="#262823"/><path d="M321 16 l8 8-8 8" fill="none" stroke="#262823" stroke-width="1.7"/>
+      </g>
+    </g>
+
+    <g transform="translate(0 780)"><line class="rule" x1="0" y1="0" x2="350" y2="0"/><text class="mono tiny muted" y="24">METHOD</text><text class="mono tiny muted" x="90" y="24">SOURCES</text><text class="mono tiny muted" x="188" y="24">LONG DESCRIPTION</text><text class="mono tiny muted" x="306" y="24">↑</text></g>
+  </g>
+</svg>

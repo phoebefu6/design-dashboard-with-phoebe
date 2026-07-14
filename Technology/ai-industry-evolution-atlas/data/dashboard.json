@@ -1,0 +1,981 @@
+{
+  "meta": {
+    "title": "The AI Evolution Garden",
+    "cutoff": "2026 H1",
+    "built": "2026-07-14",
+    "claim": "AI did not rise in a straight line. Each bloom records a cycle of attention, breakthrough, disappointment, adoption, and response.",
+    "normalization": "Petal radius is min–max normalized within each era only. Compare shape within a bloom; do not compare petal size across blooms."
+  },
+  "opinion": [
+    {
+      "year": 2024,
+      "metric": "more benefits than drawbacks",
+      "value": 55,
+      "unit": "%",
+      "source": "opinion"
+    },
+    {
+      "year": 2025,
+      "metric": "more benefits than drawbacks",
+      "value": 59,
+      "unit": "%",
+      "source": "opinion"
+    },
+    {
+      "year": 2025,
+      "metric": "AI products make me nervous",
+      "value": 52,
+      "unit": "%",
+      "source": "opinion"
+    }
+  ],
+  "sources": [
+    {
+      "id": "ngram",
+      "name": "Google Books Ngram Viewer",
+      "url": "https://books.google.com/ngrams/info",
+      "dataUrl": "https://books.google.com/ngrams/json?content=artificial%20intelligence&year_start=1950&year_end=2019&corpus=en-2019&smoothing=0&case_insensitive=true",
+      "status": "proxy",
+      "coverage": "English-language books, 1950–2019",
+      "method": "Case-insensitive annual frequency for ‘artificial intelligence’; values are averaged into display bins.",
+      "meaning": "Published-language attention proxy, not public sentiment or adoption."
+    },
+    {
+      "id": "pageviews",
+      "name": "Wikimedia Analytics API",
+      "url": "https://doc.wikimedia.org/generated-data-platform/aqs/analytics-api/",
+      "dataUrl": "https://wikimedia.org/api/rest_v1/metrics/pageviews/per-article/en.wikipedia.org/all-access/user/Artificial_intelligence/monthly/2015070100/2026063000",
+      "status": "direct",
+      "coverage": "English Wikipedia, user pageviews, July 2015–June 2026",
+      "method": "Monthly all-access user views of the Artificial intelligence article; summed by year or half-year.",
+      "meaning": "Direct page-request count and a knowledge-seeking proxy; it is not population reach."
+    },
+    {
+      "id": "aiwatch",
+      "name": "European Commission Joint Research Centre — AI Watch",
+      "url": "https://ai-watch.ec.europa.eu/publications/historical-evolution-artificial-intelligence_en",
+      "status": "secondary",
+      "coverage": "Historical synthesis published 2021",
+      "method": "Editorial periodization and selected turning points.",
+      "meaning": "Context source for boom–bust interpretation; not a quantitative series."
+    },
+    {
+      "id": "opinion",
+      "name": "Stanford HAI — 2026 AI Index, Public Opinion",
+      "url": "https://hai.stanford.edu/ai-index/2026-ai-index-report/public-opinion",
+      "status": "direct",
+      "coverage": "Survey results collected in 2025 and published in 2026",
+      "method": "Reported global survey shares; kept separate from attention proxies.",
+      "meaning": "Attitudes toward AI products and services, not usage or page interest."
+    }
+  ],
+  "eras": [
+    {
+      "id": "foundations",
+      "title": "Foundations",
+      "years": "1950–1969",
+      "start": 1950,
+      "end": 1969,
+      "source": "ngram",
+      "color": "#3b817b",
+      "branch": "symbolic inquiry",
+      "thesis": "A field receives a name, a test, and a burst of confidence that machines can represent intelligence.",
+      "attention": [
+        {
+          "label": "1950–1952",
+          "date": "1951-07-01",
+          "value": 4.988499280322856e-09,
+          "unit": "share of corpus",
+          "coverage": [
+            1950,
+            1952
+          ],
+          "normalized": 0.0
+        },
+        {
+          "label": "1953–1955",
+          "date": "1954-07-01",
+          "value": 8.932508813637904e-09,
+          "unit": "share of corpus",
+          "coverage": [
+            1953,
+            1955
+          ],
+          "normalized": 0.0107
+        },
+        {
+          "label": "1956–1958",
+          "date": "1957-07-01",
+          "value": 2.5718570021334337e-08,
+          "unit": "share of corpus",
+          "coverage": [
+            1956,
+            1958
+          ],
+          "normalized": 0.0561
+        },
+        {
+          "label": "1959–1961",
+          "date": "1960-07-01",
+          "value": 1.1709133472074622e-07,
+          "unit": "share of corpus",
+          "coverage": [
+            1959,
+            1961
+          ],
+          "normalized": 0.3036
+        },
+        {
+          "label": "1962–1964",
+          "date": "1963-07-01",
+          "value": 3.1186993366498034e-07,
+          "unit": "share of corpus",
+          "coverage": [
+            1962,
+            1964
+          ],
+          "normalized": 0.831
+        },
+        {
+          "label": "1965–1967",
+          "date": "1966-07-01",
+          "value": 3.214326420100666e-07,
+          "unit": "share of corpus",
+          "coverage": [
+            1965,
+            1967
+          ],
+          "normalized": 0.8569
+        },
+        {
+          "label": "1968–1969",
+          "date": "1968-07-01",
+          "value": 3.7427238413004216e-07,
+          "unit": "share of corpus",
+          "coverage": [
+            1968,
+            1969
+          ],
+          "normalized": 1.0
+        }
+      ],
+      "events": [
+        {
+          "id": "turing",
+          "era": "foundations",
+          "date": "1950-10-01",
+          "title": "Computing machinery and intelligence",
+          "type": "breakthrough",
+          "summary": "Turing reframes machine intelligence as an observable imitation game.",
+          "sourceName": "Oxford Academic",
+          "sourceUrl": "https://academic.oup.com/mind/article/LIX/236/433/986238",
+          "endpoint": "filled"
+        },
+        {
+          "id": "dartmouth",
+          "era": "foundations",
+          "date": "1955-08-31",
+          "title": "The field is named",
+          "type": "breakthrough",
+          "summary": "The Dartmouth proposal uses ‘artificial intelligence’ for a 1956 research project.",
+          "sourceName": "Stanford archive",
+          "sourceUrl": "https://www-formal.stanford.edu/jmc/history/dartmouth/dartmouth.html",
+          "endpoint": "filled"
+        },
+        {
+          "id": "perceptron",
+          "era": "foundations",
+          "date": "1958-11-01",
+          "title": "The perceptron learns",
+          "type": "breakthrough",
+          "summary": "Rosenblatt describes a probabilistic model for information storage and organization.",
+          "sourceName": "APA PsycNet",
+          "sourceUrl": "https://psycnet.apa.org/record/1959-09865-001",
+          "endpoint": "filled"
+        },
+        {
+          "id": "eliza",
+          "era": "foundations",
+          "date": "1966-01-01",
+          "title": "ELIZA mirrors conversation",
+          "type": "adoption",
+          "summary": "Weizenbaum demonstrates how simple language patterns can produce an illusion of understanding.",
+          "sourceName": "ACM",
+          "sourceUrl": "https://dl.acm.org/doi/10.1145/365153.365168",
+          "endpoint": "filled"
+        }
+      ]
+    },
+    {
+      "id": "first-winter",
+      "title": "First winter",
+      "years": "1970–1982",
+      "start": 1970,
+      "end": 1982,
+      "source": "ngram",
+      "color": "#987357",
+      "branch": "limits exposed",
+      "thesis": "Ambition runs into limited compute, brittle methods, and promises that evaluation cannot sustain.",
+      "attention": [
+        {
+          "label": "1970–1971",
+          "date": "1970-07-01",
+          "value": 4.380152746827348e-07,
+          "unit": "share of corpus",
+          "coverage": [
+            1970,
+            1971
+          ],
+          "normalized": 0.0
+        },
+        {
+          "label": "1972–1973",
+          "date": "1972-07-01",
+          "value": 5.604749657162067e-07,
+          "unit": "share of corpus",
+          "coverage": [
+            1972,
+            1973
+          ],
+          "normalized": 0.0947
+        },
+        {
+          "label": "1974–1975",
+          "date": "1974-07-01",
+          "value": 6.528647611275806e-07,
+          "unit": "share of corpus",
+          "coverage": [
+            1974,
+            1975
+          ],
+          "normalized": 0.1662
+        },
+        {
+          "label": "1976–1977",
+          "date": "1976-07-01",
+          "value": 8.637794213575689e-07,
+          "unit": "share of corpus",
+          "coverage": [
+            1976,
+            1977
+          ],
+          "normalized": 0.3294
+        },
+        {
+          "label": "1978–1979",
+          "date": "1978-07-01",
+          "value": 1.0131916167357286e-06,
+          "unit": "share of corpus",
+          "coverage": [
+            1978,
+            1979
+          ],
+          "normalized": 0.445
+        },
+        {
+          "label": "1980–1981",
+          "date": "1980-07-01",
+          "value": 1.198921557706012e-06,
+          "unit": "share of corpus",
+          "coverage": [
+            1980,
+            1981
+          ],
+          "normalized": 0.5887
+        },
+        {
+          "label": "1982",
+          "date": "1982-07-01",
+          "value": 1.730536059722787e-06,
+          "unit": "share of corpus",
+          "coverage": [
+            1982,
+            1982
+          ],
+          "normalized": 1.0
+        }
+      ],
+      "events": [
+        {
+          "id": "perceptrons-limits",
+          "era": "first-winter",
+          "date": "1969-01-01",
+          "title": "Neural limits become explicit",
+          "type": "setback",
+          "summary": "A formal critique helps narrow enthusiasm for early perceptrons.",
+          "sourceName": "MIT Press",
+          "sourceUrl": "https://mitpress.mit.edu/9780262631112/perceptrons/",
+          "endpoint": "hollow"
+        },
+        {
+          "id": "lighthill",
+          "era": "first-winter",
+          "date": "1973-01-01",
+          "title": "Public funding confidence falls",
+          "type": "setback",
+          "summary": "The Lighthill review becomes a landmark in the first AI winter narrative.",
+          "sourceName": "European Commission AI Watch",
+          "sourceUrl": "https://ai-watch.ec.europa.eu/publications/historical-evolution-artificial-intelligence_en",
+          "endpoint": "hollow"
+        },
+        {
+          "id": "xcon",
+          "era": "first-winter",
+          "date": "1980-01-01",
+          "title": "XCON finds commercial value",
+          "type": "adoption",
+          "summary": "A rule-based system configures computer orders and signals a practical revival.",
+          "sourceName": "AAAI",
+          "sourceUrl": "https://ojs.aaai.org/aimagazine/index.php/aimagazine/article/view/507",
+          "endpoint": "filled"
+        },
+        {
+          "id": "fifth-generation",
+          "era": "first-winter",
+          "date": "1982-01-01",
+          "title": "Japan backs fifth-generation computing",
+          "type": "adoption",
+          "summary": "A national program renews competition around knowledge processing.",
+          "sourceName": "Computer History Museum",
+          "sourceUrl": "https://www.computerhistory.org/collections/catalog/102653262",
+          "endpoint": "filled"
+        }
+      ]
+    },
+    {
+      "id": "expert-systems",
+      "title": "Expert systems",
+      "years": "1983–1996",
+      "start": 1983,
+      "end": 1996,
+      "source": "ngram",
+      "color": "#718668",
+      "branch": "rules at work",
+      "thesis": "Codified expertise reaches organizations, then maintenance cost and market collapse cool the second boom.",
+      "attention": [
+        {
+          "label": "1983–1984",
+          "date": "1984-07-01",
+          "value": 2.9873782584413644e-06,
+          "unit": "share of corpus",
+          "coverage": [
+            1983,
+            1984
+          ],
+          "normalized": 0.0
+        },
+        {
+          "label": "1985–1986",
+          "date": "1986-07-01",
+          "value": 5.315234094079718e-06,
+          "unit": "share of corpus",
+          "coverage": [
+            1985,
+            1986
+          ],
+          "normalized": 0.6949
+        },
+        {
+          "label": "1987–1988",
+          "date": "1988-07-01",
+          "value": 6.33745948865061e-06,
+          "unit": "share of corpus",
+          "coverage": [
+            1987,
+            1988
+          ],
+          "normalized": 1.0
+        },
+        {
+          "label": "1989–1990",
+          "date": "1990-07-01",
+          "value": 6.21639953343571e-06,
+          "unit": "share of corpus",
+          "coverage": [
+            1989,
+            1990
+          ],
+          "normalized": 0.9639
+        },
+        {
+          "label": "1991–1992",
+          "date": "1992-07-01",
+          "value": 5.292176563788387e-06,
+          "unit": "share of corpus",
+          "coverage": [
+            1991,
+            1992
+          ],
+          "normalized": 0.688
+        },
+        {
+          "label": "1993–1994",
+          "date": "1994-07-01",
+          "value": 4.234614415801752e-06,
+          "unit": "share of corpus",
+          "coverage": [
+            1993,
+            1994
+          ],
+          "normalized": 0.3723
+        },
+        {
+          "label": "1995–1996",
+          "date": "1996-07-01",
+          "value": 3.6381255014202724e-06,
+          "unit": "share of corpus",
+          "coverage": [
+            1995,
+            1996
+          ],
+          "normalized": 0.1942
+        }
+      ],
+      "events": [
+        {
+          "id": "backprop",
+          "era": "expert-systems",
+          "date": "1986-10-09",
+          "title": "Backpropagation returns",
+          "type": "breakthrough",
+          "summary": "Multi-layer networks learn internal representations through error propagation.",
+          "sourceName": "Nature",
+          "sourceUrl": "https://www.nature.com/articles/323533a0",
+          "endpoint": "filled"
+        },
+        {
+          "id": "lisp-collapse",
+          "era": "expert-systems",
+          "date": "1987-01-01",
+          "title": "The expert-systems market contracts",
+          "type": "setback",
+          "summary": "Specialized hardware and costly rule maintenance fail to sustain the boom.",
+          "sourceName": "European Commission AI Watch",
+          "sourceUrl": "https://ai-watch.ec.europa.eu/publications/historical-evolution-artificial-intelligence_en",
+          "endpoint": "hollow"
+        },
+        {
+          "id": "second-winter",
+          "era": "expert-systems",
+          "date": "1990-01-01",
+          "title": "A second winter settles in",
+          "type": "setback",
+          "summary": "Investment and attention retreat while learning research continues under quieter labels.",
+          "sourceName": "European Commission AI Watch",
+          "sourceUrl": "https://ai-watch.ec.europa.eu/publications/historical-evolution-artificial-intelligence_en",
+          "endpoint": "hollow"
+        },
+        {
+          "id": "svm",
+          "era": "expert-systems",
+          "date": "1995-09-01",
+          "title": "Support-vector networks",
+          "type": "breakthrough",
+          "summary": "A statistical learning method delivers strong generalization from high-dimensional data.",
+          "sourceName": "Springer",
+          "sourceUrl": "https://link.springer.com/article/10.1007/BF00994018",
+          "endpoint": "filled"
+        }
+      ]
+    },
+    {
+      "id": "statistical-learning",
+      "title": "Statistical learning",
+      "years": "1997–2011",
+      "start": 1997,
+      "end": 2011,
+      "source": "ngram",
+      "color": "#517c91",
+      "branch": "data over rules",
+      "thesis": "Benchmarks, web-scale data, and probabilistic learning quietly rebuild the field’s credibility.",
+      "attention": [
+        {
+          "label": "1997–1998",
+          "date": "1998-07-01",
+          "value": 3.208327374513986e-06,
+          "unit": "share of corpus",
+          "coverage": [
+            1997,
+            1998
+          ],
+          "normalized": 0.9079
+        },
+        {
+          "label": "1999–2000",
+          "date": "2000-07-01",
+          "value": 2.9160538582741202e-06,
+          "unit": "share of corpus",
+          "coverage": [
+            1999,
+            2000
+          ],
+          "normalized": 0.609
+        },
+        {
+          "label": "2001–2002",
+          "date": "2002-07-01",
+          "value": 2.8654021881468345e-06,
+          "unit": "share of corpus",
+          "coverage": [
+            2001,
+            2002
+          ],
+          "normalized": 0.5572
+        },
+        {
+          "label": "2003–2004",
+          "date": "2004-07-01",
+          "value": 3.298336409683633e-06,
+          "unit": "share of corpus",
+          "coverage": [
+            2003,
+            2004
+          ],
+          "normalized": 1.0
+        },
+        {
+          "label": "2005–2006",
+          "date": "2006-07-01",
+          "value": 3.007905865352531e-06,
+          "unit": "share of corpus",
+          "coverage": [
+            2005,
+            2006
+          ],
+          "normalized": 0.7029
+        },
+        {
+          "label": "2007–2008",
+          "date": "2008-07-01",
+          "value": 2.493652268484997e-06,
+          "unit": "share of corpus",
+          "coverage": [
+            2007,
+            2008
+          ],
+          "normalized": 0.177
+        },
+        {
+          "label": "2009–2010",
+          "date": "2010-07-01",
+          "value": 2.3206422714791564e-06,
+          "unit": "share of corpus",
+          "coverage": [
+            2009,
+            2010
+          ],
+          "normalized": 0.0
+        },
+        {
+          "label": "2011",
+          "date": "2011-07-01",
+          "value": 2.387207166495292e-06,
+          "unit": "share of corpus",
+          "coverage": [
+            2011,
+            2011
+          ],
+          "normalized": 0.0681
+        }
+      ],
+      "events": [
+        {
+          "id": "deep-blue",
+          "era": "statistical-learning",
+          "date": "1997-05-11",
+          "title": "Deep Blue wins the rematch",
+          "type": "adoption",
+          "summary": "IBM’s chess system defeats world champion Garry Kasparov in a six-game match.",
+          "sourceName": "IBM",
+          "sourceUrl": "https://www.ibm.com/history/deep-blue",
+          "endpoint": "filled"
+        },
+        {
+          "id": "deep-belief",
+          "era": "statistical-learning",
+          "date": "2006-07-01",
+          "title": "Deep networks learn layer by layer",
+          "type": "breakthrough",
+          "summary": "Pretraining offers a practical route to optimizing deeper neural networks.",
+          "sourceName": "Neural Computation",
+          "sourceUrl": "https://direct.mit.edu/neco/article/18/7/1527/6954/A-Fast-Learning-Algorithm-for-Deep-Belief-Nets",
+          "endpoint": "filled"
+        },
+        {
+          "id": "imagenet",
+          "era": "statistical-learning",
+          "date": "2009-09-01",
+          "title": "ImageNet scales visual evidence",
+          "type": "breakthrough",
+          "summary": "A large labeled image database makes comparable, data-hungry vision research possible.",
+          "sourceName": "CVPR",
+          "sourceUrl": "https://ieeexplore.ieee.org/document/5206848",
+          "endpoint": "filled"
+        },
+        {
+          "id": "watson",
+          "era": "statistical-learning",
+          "date": "2011-02-16",
+          "title": "Watson wins Jeopardy!",
+          "type": "adoption",
+          "summary": "Question answering becomes a televised demonstration of statistical AI at scale.",
+          "sourceName": "IBM",
+          "sourceUrl": "https://www.ibm.com/history/watson-jeopardy",
+          "endpoint": "filled"
+        }
+      ]
+    },
+    {
+      "id": "deep-learning",
+      "title": "Deep learning",
+      "years": "2012–2016",
+      "start": 2012,
+      "end": 2016,
+      "source": "ngram",
+      "color": "#b06855",
+      "branch": "representation learned",
+      "thesis": "GPU-trained neural networks turn benchmark jumps into a new platform for perception and play.",
+      "attention": [
+        {
+          "label": "2012",
+          "date": "2012-07-01",
+          "value": 3.0529851205961245e-06,
+          "unit": "share of corpus",
+          "coverage": [
+            2012,
+            2012
+          ],
+          "normalized": 1.0
+        },
+        {
+          "label": "2013",
+          "date": "2013-07-01",
+          "value": 2.59075935901687e-06,
+          "unit": "share of corpus",
+          "coverage": [
+            2013,
+            2013
+          ],
+          "normalized": 0.6051
+        },
+        {
+          "label": "2014",
+          "date": "2014-07-01",
+          "value": 2.4988121216269754e-06,
+          "unit": "share of corpus",
+          "coverage": [
+            2014,
+            2014
+          ],
+          "normalized": 0.5265
+        },
+        {
+          "label": "2015",
+          "date": "2015-07-01",
+          "value": 1.8825293598076498e-06,
+          "unit": "share of corpus",
+          "coverage": [
+            2015,
+            2015
+          ],
+          "normalized": 0.0
+        },
+        {
+          "label": "2016",
+          "date": "2016-07-01",
+          "value": 2.3491662746941144e-06,
+          "unit": "share of corpus",
+          "coverage": [
+            2016,
+            2016
+          ],
+          "normalized": 0.3987
+        }
+      ],
+      "events": [
+        {
+          "id": "alexnet",
+          "era": "deep-learning",
+          "date": "2012-12-03",
+          "title": "AlexNet resets image recognition",
+          "type": "breakthrough",
+          "summary": "A GPU-trained convolutional network wins ImageNet by a large margin.",
+          "sourceName": "NeurIPS",
+          "sourceUrl": "https://proceedings.neurips.cc/paper/2012/hash/c399862d3b9d6b76c8436e924a68c45b-Abstract.html",
+          "endpoint": "filled"
+        },
+        {
+          "id": "gan",
+          "era": "deep-learning",
+          "date": "2014-06-10",
+          "title": "Generative adversarial networks",
+          "type": "breakthrough",
+          "summary": "Two networks learn through competition, opening a productive route to generation.",
+          "sourceName": "arXiv",
+          "sourceUrl": "https://arxiv.org/abs/1406.2661",
+          "endpoint": "filled"
+        },
+        {
+          "id": "alphago",
+          "era": "deep-learning",
+          "date": "2016-01-27",
+          "title": "AlphaGo masters Go",
+          "type": "adoption",
+          "summary": "Deep neural networks and tree search defeat a professional player in a landmark result.",
+          "sourceName": "Nature",
+          "sourceUrl": "https://www.nature.com/articles/nature16961",
+          "endpoint": "filled"
+        },
+        {
+          "id": "tay",
+          "era": "deep-learning",
+          "date": "2016-03-25",
+          "title": "Tay exposes deployment risk",
+          "type": "harm",
+          "summary": "A public chatbot is taken offline after users induce abusive outputs.",
+          "sourceName": "Microsoft",
+          "sourceUrl": "https://blogs.microsoft.com/blog/2016/03/25/learning-tays-introduction/",
+          "endpoint": "hollow"
+        }
+      ]
+    },
+    {
+      "id": "foundation-models",
+      "title": "Foundation models",
+      "years": "2017–2021",
+      "start": 2017,
+      "end": 2021,
+      "source": "pageviews",
+      "color": "#716486",
+      "branch": "scale and reuse",
+      "thesis": "Transformers and large pretrained models concentrate capability while fairness and governance move inward.",
+      "attention": [
+        {
+          "label": "2017",
+          "date": "2017-07-01",
+          "value": 2887086,
+          "unit": "user pageviews",
+          "normalized": 0.1206
+        },
+        {
+          "label": "2018",
+          "date": "2018-07-01",
+          "value": 3462897,
+          "unit": "user pageviews",
+          "normalized": 1.0
+        },
+        {
+          "label": "2019",
+          "date": "2019-07-01",
+          "value": 3345426,
+          "unit": "user pageviews",
+          "normalized": 0.8206
+        },
+        {
+          "label": "2020",
+          "date": "2020-07-01",
+          "value": 2808126,
+          "unit": "user pageviews",
+          "normalized": 0.0
+        },
+        {
+          "label": "2021",
+          "date": "2021-07-01",
+          "value": 3130451,
+          "unit": "user pageviews",
+          "normalized": 0.4923
+        }
+      ],
+      "events": [
+        {
+          "id": "transformer",
+          "era": "foundation-models",
+          "date": "2017-06-12",
+          "title": "The transformer",
+          "type": "breakthrough",
+          "summary": "Attention replaces recurrence and makes sequence models more parallelizable.",
+          "sourceName": "arXiv",
+          "sourceUrl": "https://arxiv.org/abs/1706.03762",
+          "endpoint": "filled"
+        },
+        {
+          "id": "gender-shades",
+          "era": "foundation-models",
+          "date": "2018-02-01",
+          "title": "Gender Shades audits disparity",
+          "type": "harm",
+          "summary": "An intersectional audit finds large accuracy disparities in commercial gender classification.",
+          "sourceName": "PMLR",
+          "sourceUrl": "https://proceedings.mlr.press/v81/buolamwini18a.html",
+          "endpoint": "hollow"
+        },
+        {
+          "id": "gpt3",
+          "era": "foundation-models",
+          "date": "2020-05-28",
+          "title": "Language models become few-shot learners",
+          "type": "breakthrough",
+          "summary": "GPT-3 shows broad task adaptation through prompting at unprecedented model scale.",
+          "sourceName": "arXiv",
+          "sourceUrl": "https://arxiv.org/abs/2005.14165",
+          "endpoint": "filled"
+        },
+        {
+          "id": "unesco",
+          "era": "foundation-models",
+          "date": "2021-11-23",
+          "title": "A global ethics recommendation",
+          "type": "governance",
+          "summary": "UNESCO member states adopt a shared normative framework for AI ethics.",
+          "sourceName": "UNESCO",
+          "sourceUrl": "https://www.unesco.org/en/legal-affairs/recommendation-ethics-artificial-intelligence",
+          "endpoint": "hollow"
+        }
+      ]
+    },
+    {
+      "id": "public-encounter",
+      "title": "Public encounter",
+      "years": "2022–2026 H1",
+      "start": 2022,
+      "end": 2026,
+      "source": "pageviews",
+      "color": "#c49436",
+      "branch": "mass use and response",
+      "thesis": "Generative systems meet everyday users; adoption, anxiety, labor conflict, and law rise together.",
+      "attention": [
+        {
+          "label": "2022 H1",
+          "date": "2022-03-01",
+          "value": 2521976,
+          "unit": "user pageviews",
+          "normalized": 0.4019
+        },
+        {
+          "label": "2022 H2",
+          "date": "2022-09-01",
+          "value": 2900928,
+          "unit": "user pageviews",
+          "normalized": 0.6472
+        },
+        {
+          "label": "2023 H1",
+          "date": "2023-03-01",
+          "value": 3245042,
+          "unit": "user pageviews",
+          "normalized": 0.87
+        },
+        {
+          "label": "2023 H2",
+          "date": "2023-09-01",
+          "value": 3445894,
+          "unit": "user pageviews",
+          "normalized": 1.0
+        },
+        {
+          "label": "2024 H1",
+          "date": "2024-03-01",
+          "value": 2848605,
+          "unit": "user pageviews",
+          "normalized": 0.6133
+        },
+        {
+          "label": "2024 H2",
+          "date": "2024-09-01",
+          "value": 1901164,
+          "unit": "user pageviews",
+          "normalized": 0.0
+        },
+        {
+          "label": "2025 H1",
+          "date": "2025-03-01",
+          "value": 1978392,
+          "unit": "user pageviews",
+          "normalized": 0.05
+        },
+        {
+          "label": "2025 H2",
+          "date": "2025-09-01",
+          "value": 1916942,
+          "unit": "user pageviews",
+          "normalized": 0.0102
+        },
+        {
+          "label": "2026 H1",
+          "date": "2026-03-01",
+          "value": 2011124,
+          "unit": "user pageviews",
+          "normalized": 0.0712
+        }
+      ],
+      "events": [
+        {
+          "id": "chatgpt",
+          "era": "public-encounter",
+          "date": "2022-11-30",
+          "title": "ChatGPT opens a public research preview",
+          "type": "adoption",
+          "summary": "Conversational generative AI reaches a mass public interface.",
+          "sourceName": "OpenAI",
+          "sourceUrl": "https://openai.com/index/chatgpt/",
+          "endpoint": "filled"
+        },
+        {
+          "id": "wga",
+          "era": "public-encounter",
+          "date": "2023-09-25",
+          "title": "Writers negotiate AI protections",
+          "type": "backlash",
+          "summary": "A labor contract sets terms for AI use in covered writing work.",
+          "sourceName": "Writers Guild of America",
+          "sourceUrl": "https://www.wgacontract2023.org/the-campaign/summary-of-the-2023-wga-mba",
+          "endpoint": "hollow"
+        },
+        {
+          "id": "executive-order",
+          "era": "public-encounter",
+          "date": "2023-10-30",
+          "title": "United States issues an AI executive order",
+          "type": "governance",
+          "summary": "Federal policy links safety testing, rights, competition, and public-sector use.",
+          "sourceName": "The White House archive",
+          "sourceUrl": "https://bidenwhitehouse.archives.gov/briefing-room/presidential-actions/2023/10/30/executive-order-on-the-safe-secure-and-trustworthy-development-and-use-of-artificial-intelligence/",
+          "endpoint": "hollow"
+        },
+        {
+          "id": "eu-ai-act",
+          "era": "public-encounter",
+          "date": "2024-07-12",
+          "title": "The EU AI Act becomes law",
+          "type": "governance",
+          "summary": "The European Union publishes a risk-based legal framework including general-purpose AI rules.",
+          "sourceName": "EUR-Lex",
+          "sourceUrl": "https://eur-lex.europa.eu/eli/reg/2024/1689/oj/eng",
+          "endpoint": "hollow"
+        },
+        {
+          "id": "opinion-2025",
+          "era": "public-encounter",
+          "date": "2025-12-31",
+          "title": "Optimism and anxiety rise together",
+          "type": "backlash",
+          "summary": "In 2025, 59% report more benefits than drawbacks while 52% say AI products make them nervous.",
+          "sourceName": "Stanford HAI",
+          "sourceUrl": "https://hai.stanford.edu/ai-index/2026-ai-index-report/public-opinion",
+          "endpoint": "hollow"
+        },
+        {
+          "id": "h1-2026",
+          "era": "public-encounter",
+          "date": "2026-06-30",
+          "title": "The partial-year frontier",
+          "type": "governance",
+          "summary": "The atlas stops at June 2026; the final attention observation is explicitly partial-year.",
+          "sourceName": "Wikimedia Analytics API",
+          "sourceUrl": "https://doc.wikimedia.org/generated-data-platform/aqs/analytics-api/",
+          "endpoint": "hollow"
+        }
+      ]
+    }
+  ]
+}

@@ -1,0 +1,158 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1440" height="1000" viewBox="0 0 1440 1000">
+  <defs>
+    <pattern id="grain" width="18" height="18" patternUnits="userSpaceOnUse">
+      <circle cx="3" cy="5" r=".45" fill="#262823" opacity=".055"/>
+      <circle cx="14" cy="13" r=".35" fill="#262823" opacity=".04"/>
+    </pattern>
+    <filter id="lensShadow" x="-30%" y="-30%" width="160%" height="160%">
+      <feDropShadow dx="0" dy="10" stdDeviation="12" flood-color="#262823" flood-opacity=".18"/>
+    </filter>
+    <style>
+      .serif{font-family:Georgia,'Times New Roman',serif;fill:#262823}.sans{font-family:Arial,Helvetica,sans-serif;fill:#262823}.mono{font-family:'Courier New',monospace;fill:#262823}.muted{fill:#747269}.tiny{font-size:10px;letter-spacing:.09em}.small{font-size:12px}.label{font-size:11px;font-weight:700;letter-spacing:.11em}.rule{stroke:#262823;stroke-opacity:.18}.branch{fill:none;stroke-linecap:round}.node-label{font-family:Arial,Helvetica,sans-serif;font-size:11px;fill:#55574f}
+    </style>
+
+    <g id="bloom">
+      <circle r="70" fill="none" stroke="#262823" stroke-opacity=".12"/>
+      <circle r="52" fill="none" stroke="#262823" stroke-opacity=".16"/>
+      <circle r="35" fill="none" stroke="#262823" stroke-opacity=".2"/>
+      <path d="M0,-59 L11,-42 L27,-48 L34,-29 L53,-30 L48,-10 L62,0 L45,13 L52,30 L31,30 L27,51 L10,43 L0,61 L-12,43 L-29,51 L-33,30 L-53,28 L-46,10 L-63,0 L-47,-13 L-54,-31 L-32,-30 L-27,-49 L-10,-42 Z" fill="currentColor" opacity=".72"/>
+      <circle r="20" fill="#f1edda" stroke="#262823" stroke-opacity=".22"/>
+      <g fill="none" stroke="#262823" stroke-width="1.2">
+        <line x1="0" y1="-20" x2="0" y2="-86"/><line x1="14" y1="-14" x2="55" y2="-61"/><line x1="20" y1="0" x2="91" y2="0"/><line x1="14" y1="14" x2="52" y2="58"/><line x1="0" y1="20" x2="0" y2="80"/><line x1="-14" y1="14" x2="-47" y2="53"/><line x1="-20" y1="0" x2="-76" y2="0"/><line x1="-14" y1="-14" x2="-45" y2="-50"/>
+      </g>
+      <g fill="#262823">
+        <circle cx="0" cy="-86" r="2.5"/><circle cx="55" cy="-61" r="2.5"/><circle cx="91" cy="0" r="3"/><circle cx="52" cy="58" r="2.5"/><circle cx="0" cy="80" r="2.5"/>
+      </g>
+      <g fill="#f1edda" stroke="#262823" stroke-width="1.3">
+        <circle cx="-47" cy="53" r="3.5"/><circle cx="-76" cy="0" r="3.5"/><circle cx="-45" cy="-50" r="3.5"/>
+      </g>
+      <g fill="#262823" opacity=".7">
+        <circle cx="20" cy="-73" r="1.4"/><circle cx="26" cy="-77" r="1.4"/><circle cx="33" cy="-80" r="1.4"/>
+        <circle cx="76" cy="18" r="1.4"/><circle cx="82" cy="22" r="1.4"/><circle cx="87" cy="27" r="1.4"/>
+        <circle cx="-26" cy="72" r="1.4"/><circle cx="-32" cy="76" r="1.4"/>
+      </g>
+    </g>
+
+    <g id="miniBloom">
+      <circle r="42" fill="none" stroke="#262823" stroke-opacity=".14"/>
+      <circle r="29" fill="none" stroke="#262823" stroke-opacity=".18"/>
+      <path d="M0,-36 L9,-27 L20,-31 L24,-18 L37,-17 L32,-5 L40,4 L28,11 L31,25 L18,23 L8,35 L-1,27 L-13,35 L-20,23 L-34,21 L-30,8 L-40,0 L-29,-9 L-33,-23 L-18,-23 L-9,-35 Z" fill="currentColor" opacity=".72"/>
+      <circle r="12" fill="#f1edda"/>
+      <g stroke="#262823" stroke-width="1" fill="none"><line y1="-12" y2="-54"/><line x1="9" y1="-9" x2="40" y2="-40"/><line x1="12" x2="56"/><line x1="9" y1="9" x2="38" y2="38"/><line y1="12" y2="48"/><line x1="-9" y1="9" x2="-34" y2="34"/><line x1="-12" x2="-48"/><line x1="-9" y1="-9" x2="-35" y2="-35"/></g>
+      <g fill="#262823"><circle cy="-54" r="2"/><circle cx="40" cy="-40" r="2"/><circle cx="56" r="2"/><circle cx="38" cy="38" r="2"/></g>
+      <g fill="#f1edda" stroke="#262823"><circle cy="48" r="2.5"/><circle cx="-34" cy="34" r="2.5"/><circle cx="-48" r="2.5"/><circle cx="-35" cy="-35" r="2.5"/></g>
+    </g>
+  </defs>
+
+  <rect width="1440" height="1000" fill="#f1edda"/>
+  <rect width="1440" height="1000" fill="url(#grain)"/>
+
+  <g transform="translate(54 43)">
+    <text class="mono tiny muted">TECHNOLOGY / INTERACTIVE DOCUMENTARY / REVISED CONCEPT</text>
+    <text class="mono tiny muted" x="1122">1950—2026 H1</text>
+    <line class="rule" x1="0" y1="19" x2="1332" y2="19"/>
+    <text class="serif" x="0" y="91" font-size="58">The Evolution Garden of AI</text>
+    <text class="sans muted" x="4" y="122" font-size="16">How ideas, expectations and public attention branched from a research field into a global industry.</text>
+    <rect x="1152" y="57" width="180" height="45" rx="22.5" fill="#262823"/>
+    <text x="1187" y="84" font-family="Arial" font-size="11" fill="#f1edda">FOLLOW THE LINEAGE →</text>
+
+    <g transform="translate(0 168)">
+      <rect width="286" height="705" rx="4" fill="#e6e1cd" opacity=".76"/>
+      <text class="mono label" x="22" y="31">THE LONG VIEW</text>
+      <text class="serif" x="22" y="74" font-size="25">Today’s boom grew</text>
+      <text class="serif" x="22" y="103" font-size="25">from older roots.</text>
+      <text class="sans small muted" x="22" y="139">Each bloom is an era or paradigm.</text>
+      <text class="sans small muted" x="22" y="158">Together they show how attention</text>
+      <text class="sans small muted" x="22" y="177">rose, fractured, faded and returned.</text>
+
+      <line class="rule" x1="22" y1="205" x2="264" y2="205"/>
+      <text class="mono label" x="22" y="235">HOW TO READ A BLOOM</text>
+      <g transform="translate(70 322) scale(.86)" style="color:#3b817b"><use href="#miniBloom"/></g>
+      <g class="sans small">
+        <line x1="124" y1="271" x2="185" y2="245" class="rule"/><text x="191" y="249">turning point</text>
+        <line x1="103" y1="323" x2="185" y2="323" class="rule"/><text x="191" y="327">attention petal</text>
+        <line x1="69" y1="356" x2="185" y2="382" class="rule"/><text x="191" y="386">setback / response</text>
+      </g>
+      <text class="mono tiny muted" x="22" y="426">ANGLE</text><text class="sans small" x="86" y="426">time within an era</text>
+      <text class="mono tiny muted" x="22" y="450">RADIUS</text><text class="sans small" x="86" y="450">attention within that era</text>
+      <text class="mono tiny muted" x="22" y="474">SPOKE</text><text class="sans small" x="86" y="474">sourced historical event</text>
+      <text class="mono tiny muted" x="22" y="498">HALO</text><text class="sans small" x="86" y="498">supporting events</text>
+
+      <line class="rule" x1="22" y1="526" x2="264" y2="526"/>
+      <text class="mono label" x="22" y="555">EVIDENCE STATUS</text>
+      <circle cx="27" cy="582" r="4" fill="#3b817b"/><text class="mono tiny muted" x="42" y="586">DIRECT MEASURE</text>
+      <rect x="23" y="600" width="8" height="8" fill="#c49436"/><text class="mono tiny muted" x="42" y="608">PROXY</text>
+      <path d="M27 622 l5 9 h-10 z" fill="#716486"/><text class="mono tiny muted" x="42" y="631">ESTIMATE</text>
+      <circle cx="27" cy="653" r="4" fill="none" stroke="#262823"/><text class="mono tiny muted" x="42" y="657">EDITORIAL CLASSIFICATION</text>
+      <text class="mono tiny muted" x="22" y="687">SCHEMATIC GEOMETRY — FINAL PETALS</text>
+      <text class="mono tiny muted" x="22" y="701">WILL BE GENERATED FROM VALIDATED DATA.</text>
+    </g>
+
+    <g transform="translate(315 155)">
+      <!-- evolutionary trunk and branches -->
+      <path class="branch" d="M78 704 C136 665,165 605,220 560 C284 508,320 446,382 402 C449 354,470 286,537 246 C603 205,661 200,712 149" stroke="#657f70" stroke-width="5"/>
+      <path class="branch" d="M220 560 C272 560,306 592,352 621 C400 651,438 653,487 631" stroke="#b06855" stroke-width="3"/>
+      <path class="branch" d="M382 402 C424 429,456 477,506 488 C558 499,597 466,640 430" stroke="#41817d" stroke-width="4"/>
+      <path class="branch" d="M537 246 C589 253,625 290,671 311 C713 331,755 329,797 303" stroke="#c49436" stroke-width="3"/>
+      <path class="branch" d="M640 430 C700 410,744 361,797 303 C850 246,889 237,928 246" stroke="#716486" stroke-width="5"/>
+      <path class="branch" d="M487 631 C557 628,621 602,685 565 C738 535,781 491,822 451" stroke="#77785f" stroke-width="3"/>
+      <path class="branch" d="M928 246 C971 276,982 312,990 357" stroke="#716486" stroke-width="3"/>
+
+      <text class="mono tiny muted" x="55" y="740">1950 / ROOT</text>
+      <text class="mono tiny" x="120" y="628" fill="#657f70">SYMBOLIC AI</text>
+      <text class="mono tiny" x="248" y="603" fill="#b06855">WINTER / LIMITS</text>
+      <text class="mono tiny" x="355" y="350" fill="#41817d">STATISTICAL LEARNING</text>
+      <text class="mono tiny" x="624" y="190" fill="#c49436">DEEP LEARNING</text>
+      <text class="mono tiny" x="824" y="205" fill="#716486">GENERATIVE AI</text>
+
+      <!-- era flowers -->
+      <g transform="translate(151 610) scale(.62)" style="color:#3b817b"><use href="#miniBloom"/></g>
+      <text class="node-label" x="113" y="676">1956 · The field is named</text>
+
+      <g transform="translate(259 532) rotate(-14) scale(.78)" style="color:#c49436"><use href="#miniBloom"/></g>
+      <text class="node-label" x="229" y="592">1980 · Expert systems</text>
+
+      <g transform="translate(390 651) rotate(12) scale(.68)" style="color:#b06855"><use href="#miniBloom"/></g>
+      <text class="node-label" x="351" y="711">1987 · Second winter</text>
+
+      <g transform="translate(426 372) rotate(8) scale(.82)" style="color:#41817d"><use href="#miniBloom"/></g>
+      <text class="node-label" x="384" y="432">1997 · Deep Blue</text>
+
+      <g transform="translate(640 431) rotate(-8) scale(.95)" style="color:#3b817b"><use href="#miniBloom"/></g>
+      <text class="node-label" x="598" y="499">2012 · Deep learning</text>
+
+      <g transform="translate(712 149) rotate(11) scale(.78)" style="color:#c49436"><use href="#miniBloom"/></g>
+      <text class="node-label" x="670" y="91">2017 · Transformers</text>
+
+      <g transform="translate(928 246) rotate(-6) scale(.92)" style="color:#716486"><use href="#miniBloom"/></g>
+      <text class="node-label" x="881" y="317">2022 · Public encounter</text>
+
+      <g transform="translate(822 451) rotate(15) scale(.62)" style="color:#77785f"><use href="#miniBloom"/></g>
+      <text class="node-label" x="780" y="509">Policy + governance</text>
+
+      <!-- selected bloom connection -->
+      <path d="M956 287 C980 347,948 414,912 476" fill="none" stroke="#716486" stroke-width="1.5" stroke-dasharray="5 6"/>
+
+      <!-- magnified lens -->
+      <g transform="translate(885 605)" filter="url(#lensShadow)">
+        <circle r="178" fill="#f6f2e2" stroke="#fff" stroke-width="10"/>
+        <circle r="169" fill="none" stroke="#262823" stroke-opacity=".18"/>
+        <text class="mono tiny muted" x="-102" y="-128">SELECTED BLOOM / 2022—2026 H1</text>
+        <g transform="translate(-15 12) scale(1.65)" style="color:#716486"><use href="#bloom"/></g>
+        <text class="sans small" x="65" y="-75">ChatGPT</text><line x1="45" y1="-60" x2="80" y2="-42" class="rule"/>
+        <text class="sans small" x="70" y="10">adoption</text><line x1="48" y1="4" x2="82" y2="4" class="rule"/>
+        <text class="sans small" x="52" y="84">regulation</text><line x1="36" y1="60" x2="62" y2="72" class="rule"/>
+        <text class="sans small" x="-143" y="86">copyright</text><line x1="-100" y1="64" x2="-132" y2="75" class="rule"/>
+        <text class="sans small" x="-154" y="-55">job anxiety</text><line x1="-106" y1="-40" x2="-140" y2="-45" class="rule"/>
+        <text class="mono tiny muted" x="-104" y="146">CLICK A SPOKE → SOURCE + CONTEXT</text>
+      </g>
+    </g>
+
+    <g transform="translate(0 906)">
+      <line class="rule" x1="0" y1="0" x2="1332" y2="0"/>
+      <text class="mono tiny muted" x="0" y="28">OVERVIEW</text>
+      <text class="mono tiny" x="88" y="28">FOUNDATIONS</text><text class="mono tiny" x="240" y="28">WINTERS</text><text class="mono tiny" x="354" y="28">MACHINE LEARNING</text><text class="mono tiny" x="536" y="28">DEEP LEARNING</text><text class="mono tiny" x="684" y="28">GENERATIVE AI</text><text class="mono tiny" x="843" y="28">GOVERNANCE</text>
+      <text class="mono tiny muted" x="1114" y="28">METHOD / SOURCES / DATA</text>
+    </g>
+  </g>
+</svg>

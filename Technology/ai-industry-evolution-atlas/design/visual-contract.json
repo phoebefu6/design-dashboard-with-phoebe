@@ -1,0 +1,155 @@
+{
+  "page_id": "ai-industry-evolution-atlas",
+  "route": "/Technology/ai-industry-evolution-atlas/",
+  "page_type": "interactive editorial data story",
+  "approval": {
+    "status": "approved",
+    "desktop_response": "lets build!",
+    "mobile_response": "ok",
+    "date": "2026-07-14",
+    "scope": "desktop and mobile Evolution Garden layout, flower-map visual language, interaction direction"
+  },
+  "source_refs": [
+    "design/ideate/evolution-garden.svg",
+    "design/ideate/evolution-garden-v3.png",
+    "design/ideate/evolution-garden-mobile.svg",
+    "design/ideate/evolution-garden-mobile.png"
+  ],
+  "viewports": {
+    "desktop_source": [1440, 1000],
+    "desktop_target": [1440, 1000],
+    "mobile_source": [390, 844],
+    "mobile_target": [390, 844],
+    "additional_qa": [[320, 720], [414, 896], [768, 1024], [1920, 1080]]
+  },
+  "claim": "Today's AI boom grew from older research lineages through repeated cycles of breakthrough, expectation, disappointment, accumulation, adoption, and response.",
+  "evidence_invariants": [
+    "Never present unlike evidence sources as one continuously comparable public-interest index.",
+    "Petal radii are normalized within the selected evidence series and era; they do not compare absolute interest across unlike methods.",
+    "Every milestone, petal series, and interpretive label exposes its source and evidence status.",
+    "2026 is labeled H1 or partial-year wherever used.",
+    "Breakthrough, setback, harm, and governance events use redundant endpoint shapes in addition to color."
+  ],
+  "first_screen_density": {
+    "desktop": "masthead + title/thesis + reading key + complete branching garden + selected bloom lens + era navigation + source links",
+    "mobile": "masthead + concise thesis + selected era title + one large bloom + evidence status + previous/next and era stepper"
+  },
+  "tokens": {
+    "background": "#f1edda",
+    "panel": "#e6e1cd",
+    "panel_strong": "#f6f2e2",
+    "ink": "#262823",
+    "muted": "#747269",
+    "line": "rgba(38,40,35,.18)",
+    "direct": "#3b817b",
+    "proxy": "#c49436",
+    "setback": "#b06855",
+    "estimate": "#716486",
+    "governance": "#77785f",
+    "display_font": "Georgia, Iowan Old Style, Times New Roman, serif",
+    "ui_font": "Arial, Helvetica, sans-serif",
+    "meta_font": "Courier New, monospace",
+    "desktop_container": "1440px max with 54px outer inset",
+    "mobile_inset": "20px",
+    "panel_radius": "4-6px; controls are capsules",
+    "shadow": "selected lens only; soft archival lift",
+    "typography_floor": {
+      "viewport": "390px",
+      "primary_body": "14px minimum",
+      "secondary_label": "12px minimum",
+      "interactive_control": "13px minimum",
+      "hero_title": "34px minimum",
+      "warning_exceptions": ["sparse archival kicker", "decorative illustration labels"]
+    }
+  },
+  "sections": [
+    {
+      "id": "masthead",
+      "desktop_bbox": [54, 43, 1332, 122],
+      "mobile_bbox": [20, 20, 350, 136],
+      "anatomy": ["portfolio return", "artifact label", "data cutoff", "page title", "subtitle", "guided-path action"],
+      "asset_role": "HTML text and semantic links; no baked text",
+      "pass_criteria": ["title hierarchy matches source", "data cutoff visible", "primary action >=44px", "no mobile overflow"]
+    },
+    {
+      "id": "garden-overview",
+      "desktop_bbox": [369, 198, 1017, 705],
+      "mobile_bbox": [20, 196, 350, 421],
+      "anatomy": ["branch paths", "seven era/paradigm blooms", "era labels", "selected state", "supporting-event dots", "method seam markers"],
+      "asset_role": "data-bound inline SVG; no bitmap substitute",
+      "renderer": "native SVG with pure geometry/data modules",
+      "pass_criteria": ["flower map remains dominant", "complete desktop lineage visible", "one selected mobile bloom visible without horizontal scroll", "all labels data-bound"]
+    },
+    {
+      "id": "reading-key",
+      "desktop_bbox": [54, 211, 286, 705],
+      "mobile_strategy": "collapsible below selected bloom, never above first visualization",
+      "anatomy": ["executive thesis", "sample bloom", "encoding key", "evidence-status key", "schematic/normalization caveat"],
+      "asset_role": "HTML plus sample inline SVG",
+      "pass_criteria": ["petal/spoke meaning available without hover", "evidence statuses use shape plus color", "caveat visible"]
+    },
+    {
+      "id": "bloom-inspector",
+      "desktop_bbox": [1075, 650, 356, 356],
+      "mobile_strategy": "selected bloom is the main panel; event detail opens below without hiding it",
+      "anatomy": ["large radial flower", "direct event labels", "evidence counts", "source/detail action", "previous/next event controls"],
+      "asset_role": "data-bound SVG plus HTML detail region",
+      "pass_criteria": ["selected event clear without relying on color", "spokes have 44px invisible hit regions", "keyboard selection updates detail", "focus remains visible"]
+    },
+    {
+      "id": "era-navigation",
+      "desktop_bbox": [54, 949, 1332, 40],
+      "mobile_bbox": [20, 636, 350, 132],
+      "anatomy": ["era stepper", "previous", "next", "open evidence", "method/source links"],
+      "asset_role": "semantic buttons and links",
+      "pass_criteria": ["URL query stores selected era/event", "back/forward restores selection", "targets >=44px", "labels do not wrap unexpectedly"]
+    },
+    {
+      "id": "documentary-chapters",
+      "desktop_strategy": "scroll chapters below the complete garden; garden becomes sticky for guided mode",
+      "mobile_strategy": "stacked readable chapters after the interactive first screen",
+      "anatomy": ["era title", "short interpretation", "attention evidence chart", "milestone list", "source links", "method caveat"],
+      "asset_role": "HTML narrative and small data-bound SVG charts",
+      "pass_criteria": ["each scene valid as a still", "native scroll preserved", "reduced-motion displays final state", "source notes adjacent"]
+    },
+    {
+      "id": "methodology-and-sources",
+      "desktop_strategy": "full-width documented appendix",
+      "mobile_strategy": "accordion with direct link target and all content in DOM",
+      "anatomy": ["data modes", "normalization", "limitations", "source bibliography", "download links", "long description"],
+      "asset_role": "semantic HTML",
+      "pass_criteria": ["all substantive claims traceable", "no hover-only sourcing", "long description available", "2026 H1 caveat explicit"]
+    }
+  ],
+  "functional_controls": [
+    {"role": "guided path", "state": "on/off and active era", "interaction": "button starts native-scroll guided chapters", "must_not_do": "no scrolljacking"},
+    {"role": "bloom selector", "state": "selected era", "interaction": "pointer, touch, Enter, Space", "must_not_do": "no tiny visible mark as sole hit target"},
+    {"role": "spoke selector", "state": "selected event", "interaction": "pointer, touch, Enter, Space, previous/next", "must_not_do": "no hover-only detail"},
+    {"role": "era stepper", "state": "selected era", "interaction": "buttons and URL query", "must_not_do": "no decorative inactive control"},
+    {"role": "method disclosure", "state": "open/closed", "interaction": "native details/summary", "must_not_do": "no inaccessible custom accordion"}
+  ],
+  "icon_system": {
+    "strategy": "typographic chevrons drawn with CSS borders; no icon package required",
+    "nav_action_box": "48px",
+    "visible_glyph": "16px",
+    "must_not_change": ["keep previous/next controls circular", "preserve visible focus ring", "provide accessible labels"]
+  },
+  "mobile_mode": "mobile-strict",
+  "mobile_rules": [
+    "Main bloom appears before the reading key and long prose.",
+    "No desktop SVG scaling; recompute flower radius, labels, and branch geometry.",
+    "Tap/focus replaces hover and previous/next replaces precise pointing.",
+    "No one-finger drag or pinch ownership; native page scroll remains untouched.",
+    "No horizontal document overflow at 320px."
+  ],
+  "must_not_substitute": [
+    "Do not replace the flower map with cards, a conventional line chart, or a generic dashboard grid.",
+    "Do not use the approved mockup PNG as the production visualization.",
+    "Do not add generic AI gradients, glow, particles, glass panels, or dark cyber styling.",
+    "Do not copy the supplied reference's open-book layout, purple-petal system, or publication identity."
+  ],
+  "accepted_deviations": [
+    "Mobile uses one bloom at a time rather than the complete branching garden.",
+    "Production geometry may shift for label collision and responsive fit while preserving hierarchy and flower-map semantics."
+  ]
+}
