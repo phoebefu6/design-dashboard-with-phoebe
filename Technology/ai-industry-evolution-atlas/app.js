@@ -135,12 +135,21 @@ function drawSelectedBloom() {
   svg.append(svgEl("title", { id: "selected-svg-title" }, `${era.title} attention flower`));
   svg.append(svgEl("desc", { id: "selected-svg-desc" }, `${era.years}. Petal radius shows normalized ${state.data.sources.find(source => source.id === era.source).meaning.toLowerCase()} Select a spoke for its source and context.`));
   const cx = 210, cy = 228, radius = 116;
+  const svgRect = svg.getBoundingClientRect();
+  const headingRect = document.querySelector(".inspector-heading").getBoundingClientRect();
+  const svgScale = svgRect.height ? svgRect.height / 420 : 1;
+  const safeLabelTop = window.matchMedia("(min-width: 761px)").matches
+    ? Math.max(150, (headingRect.bottom - svgRect.top + 16) / svgScale)
+    : 150;
   [radius * .5, radius * .78, radius].forEach(r => svg.append(svgEl("circle", { cx, cy, r, class: "ring" })));
   svg.append(svgEl("path", { d: petalPath(era.attention, cx, cy, 42, 92), fill: era.color, class: "petal" }));
   svg.append(svgEl("circle", { cx, cy, r: 39, class: "core" }));
 
   era.events.forEach((event, index) => {
-    const angle = -Math.PI / 2 + (index / era.events.length) * Math.PI * 2;
+    // Offset the evenly ordered spokes by half a step so no label sits on the
+    // vertical title/count axis. This preserves chronology while reserving
+    // explicit text-safe zones at the top and bottom of the inspector.
+    const angle = -Math.PI / 2 + ((index + .5) / era.events.length) * Math.PI * 2;
     const group = svgEl("g", {
       class: `event-hit${index === state.eventIndex ? " selected" : ""}`,
       tabindex: "0", role: "button", "data-event": event.id,
@@ -156,8 +165,11 @@ function drawSelectedBloom() {
     const [, radialY] = polar(cx, cy, labelRadius, angle);
     const horizontal = Math.cos(angle);
     const anchor = horizontal > .22 ? "end" : horizontal < -.22 ? "start" : "middle";
-    const labelX = horizontal > .22 ? 392 : horizontal < -.22 ? 28 : cx;
-    const labelY = radialY;
+    const labelY = Math.max(safeLabelTop, Math.min(326, radialY));
+    const circleHalfWidth = Math.sqrt(Math.max(0, 185 ** 2 - (labelY - cy) ** 2));
+    const safeLabelLeft = cx - circleHalfWidth + 8;
+    const safeLabelRight = cx + circleHalfWidth - 8;
+    const labelX = horizontal > .22 ? safeLabelRight : horizontal < -.22 ? safeLabelLeft : cx;
     wrapLabel(conciseLabels[event.id] || event.title, 17).forEach((line, lineIndex) => {
       group.append(svgEl("text", { x: labelX, y: labelY + lineIndex * 15, "text-anchor": anchor, class: "event-label" }, line));
     });
