@@ -69,8 +69,8 @@ h1 { margin-bottom: 4px; font: 64px/.98 var(--display); letter-spacing: -.045em;
 .status-symbol.editorial { border: 1.5px solid var(--ink); border-radius: 50%; }
 .key-caveat { margin: 22px 0 0; font: 11px/1.45 var(--meta); text-transform: uppercase; letter-spacing: .12em; color: var(--muted); }
 
-.garden-stage { position: relative; min-width: 0; min-height: 720px; }
-.garden { display: block; width: 100%; height: 720px; overflow: visible; }
+.garden-stage { position: relative; min-width: 0; min-height: 900px; }
+.garden { display: block; width: 100%; height: 720px; overflow: visible; transform: translateY(180px); }
 .garden .branch { fill: none; stroke-linecap: round; opacity: .84; }
 .garden .branch-secondary { opacity: .52; }
 .garden .method-seam { stroke-dasharray: 6 7; }
@@ -97,8 +97,8 @@ h1 { margin-bottom: 4px; font: 64px/.98 var(--display); letter-spacing: -.045em;
 #selected-bloom .halo-dot { fill: var(--muted); }
 .inspector-counts { position: absolute; left: 54px; right: 54px; bottom: 34px; display: flex; justify-content: center; gap: 24px; color: var(--muted); font: 10px var(--meta); text-transform: uppercase; letter-spacing: .1em; pointer-events: none; }
 .event-detail { display: none; }
-.garden-stage.detail-open { min-height: 970px; }
-.garden-stage.detail-open .event-detail { position: absolute; z-index: 5; top: 740px; left: 30px; display: block; width: 392px; min-height: 164px; padding: 22px 56px 22px 24px; border: 1px solid var(--line); border-radius: 5px; background: rgba(246,242,226,.98); box-shadow: 0 14px 26px rgba(38,40,35,.12); text-align: left; }
+.garden-stage.detail-open { min-height: 900px; }
+.garden-stage.detail-open .event-detail { position: absolute; z-index: 5; top: 40px; left: 450px; display: block; width: 350px; min-height: 164px; padding: 22px 56px 22px 24px; border: 1px solid var(--line); border-radius: 5px; background: rgba(246,242,226,.98); box-shadow: 0 14px 26px rgba(38,40,35,.12); text-align: left; }
 .event-detail-close { position: absolute; top: 12px; right: 12px; display: grid; width: 44px; height: 44px; place-items: center; border: 1px solid var(--line); border-radius: 50%; background: transparent; cursor: pointer; font-size: 25px; line-height: 1; }
 .event-detail-close:hover { background: var(--ink); color: var(--paper); }
 .event-detail h3 { margin: 5px 0 8px; font: 23px/1.05 var(--display); }
@@ -165,7 +165,8 @@ footer { display: flex; justify-content: space-between; padding: 32px 0 50px; bo
   .atlas-shell { grid-template-columns: 250px minmax(0,1fr); }
   .reading-key { padding-inline: 18px; }
   .bloom-inspector { top: 24px; left: 20px; width: 330px; }
-  .garden-stage.detail-open .event-detail { top: 740px; left: 20px; width: 330px; }
+  .garden-stage.detail-open { min-height: 1110px; }
+  .garden-stage.detail-open .event-detail { top: 920px; left: 20px; width: 330px; }
   .chapter { grid-template-columns: 150px 1fr; }
   .event-list { grid-column: 2; }
   .method-grid { grid-template-columns: repeat(2,1fr); }
@@ -188,7 +189,7 @@ footer { display: flex; justify-content: space-between; padding: 32px 0 50px; bo
   .atlas-shell { display: flex; flex-direction: column; gap: 0; padding-top: 0; }
   .mobile-thesis { display: flex; min-height: 64px; align-items: center; justify-content: space-between; margin: 6px 0 18px; padding: 0 25px; border-radius: 999px; background: var(--ink); color: var(--paper); text-transform: uppercase; }
   .garden-stage, .garden-stage.detail-open { order: 1; min-height: auto; }
-  .garden { display: none; }
+  .garden { display: none; transform: none; }
   .bloom-inspector { position: relative; top: auto; right: auto; bottom: auto; left: auto; width: 100%; min-height: 515px; aspect-ratio: auto; border: 0; border-radius: 6px; background: rgba(230,225,205,.78); box-shadow: none; overflow: hidden; }
   .inspector-heading { position: relative; top: auto; left: auto; right: auto; padding: 30px 32px 0; text-align: left; }
   .inspector-heading .kicker { font-size: 11px; }

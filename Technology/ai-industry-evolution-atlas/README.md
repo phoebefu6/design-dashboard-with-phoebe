@@ -13,7 +13,7 @@ An interactive editorial flower map tracing the cycles that shaped artificial in
 - Petals encoding the contour of attention within an era, never across incompatible source methods.
 - Filled event endpoints for breakthroughs or adoption and hollow endpoints for setbacks, harms, backlash, or governance.
 - Click, touch, and keyboard selection with shareable `?era=` and `?event=` URL state.
-- Event evidence opens outside the desktop bloom (and below it on mobile) and can be dismissed with its close button, a second spoke selection, an outside click, or Escape.
+- Event evidence opens beside the desktop bloom in a reserved upper information area (and below it on mobile) and can be dismissed with its close button, a second spoke selection, an outside click, or Escape.
 - Documentary chapters, adjacent source notes, a long description, reduced-motion behavior, and print styles.
 
 ## Evidence model
