@@ -73,13 +73,14 @@
           </div>
           <svg id="selected-bloom" viewBox="0 0 420 420" role="img" aria-labelledby="selected-svg-title selected-svg-desc"></svg>
           <div class="inspector-counts" id="inspector-counts"></div>
-          <article class="event-detail" id="event-detail">
-            <p class="event-type" id="event-type"></p>
-            <h3 id="event-title"></h3>
-            <p id="event-summary"></p>
-            <a id="event-source" target="_blank" rel="noreferrer">Open source <span aria-hidden="true">↗</span></a>
-          </article>
         </div>
+        <article class="event-detail" id="event-detail" aria-live="polite" aria-labelledby="event-title">
+          <button class="event-detail-close" id="event-detail-close" type="button" aria-label="Close event details"><span aria-hidden="true">×</span></button>
+          <p class="event-type" id="event-type"></p>
+          <h3 id="event-title"></h3>
+          <p id="event-summary"></p>
+          <a id="event-source" target="_blank" rel="noreferrer">Open source <span aria-hidden="true">↗</span></a>
+        </article>
       </div>
 
       <nav class="era-navigation" aria-label="Select an era">

@@ -191,6 +191,7 @@ function renderInspector() {
   const era = state.data.eras[state.eraIndex];
   const event = era.events[state.eventIndex];
   document.querySelector("#bloom-inspector").classList.toggle("detail-open", state.detailOpen);
+  document.querySelector(".garden-stage").classList.toggle("detail-open", state.detailOpen);
   document.querySelector("#inspector-kicker").textContent = `${String(state.eraIndex + 1).padStart(2,"0")} / ${era.years} · selected bloom`;
   document.querySelector("#inspector-title").textContent = era.title;
   document.querySelector("#inspector-thesis").textContent = era.thesis;
@@ -286,11 +287,26 @@ function selectEvent(id, push = true, refocus = false) {
   const era = state.data.eras[state.eraIndex];
   const index = era.events.findIndex(event => event.id === id);
   if (index < 0) return;
+  if (state.detailOpen && index === state.eventIndex) {
+    closeEventDetail(true);
+    return;
+  }
   state.eventIndex = index;
   state.detailOpen = true;
   renderInspector();
   setUrl(push);
   if (refocus) document.querySelector(`[data-event="${id}"]`)?.focus();
+}
+
+function closeEventDetail(push = true) {
+  if (!state.detailOpen) return;
+  state.detailOpen = false;
+  renderInspector();
+  const era = state.data.eras[state.eraIndex];
+  const url = new URL(window.location.href);
+  url.searchParams.set("era", era.id);
+  url.searchParams.delete("event");
+  history[push ? "pushState" : "replaceState"]({}, "", url);
 }
 
 function restoreFromUrl(replace = false) {
@@ -314,6 +330,21 @@ async function init() {
   restoreFromUrl(true);
   document.querySelector("#previous-era").addEventListener("click", () => selectEra(state.data.eras[state.eraIndex - 1]?.id, true));
   document.querySelector("#next-era").addEventListener("click", () => selectEra(state.data.eras[state.eraIndex + 1]?.id, true));
+  document.querySelector("#event-detail-close").addEventListener("click", () => {
+    const selectedEvent = state.data.eras[state.eraIndex].events[state.eventIndex].id;
+    closeEventDetail(true);
+    document.querySelector(`[data-event="${selectedEvent}"]`)?.focus();
+  });
+  document.addEventListener("pointerdown", event => {
+    if (!state.detailOpen || event.target.closest("#event-detail") || event.target.closest("[data-event]")) return;
+    closeEventDetail(true);
+  });
+  document.addEventListener("keydown", event => {
+    if (event.key !== "Escape" || !state.detailOpen) return;
+    const selectedEvent = state.data.eras[state.eraIndex].events[state.eventIndex].id;
+    closeEventDetail(true);
+    document.querySelector(`[data-event="${selectedEvent}"]`)?.focus();
+  });
   window.addEventListener("popstate", () => restoreFromUrl(false));
 }
 

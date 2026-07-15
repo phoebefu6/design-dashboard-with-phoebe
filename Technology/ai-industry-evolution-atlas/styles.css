@@ -85,7 +85,7 @@ h1 { margin-bottom: 4px; font: 64px/.98 var(--display); letter-spacing: -.045em;
 .garden .spoke, #selected-bloom .spoke { stroke: var(--ink); stroke-width: 1.2; }
 .garden .endpoint, #selected-bloom .endpoint { stroke: var(--ink); stroke-width: 1.4; }
 
-.bloom-inspector { position: absolute; right: -18px; bottom: -34px; width: 392px; aspect-ratio: 1; z-index: 4; border: 10px solid rgba(255,255,255,.78); border-radius: 50%; background: rgba(246,242,226,.96); box-shadow: 0 18px 32px rgba(38,40,35,.16); overflow: hidden; }
+.bloom-inspector { position: absolute; top: 20px; left: 30px; width: 392px; aspect-ratio: 1; z-index: 4; border: 10px solid rgba(255,255,255,.78); border-radius: 50%; background: rgba(246,242,226,.96); box-shadow: 0 18px 32px rgba(38,40,35,.16); overflow: hidden; }
 .inspector-heading { position: absolute; z-index: 2; top: 33px; left: 48px; right: 48px; text-align: center; pointer-events: none; }
 .inspector-heading .kicker { margin-bottom: 3px; color: var(--muted); }
 .inspector-heading h2 { margin-bottom: 0; font: 25px var(--display); }
@@ -97,12 +97,14 @@ h1 { margin-bottom: 4px; font: 64px/.98 var(--display); letter-spacing: -.045em;
 #selected-bloom .halo-dot { fill: var(--muted); }
 .inspector-counts { position: absolute; left: 54px; right: 54px; bottom: 34px; display: flex; justify-content: center; gap: 24px; color: var(--muted); font: 10px var(--meta); text-transform: uppercase; letter-spacing: .1em; pointer-events: none; }
 .event-detail { display: none; }
-.bloom-inspector.detail-open .event-detail { position: absolute; z-index: 5; left: 48px; right: 48px; bottom: 28px; display: block; padding: 14px 16px; border: 1px solid var(--line); background: rgba(246,242,226,.96); text-align: left; }
-.bloom-inspector.detail-open .inspector-counts { display: none; }
-.bloom-inspector.detail-open #selected-bloom .event-label { opacity: 0; }
-.bloom-inspector .event-detail h3 { margin: 3px 0; font: 18px/1.05 var(--display); }
-.bloom-inspector .event-detail p { margin-bottom: 5px; font-size: 11px; line-height: 1.3; }
-.bloom-inspector .event-detail a { font-size: 11px; font-weight: 700; }
+.garden-stage.detail-open { min-height: 970px; }
+.garden-stage.detail-open .event-detail { position: absolute; z-index: 5; top: 740px; left: 30px; display: block; width: 392px; min-height: 164px; padding: 22px 56px 22px 24px; border: 1px solid var(--line); border-radius: 5px; background: rgba(246,242,226,.98); box-shadow: 0 14px 26px rgba(38,40,35,.12); text-align: left; }
+.event-detail-close { position: absolute; top: 12px; right: 12px; display: grid; width: 44px; height: 44px; place-items: center; border: 1px solid var(--line); border-radius: 50%; background: transparent; cursor: pointer; font-size: 25px; line-height: 1; }
+.event-detail-close:hover { background: var(--ink); color: var(--paper); }
+.event-detail h3 { margin: 5px 0 8px; font: 23px/1.05 var(--display); }
+.event-detail p { margin-bottom: 8px; color: var(--muted); font-size: 13px; line-height: 1.4; }
+.event-detail .event-type { color: var(--ink); }
+.event-detail a { font-size: 13px; font-weight: 700; }
 
 .era-navigation { grid-column: 1 / -1; display: grid; grid-template-columns: 48px minmax(0,1fr) auto 48px; align-items: center; gap: 16px; min-height: 70px; border-top: 1px solid var(--line); border-bottom: 1px solid var(--line); }
 .round-button { display: inline-grid; width: 48px; height: 48px; place-items: center; border: 1px solid var(--ink); border-radius: 50%; background: transparent; cursor: pointer; font-size: 34px; line-height: 1; }
@@ -162,7 +164,8 @@ footer { display: flex; justify-content: space-between; padding: 32px 0 50px; bo
   h1 { font-size: 54px; }
   .atlas-shell { grid-template-columns: 250px minmax(0,1fr); }
   .reading-key { padding-inline: 18px; }
-  .bloom-inspector { width: 330px; }
+  .bloom-inspector { top: 24px; left: 20px; width: 330px; }
+  .garden-stage.detail-open .event-detail { top: 740px; left: 20px; width: 330px; }
   .chapter { grid-template-columns: 150px 1fr; }
   .event-list { grid-column: 2; }
   .method-grid { grid-template-columns: repeat(2,1fr); }
@@ -184,9 +187,9 @@ footer { display: flex; justify-content: space-between; padding: 32px 0 50px; bo
   .primary-action { display: none; }
   .atlas-shell { display: flex; flex-direction: column; gap: 0; padding-top: 0; }
   .mobile-thesis { display: flex; min-height: 64px; align-items: center; justify-content: space-between; margin: 6px 0 18px; padding: 0 25px; border-radius: 999px; background: var(--ink); color: var(--paper); text-transform: uppercase; }
-  .garden-stage { order: 1; min-height: auto; }
+  .garden-stage, .garden-stage.detail-open { order: 1; min-height: auto; }
   .garden { display: none; }
-  .bloom-inspector { position: relative; right: auto; bottom: auto; width: 100%; min-height: 515px; aspect-ratio: auto; border: 0; border-radius: 6px; background: rgba(230,225,205,.78); box-shadow: none; overflow: hidden; }
+  .bloom-inspector { position: relative; top: auto; right: auto; bottom: auto; left: auto; width: 100%; min-height: 515px; aspect-ratio: auto; border: 0; border-radius: 6px; background: rgba(230,225,205,.78); box-shadow: none; overflow: hidden; }
   .inspector-heading { position: relative; top: auto; left: auto; right: auto; padding: 30px 32px 0; text-align: left; }
   .inspector-heading .kicker { font-size: 11px; }
   .inspector-heading h2 { margin: 14px 0 4px; font-size: 38px; line-height: 1; }
@@ -195,13 +198,9 @@ footer { display: flex; justify-content: space-between; padding: 32px 0 50px; bo
   #selected-bloom .event-label { font-size: 15px; }
   .inspector-counts { position: relative; left: auto; right: auto; bottom: auto; justify-content: flex-start; padding: 0 32px 14px; font-size: 10px; }
   .bloom-inspector:not(.detail-open)::after { content: "Tap a spoke for source + context"; display: block; margin: 0 20px 20px; padding: 12px; border: 1px solid var(--line); border-radius: 999px; text-align: center; font: 10px var(--meta); text-transform: uppercase; letter-spacing: .12em; }
-  .bloom-inspector.detail-open .event-detail { position: relative; left: auto; right: auto; bottom: auto; min-height: 150px; margin: 0 20px 20px; padding: 18px 20px; border-radius: 5px; background: rgba(246,242,226,.92); }
-  .bloom-inspector.detail-open .event-detail h3 { font-size: 23px; }
-  .bloom-inspector.detail-open .event-detail p { font-size: 14px; }
-  .bloom-inspector.detail-open .event-detail a { font-size: 13px; }
-  .event-detail h3 { margin: 5px 0; font: 23px var(--display); }
-  .event-detail p:not(.event-type) { margin-bottom: 8px; color: var(--muted); font-size: 14px; }
-  .event-detail a { font-size: 13px; font-weight: 700; }
+  .garden-stage.detail-open .event-detail { position: relative; top: auto; right: auto; left: auto; width: auto; min-height: 150px; margin: 12px 0 0; padding: 20px 64px 20px 20px; border-radius: 5px; background: rgba(246,242,226,.92); }
+  .event-detail h3 { font-size: 23px; }
+  .event-detail p { font-size: 14px; }
   .reading-key { order: 3; margin-top: 28px; }
   .reading-key h2, .reading-key > p:not(.key-caveat), .key-bloom { display: none; }
   .reading-key .kicker::after { content: " — how to read the bloom"; }
