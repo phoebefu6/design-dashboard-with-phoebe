@@ -1,3 +1,13 @@
+<!-- phoebe header -->
+
+[![Open the live gallery](https://img.shields.io/badge/%E2%96%B6%20open%20the%20live%20gallery-1f6feb?style=for-the-badge)](https://phoebefu6.github.io/design-dashboard-with-phoebe/)
+[![Star this repo](https://img.shields.io/github/stars/phoebefu6/design-dashboard-with-phoebe?style=for-the-badge&label=star%20this%20repo&color=444444)](https://github.com/phoebefu6/design-dashboard-with-phoebe/stargazers)
+
+### ▶︎ [Open the live gallery →](https://phoebefu6.github.io/design-dashboard-with-phoebe/)
+
+Free and open. Every build links to its source.
+
+<!-- /phoebe header -->
 Phoebe designs and ships dashboards across industries.
 
 This is a growing collection of dashboard experiments across ecommerce, healthcare, education, finance, HR, aquaculture, technology, and whatever problem space feels interesting next. Each one tries a different mix of layout, chart language, interaction, density, color, and data story based on the industry and the decision it needs to support.
